@@ -1,0 +1,374 @@
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <title>七夕心愿TA来猜</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no, email=no">
+    <meta name="full-screen" content="true">
+    <meta name="screen-orientation" content="portrait">
+    <meta name="x5-fullscreen" content="true">
+    <meta name="360-fullscreen" content="true">
+    <meta name="keywords" content="">
+    <meta name="author" content="">
+    <meta name="description" content="">
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+    <meta name="viewport" content="width=750,user-scalable=no,target-densitydpi=device-dpi">
+
+    <!--样式   生产-->
+    <link rel="stylesheet" href="css/main.css">
+    <!--线上  文件-->
+    <!--<link rel="stylesheet" href="css/min/main.min.css">-->
+    <script async="" src="https://www.google-analytics.com/analytics.js"></script><script>
+
+
+    </script>
+
+</head>
+
+<body>
+
+<!--首页页面一-->
+<div class="page page-1" style="display: block;">
+
+    <img src="img/1-logo-topText.png" alt="" class="page1-logo">
+    <img src="img/1-logo-center.gif" alt="">
+
+    <div class="page1-BtnBody ab-c-w">
+        <button id="MakeWish"></button>
+        <div id="page1Rules"></div>
+    </div>
+</div>
+
+<!--规则-->
+<div class="page page-1Rules">
+    <div class="contentBody ab-c-w rulesBody seclaTran">
+        <div class="closeRulse">
+
+        </div>
+    </div>
+</div>
+
+
+<!--页面二提交心愿-->
+<div class="page page-2">
+    <div class="contentBody ab-c-w seclaTran">
+
+        <div class="page2ConBody">
+
+            <img src="img/2-kaP2.png" alt="" class="kaP1">
+            <img src="img/2-kaP2.png" alt="" class="kaP2">
+            <img src="img/2-man.png" alt="" class="page2man">
+            <img src="img/2-woman.png" alt="" class="page2woman">
+            <input id="page2Text" placeholder="可选择也可自定义输入">
+            <!--<input id='page2Text'  placeholder="可选择也可自定义输入" onkeyup="value=value.replace(/[^\u4E00-\u9FA5][/W]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\u4E00-\u9FA5]/g,''))" maxlength="8">-->
+        </div>
+        <div class="formBody">
+            <div class="swiper-container" id="swiperBox1">  <!-- 父盒子给宽高  -->
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide r1">
+                        <div class="page2List1 dataText" datatext="迪士尼看烟花"></div>
+                        <div class="page2List2 dataText" datatext="王者开黑"></div>
+                        <div class="page2List3 dataText" datatext="浪漫摩天轮"></div>
+                    </div>
+                    <div class="swiper-slide r2">
+                        <div class="page2List1 dataText" datatext="Fresh面部SPA"></div>
+                        <div class="page2List2 dataText" datatext="看电影"></div>
+                        <div class="page2List3 dataText" datatext="为爱鼓掌"></div>
+                    </div>
+                    <div class="swiper-slide r3">
+                        <div class="page2List1 dataText" datatext="Fresh七夕礼盒"></div>
+                        <div class="page2List2 dataText" datatext="烛光晚餐"></div>
+                        <div class="page2List3 dataText" datatext="江边夜游轮"></div>
+                    </div>
+
+                </div>
+
+                <img src="img/arrowLeft.png" alt="" class="arrowLeft swiper-button-prev">
+                <img src="img/arrowRight.png" alt="" class="arrowRight swiper-button-next">
+            </div>
+        </div>
+
+        <div class="page2BtnBody">
+            <div class="page2Error"></div>
+            <button id="SubmitWish">提交心愿</button>
+        </div>
+
+
+    </div>
+</div>
+
+<div class="page page2Tip">
+    <img src="img/page2-Tip.png" alt="" class="ab-c-w" style="top: 166px">
+</div>
+
+<!--页面三许愿墙-->
+<!--<div class="page page-3">-->
+<!--<img src="img/3-xin-bg.png" alt="" class="page3Bg">-->
+<!--<div class="page3ConBody ab-c-w">-->
+<!--<div id="P3text">-->
+<!--来个熊抱-->
+<!--</div>-->
+<!--</div>-->
+<!--&lt;!&ndash;<img src="img/3-xin-bg.png" alt="" class="page3xin-bg">&ndash;&gt;-->
+<!--<div id="page3btn" class="ab-c-w">-->
+
+<!--</div>-->
+<!--</div>-->
+
+<!--页面四 6-朋友打开页面开始猜-->
+<div class="page page-4">
+    <!--提交后显示的-->
+    <div class="TiJiaoTopBody">
+        <img src="img/TiJiaoTopBody.png" alt="">
+    </div>
+    <!--朋友猜显示的-->
+    <div class="CaiTopBody ab-c-w">
+        <div class="P4headerImg">
+            <img src="" alt="">
+        </div>
+        <div class="P4headerName">
+            <!--哆啦A梦-->
+        </div>
+    </div>
+    <div class="page4BigBody ab-c-w">
+        <div class="page4Bg page4Con1" data-isclick="false">
+            <div class="ZF-text ZF-text1">
+                <!--祝福一-->
+            </div>
+            <img src="img/4-zf-rgba.png" alt="" class="ZF_RGBA">
+        </div>
+        <div class="page4Bg page4Con2" data-isclick="false">
+            <div class="ZF-text ZF-text2">
+                <!--祝福2-->
+            </div>
+            <img src="img/4-zf-rgba.png" alt="" class="ZF_RGBA">
+
+        </div>
+        <div class="page4Bg page4Con3" data-isclick="false">
+            <div class="ZF-text ZF-text3">
+                <!--祝福3-->
+            </div>
+            <img src="img/4-zf-rgba.png" alt="" class="ZF_RGBA">
+
+        </div>
+        <div class="page4Bg page4Con4" data-isclick="false">
+            <div class="ZF-text ZF-text4">
+                <!--祝福4-->
+            </div>
+            <img src="img/4-zf-rgba.png" alt="" class="ZF_RGBA">
+
+        </div>
+        <div class="page4Bg page4Con5" data-isclick="false">
+            <div class="ZF-text ZF-text5">
+                <!--祝福5-->
+            </div>
+            <img src="img/4-zf-rgba.png" alt="" class="ZF_RGBA">
+        </div>
+        <div class="page4Bg page4Con6" data-isclick="false">
+            <div class="ZF-text ZF-text6">
+                <!--祝福6-->
+            </div>
+            <img src="img/4-zf-rgba.png" alt="" class="ZF_RGBA">
+        </div>
+        <div class="page4Bg page4Con7" data-isclick="false">
+            <div class="ZF-text ZF-text7">
+                <!--祝福7-->
+            </div>
+            <img src="img/4-zf-rgba.png" alt="" class="ZF_RGBA">
+
+        </div>
+        <div class="page4Bg page4Con8" data-isclick="false">
+            <div class="ZF-text ZF-text8">
+                <!--祝福8-->
+            </div>
+            <img src="img/4-zf-rgba.png" alt="" class="ZF_RGBA">
+        </div>
+        <div class="page4Bg page4Con9" data-isclick="false">
+            <div class="ZF-text ZF-text9">
+                <!--祝福9-->
+            </div>
+            <img src="img/4-zf-rgba.png" alt="" class="ZF_RGBA">
+        </div>
+
+
+    </div>
+
+    <!--朋友猜下麦提示-->
+    <!--<div class="CaiBottomText ab-c-w">-->
+    <!--点击卡片查看结果-->
+    <!--</div>-->
+
+    <div class="page4BtnBody ab-c-w">
+        <button id="page4YQC">让TA猜</button>
+    </div>
+
+
+    <!--猜错了  显示模糊层 并提示-->
+    <!--<div class="filter">-->
+
+    <!--</div>-->
+</div>
+
+
+<!--页面四 猜错 layer-->
+<div class="page page4Error">
+
+    <div class="caiNO ab-c-w">
+
+    </div>
+    <div class="ab-c-w NObtn8Body">
+        <div class="NObtn8Close">
+
+        </div>
+        <div class="NObtn8">
+
+        </div>
+    </div>
+
+    <div class="caiYes ab-c-w">
+        <div class="caiYesBtn">
+
+        </div>
+    </div>
+    <!--<p>还能好好做朋友吗?</p>-->
+    <!--<div class="page4ErrCon">-->
+    <!--<img src="img/2-kaP2.png" alt="">-->
+    <!--<div class="P4Text">我们结婚啊</div>-->
+    <!--</div>-->
+    <!--<div class="page4ErrBtnB">-->
+    <!--<div id="P4Liwu">礼物补偿</div>-->
+    <!--<div id="P4Again">再猜一次</div>-->
+    <!--</div>-->
+</div>
+
+
+<!--页面五 默契爆表-->
+<div class="page page-5">
+    <img src="img/page5MoqiBg.jpg" alt="" class="page5MoqiBg ab-c-w">
+    <!---->
+    <!--<div class=" ab-c-w MqConBody">-->
+    <!--<p>你们的默契指数</p>-->
+    <!--<p class="MOPIB">100%</p>-->
+
+    <!--&lt;!&ndash;<div class="page5BtnB">&ndash;&gt;-->
+    <!--&lt;!&ndash;<div id="P5GetJx">给TA惊喜</div>&ndash;&gt;-->
+    <!--&lt;!&ndash;<div id="P5Iplay">我也要玩</div>&ndash;&gt;-->
+    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+    <!--</div>-->
+
+    <div class="page5Con ab-c-w seclaTran">
+        <img src="img/MOqiimg1.png" alt="">
+
+        <div class="AheaderImg">
+            <img src="" alt="">
+        </div>
+        <div class="AheaderName">
+
+        </div>
+
+        <div class="BheaderImg">
+            <img src="" alt="">
+        </div>
+        <div class="BheaderName">
+
+        </div>
+
+        <div class="MOqiTitle">
+            <p><span></span> <b style="font-weight: normal"></b></p>
+        </div>
+        <div class="MOqiText">
+            <!--命中注定，没有人比你们更相配。-->
+        </div>
+        <div class="giveLove ab-c-w">
+
+        </div>
+    </div>
+
+
+</div>
+
+
+<!--页面  礼盒-->
+<div class="page page-6">
+    <div class="contentBody ab-c-w seclaTran">
+        <div class="boxClose"></div>
+        <div class="boxBtn"></div>
+    </div>
+</div>
+
+
+<!--主用户结果页  好友默契度  user end-->
+<div class="page page-7">
+    <div class="contentBody ab-c-w seclaTran">
+        <div class="Pm-TopBody">
+            <div class="PMBoxGo"></div>
+            <img src="img/user-end.png" alt="">
+        </div>
+        <!--<h1>TA与你的默契度</h1>-->
+        <div id="Pm-conBody">
+            <div class="iscrollBody" id="Pm-conBody2">
+                <div class="Pm-conBody">
+
+                </div>
+            </div>
+
+        </div>
+
+
+        <!--<div class="PmBtnBody">-->
+        <!--<div id="Pmbtn">-->
+        <!--查看七夕礼盒-->
+        <!--</div>-->
+        <!--</div>-->
+
+
+    </div>
+</div>
+
+
+<!--分享-->
+<div class="page Fx-layer">
+    <img src="img/FX-Layer-5.png" alt="">
+</div>
+
+<!--心愿飞行-->
+<div class="page subXinYPage">
+    <img src="img/subXinY.gif" alt="" class="ab-c-w subXinYPageImg">
+</div>
+
+
+<!--ajax-->
+<div class="ajaxLayer ab-f">
+    <img src="img/loading.gif" alt="" class="ab-c">
+</div>
+
+
+<script src="js/public/jquery-1.9.1.min.js"></script>
+<!-- <script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script> -->
+<script src="js/public/swiper.min.js"></script>
+<script src="js/public/iscroll.min.js"></script>
+
+<!--线上环境-->
+<!--<script src="js/min/main.min.js"></script>-->
+
+
+<!--生产环境-->
+<script src="js/uitls.js"></script>
+<script src="js/Isignature.js"></script>
+<script type="text/javascript" src="js/main.js"></script>
+<script src="js/ajax.js"></script>
+<script src="js/Fn.js"></script>
+<script src="js/track.js"></script>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        //main.init();
+    });
+
+
+</script>
+
+
+</body></html>

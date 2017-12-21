@@ -1,6 +1,6 @@
 var main = {};
 
-cqsj.initShareInfo = function () {
+main.initShareInfo = function () {
     var currUrl = cqsj.url.replace(window.location.hash, '');
     $.getJSON('http://www.sphinxcapital.com.cn/wxapi/signature.php?url=' + encodeURIComponent(currUrl)).done(function (data) {
         wx.config({
