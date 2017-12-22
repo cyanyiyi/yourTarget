@@ -32,57 +32,113 @@
         function getRem(pwidth, prem) {
             var html = document.getElementsByTagName("html")[0];
             var oWidth = document.body.clientWidth || document.documentElement.clientWidth;
+            console.log(oWidth);
+            if(oWidth >= 640){
+                oWidth = 640;
+            }
             html.style.fontSize = oWidth / pwidth * prem + "px";
         }
     </script>
     <style>
-        .page1 {
-            background: #ccc;
-        }
-
-        .page2 {
-            background: #ffffff;
-        }
-
-        .target1 {
-            background: rgb(9, 199, 94);
-        }
-
-        .target2 {
-            background: rgb(122, 122, 8);
-        }
-
-        .target3 {
-            background: rgb(36, 124, 196);
-        }
     </style>
 </head>
 
 <body>
-    <div class="swiper-container swiper-container-main">
+    <!-- main swiper start -->
+    <div class="swiper-container swiper-container-main" style="display: none">
         <div class="swiper-wrapper">
             <div class="swiper-slide page1">
+                <div class="logo mt70">
+                    <img src="./img/logo.png" alt="" class="wid100">
+                </div>
+                <div class="home-title mt60">
+                    <img src="./img/home-ygy.png" alt="" class="wid100">
+                </div>
+                <div class="home-video-con mt90">
 
+                </div>
+                <div class="home-see mt120">
+                    <img src="./img/home-seemytarget.png" alt="" class="wid100">
+                </div>
+			    <img src="./img/down.png" alt="" class="arrow animated fadeInUp infinite" />
             </div>
             <div class="swiper-slide page2">
-                <div class="target-title">2018年我的目标是</div>
-                <div class="target-input">
-                    <input id="page2Text" placeholder="可选择也可自定义输入">
+                <div class="one-title mt170">
+                    <img src="./img/one-title.png" alt="" class="wid100">
                 </div>
-                <div class="swiper-container swiper-container-target">
+                <div class="one-input mt100">
+                    <input id="page2Text" placeholder="在此输入你的目标">
+                    <img src="./img/one-input-border.png" alt="" class="wid100">
+                </div>
+                <div class="swiper-container swiper-container-target one-target-con mt140">
                     <div class="swiper-wrapper">
-                        <div class="swiper-slide target1">
-                            1
+                        <div class="swiper-slide">
+                            <div class="target-circle target1 target-text" target-text="职位生个级工资多个零">
+                                <img src="./img/one-target-zwsgj.png" alt="" class="ab-c-w">
+                            </div>
+                            <div class="target-circle target2 target-text" target-text="雅思7分">
+                                <img src="./img/one-target-ysqf.png" alt="" class="ab-c-w">
+                            </div>
+                            <div class="target-circle target3 target-text" target-text="世界和平">
+                                <img src="./img/one-target-sjhp.png" alt="" class="ab-c-w">
+                            </div>
+                            <div class="target-circle target4 target-text" target-text="八块腹肌马甲线">
+                                <img src="./img/one-target-bkfj.png" alt="" class="ab-c-w">
+                            </div>
                         </div>
-                        <div class="swiper-slide target2">
-                            2
+                        <div class="swiper-slide">
+                            <div class="target-circle target1 target-text" target-text="职位生个级工资多个零2">
+                                <img src="./img/one-target-zwsgj.png" alt="" class="ab-c-w">
+                            </div>
+                            <div class="target-circle target2 target-text" target-text="雅思7分2">
+                                <img src="./img/one-target-ysqf.png" alt="" class="ab-c-w">
+                            </div>
+                            <div class="target-circle target3 target-text" target-text="世界和平2">
+                                <img src="./img/one-target-sjhp.png" alt="" class="ab-c-w">
+                            </div>
+                            <div class="target-circle target4 target-text" target-text="八块腹肌马甲线2">
+                                <img src="./img/one-target-bkfj.png" alt="" class="ab-c-w">
+                            </div>
                         </div>
-                        <div class="swiper-slide target3">
-                            3
+                        <div class="swiper-slide">
+                            <div class="target-circle target1 target-text" target-text="职位生个级工资多个零3">
+                                <img src="./img/one-target-zwsgj.png" alt="" class="ab-c-w">
+                            </div>
+                            <div class="target-circle target2 target-text" target-text="雅思7分3">
+                                <img src="./img/one-target-ysqf.png" alt="" class="ab-c-w">
+                            </div>
+                            <div class="target-circle target3 target-text" target-text="世界和平3">
+                                <img src="./img/one-target-sjhp.png" alt="" class="ab-c-w">
+                            </div>
+                            <div class="target-circle target4 target-text" target-text="八块腹肌马甲线3">
+                                <img src="./img/one-target-bkfj.png" alt="" class="ab-c-w">
+                            </div>
                         </div>
                     </div>
                     <div class="swiper-button-prev swiper-button-white"></div>
                     <div class="swiper-button-next swiper-button-white"></div>
+                </div>
+                <div class="target-submit mt60">
+                    提交
+                </div>
+                <div class="logo mt120">
+                    <img src="./img/logo.png" alt="" class="wid100">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- main swipper end -->
+    <!-- 目标页 -->
+    <div class="page page3" style="display: block">
+        <div class="t-userinfo-box mt80">
+            <div class="t-userinfo-avatar fl">
+                <img src="" alt="">
+            </div>
+            <div class="t-userinfo-nickname fl">我是昵称</div>
+            <div class="t-userinfo-say mt10 fl">
+                <div class="t-say-l fl"></div>
+                <div class="t-say-r fl">
+                    <img src="./img/t-xiamian9.png" alt="" class="ab-c-w">
                 </div>
             </div>
         </div>
@@ -110,11 +166,13 @@
             effect: 'fade',
             nextButton: '.swiper-button-next',
             prevButton: '.swiper-button-prev',
-            onInit: function (opt) { 
-            },
+            onInit: function (opt) {},
             onSlideChangeEnd: function (opt) {
                 console.log(opt.activeIndex);
             }
+        })
+        $(".target-text").click(function(){
+            console.log($(this).attr('target-text'));
         })
     </script>
 </body>

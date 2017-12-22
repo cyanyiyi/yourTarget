@@ -24,12 +24,20 @@ footer {
 
 body {
     width: 100%;
+    height: 100%;
     color: #000;
-    background: #999;
+    background: #000;
     overflow-x: hidden;
     /*上下拉动滚动条卡顿设置*/
     -webkit-overflow-scrolling: touch;
     overflow-scrolling: touch;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    font-family: "宋体", serif, "SimSun", Arial, Helvetica, sans-serif;
 }
 
 body,
@@ -48,9 +56,8 @@ input {
 }
 
 html {
-    /* font-size: 62.5%; */
     width: 100%;
-    height: 100%;
+    /* height: 100%; */
     overflow-x: hidden;
     -webkit-text-size-adjust: none;
 }
@@ -265,20 +272,7 @@ div {
     transition: 0.5s;
 }
 
-body {
-    width: 100%;
-    height: 100%;
-    max-width: 750px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    margin: auto;
-    background: #fff;
-    font-family: "宋体", serif, "SimSun", Arial, Helvetica, sans-serif;
-    color: #46545e;
-}
+
 
 input::-webkit-input-placeholder,
 input,
@@ -334,16 +328,205 @@ div {
     overflow: hidden;
     display: none;
 }
-
-.target-title {
-    
+.show {
+    display: block;
+}
+.hide {
+    display: none;
 }
 
-.target-input {
-
+.fl {
+    float: left;
 }
 
-.swiper-container-target {
-    height: 2rem;
+.wid100 {
+    width: 100%;
+}
+.mt10 {
+    margin-top: 0.1rem !important;
+}
+.mt60 {
+    margin-top: 0.6rem !important;
+}
+.mt70 {
+    margin-top: 0.70rem !important;
+}
+.mt80 {
+    margin-top: 0.80rem !important;
+}
+.mt90 {
+    margin-top: 0.90rem !important;
+}
+.mt100 {
+    margin-top: 1.0rem !important;
+}
+.mt120 {
+    margin-top: 1.2rem !important;
+}
+.mt140 {
+    margin-top: 1.4rem !important;
+}
+.mt170 {
+    margin-top: 1.7rem !important;
 }
 
+.logo {
+    width: 2.25rem;
+    height: 0.56rem;
+    margin: 0 auto;
+}
+/* home页 */
+.page1 {
+    background: url('../img/home-bg.png') no-repeat center center;
+	background-size: cover;
+	position: relative;
+}
+.page1 .arrow {
+    width: 10%;
+	position: absolute;
+	left: 45%;
+	bottom: 10px;
+	z-index: 99;
+}
+.page1 .home-title {
+    width: 4.33rem;
+    height: 1.79rem;
+    margin: 0 auto;
+}
+.page1 .home-video-con {
+    width: 100%;
+    height: 5rem;
+    background: #fff;
+}
+.page1 .home-see {
+    width: 2.81rem;
+    height: 0.37rem;
+    margin: 0 auto;
+}
+/* 选择目标页 */
+.page2 {
+    background: url('../img/one-bg.png') no-repeat center center;
+	background-size: cover;
+	position: relative;
+}
+.page2 .one-title {
+    width: 4.35rem;
+    height: 0.6rem;
+    margin: 0 auto;
+}
+
+.page2 .one-input {
+    width: 4.6rem;
+    height: 0.6rem;
+    margin: 0 auto;
+}
+.page2 .one-input input {
+    width: 100%;
+    text-align: center;
+    font-size: 0.32rem;
+    color:#fff;
+}
+
+.page2 .one-target-con {
+    width: 100%;
+    height: 4.6rem;
+}
+.page2 .one-target-box {
+    position: relative;
+}
+.page2 .t1box {
+    width: 100%;
+    position: absolute;
+    background: #eeee00;
+}
+.page2 .target-circle {
+    width: 2.3rem;
+    height: 2.3rem;
+    background: url('../img/one-circle.png') no-repeat center center;
+    background-size: contain;
+}
+.page2 .target1{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+.page2 .target2{
+    position: absolute;
+    top: 1.15rem;
+    right: 1rem;
+} 
+.page2 .target3{
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+}
+.page2 .target4{
+    position: absolute;
+    left: 1rem;
+    top: 1.15rem;
+}
+.page2 .target-circle img {
+    width: 1.2rem;
+}
+.page2 .target-submit {
+    text-align: center;
+    color: #fff;
+    font-size: 20px;
+}
+/* 生成目标页 */
+.page3 {
+    background: url('../img/t-bg.png') no-repeat center center;
+	background-size: cover;
+	position: relative;
+}
+.page3 .t-userinfo-box{
+    width: 6.6rem;
+    height: 1.45rem;
+    margin: 0 auto;
+    /* background: #ccc; */
+}
+.t-userinfo-avatar {
+    width: 1.28rem;
+    height: 100%;
+}
+.t-userinfo-avatar img {
+    width: 1.28rem;
+    height: 1.28rem;
+    background: #fff;
+}
+.t-userinfo-nickname {
+    width: 5.3rem;
+    height: 0.28rem;
+    line-height: 0.28rem;
+    font-size: 0.28rem;
+    text-indent: 30px;
+    color: #fff;
+    /* color: #fff; */
+}
+.t-userinfo-say {
+    width: 5.3rem;
+    height: 1rem;
+    overflow: hidden;
+    /* background: #eeee00; */
+}
+.t-say-l {
+    width: 0.18rem;
+    height: 1rem;
+    background: url('../img/t-xiaosj.png') no-repeat left 0.18rem;
+    background-size: contain;
+}
+.t-say-r {
+    width: 5rem;
+    height: 1rem;
+    line-height: 1rem;
+    background: url('../img/t-yuanjuxing.png') no-repeat -2px center;
+    background-size: contain;
+    position: relative;
+}
+.t-say-r  img {
+    width: 4.7rem;
+}
