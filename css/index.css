@@ -63,11 +63,6 @@ html {
 }
 
 
-/*长按页面闪退设置*/
-
-element {
-    -webkit-touch-callout: none;
-}
 
 
 /*1px边框*/
@@ -143,8 +138,6 @@ img,
 a,
 div {
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
 }
 
 ::selection {
@@ -182,8 +175,6 @@ div {
 
 .selectAvailable {
     -webkit-tap-highlight-color: rgba(231, 105, 105, 0.7);
-    -webkit-touch-callout: default;
-    -webkit-user-select: text;
 }
 
 .selectAvailable::selection {
@@ -242,10 +233,6 @@ div {
 
 .op0 {
     opacity: 0;
-}
-
-.w100 {
-    width: 100%;
 }
 
 .ajaxLayer {
@@ -326,12 +313,6 @@ div {
     left: 0;
     z-index: 1;
     overflow: hidden;
-    display: none;
-}
-.show {
-    display: block;
-}
-.hide {
     display: none;
 }
 
@@ -600,6 +581,13 @@ div {
     position: relative;
     float: left;
 }
+.nine-text {
+    position: absolute;
+    top: 0.4rem;
+    width: 1.6rem;
+    height: 0.3rem;
+    line-height: 0.3rem;
+}
 .guess-error {
     width: 0.6rem;
     height: 0.74rem;
@@ -610,4 +598,33 @@ div {
     height: 1.34rem;
     margin: 0 auto;
     background: #fff;
+}
+
+.share-ta-layer {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.share-ta-layer img {
+
+}
+
+.share-pic-layer {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.share-pic-layer img {
+
+}
+.save-pic-layer {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+.save-pic-layer div {
+    height: 1rem;
+    color: #fff;
+    font-size: 24px;
+    text-align: center;
+}
+
+#generatePicShow img {
+    -webkit-touch-callout: default !important;
 }

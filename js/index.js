@@ -1,5 +1,5 @@
 var main = {};
-main.init = function() {
+main.init = function () {
     // this.initShareInfo();
     main.bindEvent();
 }
@@ -37,27 +37,27 @@ main.initShareInfo = function () {
     });
 }
 
-main.initUserinfo = function(nickName, avatarUrl) {
+main.initUserinfo = function (nickName, avatarUrl) {
     $('.t-userinfo-avatar img').attr("src", avatarUrl);
     $('.t-userinfo-nickname').text(nickName);
 
 }
 
-main.generateCode = function(url) {
+main.generateCode = function (url) {
     console.log(url);
     var codeEl = $('#share-code')[0];
     var width = codeEl.offsetWidth;
     var height = codeEl.offsetHeight;
     var qrcode = new QRCode(codeEl, {
-        width : width,
-        height : height
+        width: width,
+        height: height
     });
     qrcode.makeCode(url);
 }
 
-main.takeScreenshot = function() {
+main.takeScreenshot = function () {
     var cntElem = $('#generatePic')[0];
-    var shareContent = cntElem;//需要截图的包裹的（原生的）DOM 对象
+    var shareContent = cntElem; //需要截图的包裹的（原生的）DOM 对象
     var width = shareContent.offsetWidth; //获取dom 宽度
     var height = shareContent.offsetHeight; //获取dom 高度
     var canvas = document.createElement("canvas"); //创建一个canvas节点
@@ -67,12 +67,17 @@ main.takeScreenshot = function() {
     canvas.style.width = width + "px";
     canvas.style.height = height + "px";
     canvas.getContext("2d").scale(scale, scale); //获取context,设置scale 
+    var url = '';
     html2canvas($("#generatePic"), {
         canvas: canvas,
         onrendered: function (canvas) {
-            console.log(canvas);
-            // var url = canvas.toDataURL();
-            $('#generatePicShow').append(canvas).show();
+            var strDataURI = canvas.toDataURL("image/jpeg");
+            // $('#generatePicShow').show().find('img').attr('src', strDataURI);
+            $('#generatePicShow').find('img').attr('src', strDataURI);
+            setTimeout(function(){
+                $('#generatePicShow').show();
+                $('.save-pic-layer').show().delay(1000).fadeOut('slow');
+            }, 4000);
         }
     });
 }
@@ -84,47 +89,68 @@ main.sort = function (ARR) {
     return ARR;
 };
 
-main.Randomwish = function ($domArr, target) {
+main.Randomwish = function (domArrS, domArrP, target) {
     var _target = main.sort(target);
     console.log(_target);
-    for (var i = 0; i < $domArr.length; i++) {
-        (function(i){
-            $($domArr[i]).text(_target[i])
+    for (var i = 0; i < domArrS.length; i++) {
+        (function (i) {
+            $(domArrS[i]).text(_target[i]);
+            $(domArrP[i]).text(_target[i]);
         })(i)
     }
 
 };
 
-main.bindEvent = function() {
+main.bindEvent = function () {
     // 选择系统目标
-    $(".target-text").click(function () {
+    $(document).on('click','.target-text' ,function () {
         $('#input-target').val($(this).attr('target-text'));
     })
-    // 生成我的目标海报
-    $("#submit-target").on("click", function () {      
+    // 提交我的目标
+    $("#submit-target").on("click", function () {
         var myTarget = $('#input-target').val();
-        var _targetArr = ['目标1','目标2','目标3','目标4','目标5','目标6','目标7','目标8','目标9'];
-        var $domArr = $('.t-nine-text');
-        console.log(myTarget);
-        if(!myTarget){
+        var _targetArr = ['目标1', '目标2', '目标3', '目标4', '目标5', '目标6', '目标7', '目标8', '目标9'];
+        var domArrShare = $('.s-nine-text');
+        var domArrPic = $('.t-nine-text');
+        if (!myTarget) {
             $('.one-input').addClass('bounce').find('#input-target').addClass('red-input');
-            setTimeout(function(){
+            setTimeout(function () {
                 $('.one-input').removeClass('bounce').find('#input-target').removeClass('red-input');
-            },2000)
+            }, 2000)
         } else {
+            _targetArr = main.sort(_targetArr);
+            $('#selectSharewayPage').show();
             $('#generatePic').show();
+            $('#home').hide();
             if (_targetArr.indexOf(myTarget) === -1) {
                 _targetArr[5] = myTarget;
-                console.log(2222)
             }
             var nickName = '柳岩';
             var avatarUrl = './img/ly2.jpg';
             main.initUserinfo(nickName, avatarUrl);
-            main.Randomwish($domArr, _targetArr);
-            main.generateCode('www.tx.com?id=1');         
-            main.takeScreenshot();
-            $('#home').hide();
+            main.Randomwish(domArrShare, domArrPic, _targetArr);
+            main.generateCode('www.tx.com?id=1');
         }
     });
+    // 选择分享方式
+    // 1.右上角分享
+    $("#share-ta-btn").on('click', function () {
+        $('.share-ta-layer').fadeIn("slow");
+    })
+    $('.share-ta-layer').on('click', function(){
+        $(this).toggle();
+    })
+    // 2.生成图片分享
+    $("#share-pic-btn").on('click', function () {
+        main.takeScreenshot();
+        $('.share-pic-layer').fadeIn("slow");
+        setTimeout(function(){
+            $('.share-pic-layer').hide();
+        }, 5000)
+    })
+    $('.save-pic-layer').on('click', function(){
+        $(this).toggle();
+    })
+    
 }
 main.init();
