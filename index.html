@@ -46,7 +46,7 @@
 
 <body>
     <!-- main swiper start -->
-    <div class="swiper-container swiper-container-main" style="display: none">
+    <div id="home" class="swiper-container swiper-container-main" style="display: none">
         <div class="swiper-wrapper">
             <div class="swiper-slide page1">
                 <div class="logo mt70">
@@ -67,8 +67,8 @@
                 <div class="one-title mt170">
                     <img src="./img/one-title.png" alt="" class="wid100">
                 </div>
-                <div class="one-input mt100">
-                    <input id="page2Text" placeholder="在此输入你的目标">
+                <div class="one-input mt100 animated 2s">
+                    <input id="input-target" placeholder="在此输入你的目标">
                     <img src="./img/one-input-border.png" alt="" class="wid100">
                 </div>
                 <div class="swiper-container swiper-container-target one-target-con mt140">
@@ -88,28 +88,28 @@
                             </div>
                         </div>
                         <div class="swiper-slide">
-                            <div class="target-circle target1 target-text" target-text="职位生个级工资多个零2">
+                            <div class="target-circle target1 target-text" target-text="八块腹肌马甲线2">
+                                <img src="./img/one-target-bkfj.png" alt="" class="ab-c-w">
+                            </div>
+                            <div class="target-circle target2 target-text" target-text="职位生个级工资多个零2">
                                 <img src="./img/one-target-zwsgj.png" alt="" class="ab-c-w">
                             </div>
-                            <div class="target-circle target2 target-text" target-text="雅思7分2">
+                            <div class="target-circle target3 target-text" target-text="雅思7分2">
                                 <img src="./img/one-target-ysqf.png" alt="" class="ab-c-w">
                             </div>
-                            <div class="target-circle target3 target-text" target-text="世界和平2">
+                            <div class="target-circle target4 target-text" target-text="世界和平2">
                                 <img src="./img/one-target-sjhp.png" alt="" class="ab-c-w">
-                            </div>
-                            <div class="target-circle target4 target-text" target-text="八块腹肌马甲线2">
-                                <img src="./img/one-target-bkfj.png" alt="" class="ab-c-w">
                             </div>
                         </div>
                         <div class="swiper-slide">
-                            <div class="target-circle target1 target-text" target-text="职位生个级工资多个零3">
-                                <img src="./img/one-target-zwsgj.png" alt="" class="ab-c-w">
-                            </div>
-                            <div class="target-circle target2 target-text" target-text="雅思7分3">
+                            <div class="target-circle target1 target-text" target-text="雅思7分3">
                                 <img src="./img/one-target-ysqf.png" alt="" class="ab-c-w">
                             </div>
-                            <div class="target-circle target3 target-text" target-text="世界和平3">
+                            <div class="target-circle target2 target-text" target-text="世界和平3">
                                 <img src="./img/one-target-sjhp.png" alt="" class="ab-c-w">
+                            </div>
+                            <div class="target-circle target3 target-text" target-text="职位生个级工资多个零3">
+                                <img src="./img/one-target-zwsgj.png" alt="" class="ab-c-w">
                             </div>
                             <div class="target-circle target4 target-text" target-text="八块腹肌马甲线3">
                                 <img src="./img/one-target-bkfj.png" alt="" class="ab-c-w">
@@ -119,21 +119,72 @@
                     <div class="swiper-button-prev swiper-button-white"></div>
                     <div class="swiper-button-next swiper-button-white"></div>
                 </div>
-                <div class="target-submit mt60">
-                    提交
-                </div>
-                <div class="logo mt120">
+                <div id="submit-target" class="target-submit mt80">生成目标</div>
+                <div class="logo mt60">
                     <img src="./img/logo.png" alt="" class="wid100">
                 </div>
             </div>
         </div>
     </div>
     <!-- main swipper end -->
-    <!-- 九宫格目标页 -->
-    <div id="generatePic" class="page page3" style="display: block">
+    <!-- 选择分享方式页 start -->
+    <div id="selectSharewayPage" class="page page3" style="display: block;">
+        <div class="s-question mt40">
+                <img src="./img/t-question.png" alt="" class="wid100">
+        </div>
+        <div class="nine-box mt120">
+            <div class="nine-target mr42" guess-result="false">
+                <p class="nine-text ab-c-w">目标1</p>
+                <img src="./img/t-nine1.png" alt="" class="wid100">
+            </div>
+            <div class="nine-target mr42" guess-result="false">
+                <p class="nine-text ab-c-w">目标2</p>
+                <img src="./img/t-nine2.png" alt="" class="wid100">
+            </div>
+            <div class="nine-target" guess-result="false">
+                <p class="nine-text ab-c-w">目标3</p>
+                <img src="./img/t-nine3.png" alt="" class="wid100">
+            </div>
+            <div class="nine-target mr42 mt35" guess-result="false">
+                <p class="nine-text ab-c-w">目标4</p>
+                <img src="./img/t-nine4.png" alt="" class="wid100">
+            </div>
+            <div class="nine-target mr42 mt35" guess-result="false">
+                <p class="nine-text ab-c-w">目标5</p>
+                <img src="./img/t-nine5.png" alt="" class="wid100">
+            </div>
+            <div class="nine-target mt35" guess-result="false">
+                <p class="nine-text ab-c-w">目标6</p>
+                <img src="./img/t-nine6.png" alt="" class="wid100">
+            </div>
+            <div class="nine-target mr42 mt35" guess-result="false">
+                <p class="nine-text ab-c-w">目标7</p>
+                <img src="./img/t-nine7.png" alt="" class="wid100">
+            </div>
+            <div class="nine-target mr42 mt35" guess-result="false">
+                <p class="nine-text ab-c-w">目标8</p>
+                <img src="./img/t-nine8.png" alt="" class="wid100">
+            </div>
+            <div class="nine-target mt35" guess-result="false">
+                <p class="nine-text ab-c-w">目标9</p>
+                <img src="./img/t-nine9.png" alt="" class="wid100">
+            </div>
+        </div>
+        <div class="shareway-btn-box mt60">
+            <div id="share-ta-btn" class="shareway-btn fl">邀ta猜</div>
+            <div id="share-pic-btn" class="shareway-btn fr">生成图片猜</div>
+        </div>
+        <div class="logo mt60">
+            <img src="./img/logo.png" alt="" class="wid100">
+        </div>
+    </div>
+    <!-- 选择分享方式页 end -->
+
+    <!-- 生成分享图片页 start -->
+    <div id="generatePic" class="page page4" style="display: none; position: absolute;left:0;top:0;z-index:-10;">
         <div class="t-userinfo-box mt80">
             <div class="t-userinfo-avatar fl">
-                <img src="./img/ly2.jpg" alt="">
+                <img src="" alt="">
             </div>
             <div class="t-userinfo-nickname fl">我是昵称</div>
             <div class="t-userinfo-say mt10 fl">
@@ -143,61 +194,65 @@
                 </div>
             </div>
         </div>
-        <div class="t-nine-box mt100">
-            <div class="t-nine-target mr42" guess-result="false">
-                <p class="t-nine-text ab-c-w">目标1</p>
+        <div class="nine-box mt100">
+            <div class="nine-target t-nine-target mr42" guess-result="false">
+                <p class="nine-text t-nine-text ab-c-w">目标1</p>
                 <img src="./img/t-nine1.png" alt="" class="wid100">
                 <img src="./img/t-x.png" alt="" class="guess-error ab-c-w">
             </div>
-            <div class="t-nine-target mr42" guess-result="false">
-                <p class="t-nine-text ab-c-w">目标2</p>
+            <div class="nine-target t-nine-target mr42" guess-result="false">
+                <p class="nine-text t-nine-text ab-c-w">目标2</p>
                 <img src="./img/t-nine2.png" alt="" class="wid100">
                 <img src="./img/t-x.png" alt="" class="guess-error ab-c-w">
             </div>
-            <div class="t-nine-target" guess-result="false">
-                <p class="t-nine-text ab-c-w">目标3</p>
+            <div class="nine-target t-nine-target" guess-result="false">
+                <p class="nine-text t-nine-text ab-c-w">目标3</p>
                 <img src="./img/t-nine3.png" alt="" class="wid100">
                 <img src="./img/t-x.png" alt="" class="guess-error ab-c-w">
             </div>
-            <div class="t-nine-target mr42 mt35" guess-result="false">
-                <p class="t-nine-text ab-c-w">目标4</p>
+            <div class="nine-target t-nine-target mr42 mt35" guess-result="false">
+                <p class="nine-text t-nine-text ab-c-w">目标4</p>
                 <img src="./img/t-nine4.png" alt="" class="wid100">
                 <img src="./img/t-x.png" alt="" class="guess-error ab-c-w">
             </div>
-            <div class="t-nine-target mr42 mt35" guess-result="false">
-                <p class="t-nine-text ab-c-w">目标5</p>
+            <div class="nine-target t-nine-target mr42 mt35" guess-result="false">
+                <p class="nine-text t-nine-text ab-c-w">目标5</p>
                 <img src="./img/t-nine5.png" alt="" class="wid100">
                 <img src="./img/t-x.png" alt="" class="guess-error ab-c-w">
             </div>
-            <div class="t-nine-target mt35" guess-result="false">
-                <p class="t-nine-text ab-c-w">目标6</p>
+            <div class="nine-target t-nine-target mt35" guess-result="false">
+                <p class="nine-text t-nine-text ab-c-w">目标6</p>
                 <img src="./img/t-nine6.png" alt="" class="wid100">
                 <img src="./img/t-x.png" alt="" class="guess-error ab-c-w">
             </div>
-            <div class="t-nine-target mr42 mt35" guess-result="false">
-                <p class="t-nine-text ab-c-w">目标7</p>
+            <div class="nine-target t-nine-target mr42 mt35" guess-result="false">
+                <p class="nine-text t-nine-text ab-c-w">目标7</p>
                 <img src="./img/t-nine7.png" alt="" class="wid100">
                 <img src="./img/t-x.png" alt="" class="guess-error ab-c-w">
             </div>
-            <div class="t-nine-target mr42 mt35" guess-result="false">
-                <p class="t-nine-text ab-c-w">目标8</p>
+            <div class="nine-target t-nine-target mr42 mt35" guess-result="false">
+                <p class="nine-text t-nine-text ab-c-w">目标8</p>
                 <img src="./img/t-nine8.png" alt="" class="wid100">
                 <img src="./img/t-x.png" alt="" class="guess-error ab-c-w">
             </div>
-            <div class="t-nine-target mt35" guess-result="false">
-                <p class="t-nine-text ab-c-w">目标9</p>
+            <div class="nine-target t-nine-target mt35" guess-result="false">
+                <p class="nine-text t-nine-text ab-c-w">目标9</p>
                 <img src="./img/t-nine9.png" alt="" class="wid100">
                 <img src="./img/t-x.png" alt="" class="guess-error ab-c-w">
             </div>
         </div>
-        <div class="logo mt120">
+        <div id="share-code" class="share-code mt40"></div>
+        <div class="logo mt60">
             <img src="./img/logo.png" alt="" class="wid100">
         </div>
     </div>
+    <!-- 生成分享图片页 start -->
 
+    <!-- 生成的海报的存放位置 -->
     <div id="generatePicShow" class="page"></div>
     <script src="./js/jquery-1.9.1.min.js"></script>
     <script src="./js/html2canvas.js"></script>
+    <script src="./js/qrcode.js"></script>
     <!-- <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script> -->
     <script src="./js/swiper-3.3.1.min.js"></script>
     <script src="./js/swiper.animate1.0.2.min.js"></script>
@@ -216,8 +271,6 @@
         var subSwiper = new Swiper('.swiper-container-target', {
             direction: 'horizontal',
             loop: true,
-            spaceBetween: 30,
-            effect: 'fade',
             nextButton: '.swiper-button-next',
             prevButton: '.swiper-button-prev',
             onInit: function (opt) {},
@@ -228,35 +281,6 @@
         $(".target-text").click(function () {
             console.log($(this).attr('target-text'));
         })
-
-        function takeScreenshot() {
-            console.log('test');
-            var cntElem = $('#generatePic')[0];
-            var shareContent = cntElem;//需要截图的包裹的（原生的）DOM 对象
-            var width = shareContent.offsetWidth; //获取dom 宽度
-            var height = shareContent.offsetHeight; //获取dom 高度
-            var canvas = document.createElement("canvas"); //创建一个canvas节点
-            var scale = 2; //定义任意放大倍数 支持小数
-            canvas.width = width * scale; //定义canvas 宽度 * 缩放
-            canvas.height = height * scale; //定义canvas高度 *缩放
-            canvas.style.width = width + "px";
-            canvas.style.height = height + "px";
-            canvas.getContext("2d").scale(scale, scale); //获取context,设置scale 
-            html2canvas($("#generatePic"), {
-                canvas: canvas,
-                onrendered: function (canvas) {
-                    console.log(canvas);
-                    // var url = canvas.toDataURL();
-                    $('#generatePicShow').append(canvas).show();
-                }
-            });
-        }
-        
-
-        $("#generatePic").on("click", function () {               
-            takeScreenshot();
-            $(this).hide();
-        });
     </script>
 </body>
 

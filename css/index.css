@@ -338,6 +338,20 @@ div {
 .fl {
     float: left;
 }
+.fr {
+    float: right;
+}
+
+.red-input {
+    color: #ff0000 !important;
+}
+.red-input:-ms-input-placeholder{
+    color: #ff0000;opacity:1;
+}
+
+.red-input::-webkit-input-placeholder{
+    color: #ff0000;opacity:1;
+}
 
 .wid100 {
     width: 100%;
@@ -347,6 +361,9 @@ div {
 }
 .mt35 {
     margin-top: 0.35rem !important;
+}
+.mt40 {
+    margin-top: 0.40rem !important;
 }
 .mt60 {
     margin-top: 0.6rem !important;
@@ -371,6 +388,9 @@ div {
 }
 .mt170 {
     margin-top: 1.7rem !important;
+}
+.mr20 {
+    margin-right: .2rem !important;
 }
 .mr42 {
     margin-right: .42rem !important;
@@ -408,6 +428,7 @@ div {
     height: 0.37rem;
     margin: 0 auto;
 }
+
 /* 选择目标页 */
 .page2 {
     background: url('../img/one-bg.png') no-repeat center center;
@@ -438,11 +459,6 @@ div {
 }
 .page2 .one-target-box {
     position: relative;
-}
-.page2 .t1box {
-    width: 100%;
-    position: absolute;
-    background: #eeee00;
 }
 .page2 .target-circle {
     width: 2.3rem;
@@ -478,70 +494,104 @@ div {
     width: 1.2rem;
 }
 .page2 .target-submit {
+    width: 3rem;
+    height: 0.8rem;
+    line-height: 0.8rem;
     text-align: center;
-    color: #fff;
-    font-size: 20px;
+    color: #000;
+    font-size: 0.5rem;
+    background: #ffc100;
+    margin: 0 auto;
 }
-/* 生成目标页 */
+/* 选择目标分享方式页 */
 .page3 {
     background: url('../img/t-bg.png') no-repeat center center;
 	background-size: cover;
 	position: relative;
 }
-.page3 .t-userinfo-box{
+.s-question {
+    width: 4.19rem;
+    height: 1.29rem;
+    margin: 0 auto;
+}
+.shareway-btn-box {
+    padding: 5px;
+    width: 5rem;
+    height: 0.8rem;
+    line-height: 0.8rem;
+    text-align: center;
+    color: #000;
+    font-size: 0.5rem;
+    margin: 0 auto;
+    overflow: hidden;
+}
+.shareway-btn-box .shareway-btn {
+    background: #ffc100;
+    padding: 0 10px;
+}
+
+
+
+
+/* 用于生成生成目标图片的起始页 */
+.page4 {
+    background: url('../img/t-bg.png') no-repeat center center;
+	background-size: cover;
+	position: relative;
+}
+.page4 .t-userinfo-box{
     width: 6.6rem;
     height: 1.45rem;
     margin: 0 auto;
-    /* background: #ccc; */
 }
-.t-userinfo-avatar {
+.page4 .t-userinfo-avatar {
     width: 1.28rem;
     height: 100%;
 }
-.t-userinfo-avatar img {
+.page4 .t-userinfo-avatar img {
     width: 1.28rem;
     height: 1.28rem;
     background: #fff;
 }
-.t-userinfo-nickname {
+.page4 .t-userinfo-nickname {
     width: 5.3rem;
     height: 0.28rem;
     line-height: 0.28rem;
     font-size: 0.28rem;
     text-indent: 30px;
     color: #fff;
-    /* color: #fff; */
 }
-.t-userinfo-say {
+.page4 .t-userinfo-say {
     width: 5.3rem;
     height: 1rem;
     overflow: hidden;
-    /* background: #eeee00; */
 }
-.t-say-l {
+.page4 .t-say-l {
     width: 0.18rem;
     height: 1rem;
     background: url('../img/t-xiaosj.png') no-repeat left 0.18rem;
     background-size: contain;
 }
-.t-say-r {
+.page4 .t-say-r {
     width: 5rem;
     height: 1rem;
     line-height: 1rem;
-    background: url('../img/t-yuanjuxing.png') no-repeat -2px center;
+    background: url('../img/t-yuanjuxing.png') no-repeat -3px center;
     background-size: contain;
     position: relative;
 }
-.t-say-r  img {
+.page4 .t-say-r  img {
     width: 4.7rem;
 }
-.t-nine-box {
+
+/* 九宫格部分 */
+.nine-box {
     width: 6.14rem;
     height: 6rem;;
     margin: 0 auto;
     overflow: hidden;
 }
-.t-nine-target {
+.nine-target {
     width: 1.76rem;
     height: 1.76rem;
     line-height: 1.76rem;
@@ -550,10 +600,14 @@ div {
     position: relative;
     float: left;
 }
-.t-nine-text {
-
-}
 .guess-error {
     width: 0.6rem;
     height: 0.74rem;
+    display: none;
+}
+.share-code {
+    width: 1.34rem;
+    height: 1.34rem;
+    margin: 0 auto;
+    background: #fff;
 }
