@@ -67,7 +67,6 @@ main.takeScreenshot = function () {
     canvas.style.width = width + "px";
     canvas.style.height = height + "px";
     canvas.getContext("2d").scale(scale, scale); //获取context,设置scale 
-    var url = '';
     html2canvas($("#generatePic"), {
         canvas: canvas,
         onrendered: function (canvas) {
