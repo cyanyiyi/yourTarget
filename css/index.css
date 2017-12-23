@@ -37,7 +37,7 @@ body {
     right: 0;
     bottom: 0;
     margin: auto;
-    font-family: "宋体", serif, "SimSun", Arial, Helvetica, sans-serif;
+    font-family: "微软雅黑", "Microsoft YaHei", "宋体", serif, "SimSun", Arial, Helvetica, sans-serif;
 }
 
 body,
@@ -280,7 +280,7 @@ button,
 body,
 div {
     /* WebKit browsers */
-    font-family: "宋体", serif, "SimSun", Arial, Helvetica, sans-serif;
+    font-family: "微软雅黑", "Microsoft YaHei", "宋体", serif, "SimSun", Arial, Helvetica, sans-serif;
 }
 
 input:-moz-placeholder,
@@ -289,7 +289,7 @@ button,
 body,
 div {
     /* Mozilla Firefox 4 to 18 */
-    font-family: "宋体", serif, "SimSun", Arial, Helvetica, sans-serif;
+    font-family: "微软雅黑", "Microsoft YaHei", "宋体", serif, "SimSun", Arial, Helvetica, sans-serif;
 }
 
 input::-moz-placeholder,
@@ -298,7 +298,7 @@ button,
 body,
 div {
     /* Mozilla Firefox 19+ */
-    font-family: "宋体", serif, "SimSun", Arial, Helvetica, sans-serif;
+    font-family: "微软雅黑", "Microsoft YaHei", "宋体", serif, "SimSun", Arial, Helvetica, sans-serif;
 }
 
 input:-ms-input-placeholder,
@@ -307,7 +307,7 @@ button,
 body,
 div {
     /* Internet Explorer 10+ */
-    font-family: "宋体", serif, "SimSun", Arial, Helvetica, sans-serif;
+    font-family: "微软雅黑", "Microsoft YaHei", "宋体", serif, "SimSun", Arial, Helvetica, sans-serif;
 }
 
 /*********************************************************/
@@ -345,6 +345,9 @@ div {
 .mt10 {
     margin-top: 0.1rem !important;
 }
+.mt35 {
+    margin-top: 0.35rem !important;
+}
 .mt60 {
     margin-top: 0.6rem !important;
 }
@@ -369,7 +372,9 @@ div {
 .mt170 {
     margin-top: 1.7rem !important;
 }
-
+.mr42 {
+    margin-right: .42rem !important;
+}
 .logo {
     width: 2.25rem;
     height: 0.56rem;
@@ -529,4 +534,26 @@ div {
 }
 .t-say-r  img {
     width: 4.7rem;
+}
+.t-nine-box {
+    width: 6.14rem;
+    height: 6rem;;
+    margin: 0 auto;
+    overflow: hidden;
+}
+.t-nine-target {
+    width: 1.76rem;
+    height: 1.76rem;
+    line-height: 1.76rem;
+    font-size: 0.28rem;
+    text-align: center;
+    position: relative;
+    float: left;
+}
+.t-nine-text {
+
+}
+.guess-error {
+    width: 0.6rem;
+    height: 0.74rem;
 }

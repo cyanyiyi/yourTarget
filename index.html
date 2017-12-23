@@ -33,13 +33,14 @@
             var html = document.getElementsByTagName("html")[0];
             var oWidth = document.body.clientWidth || document.documentElement.clientWidth;
             console.log(oWidth);
-            if(oWidth >= 640){
+            if (oWidth >= 640) {
                 oWidth = 640;
             }
             html.style.fontSize = oWidth / pwidth * prem + "px";
         }
     </script>
     <style>
+
     </style>
 </head>
 
@@ -60,7 +61,7 @@
                 <div class="home-see mt120">
                     <img src="./img/home-seemytarget.png" alt="" class="wid100">
                 </div>
-			    <img src="./img/down.png" alt="" class="arrow animated fadeInUp infinite" />
+                <img src="./img/down.png" alt="" class="arrow animated fadeInUp infinite" />
             </div>
             <div class="swiper-slide page2">
                 <div class="one-title mt170">
@@ -128,11 +129,11 @@
         </div>
     </div>
     <!-- main swipper end -->
-    <!-- 目标页 -->
-    <div class="page page3" style="display: block">
+    <!-- 九宫格目标页 -->
+    <div id="generatePic" class="page page3" style="display: block">
         <div class="t-userinfo-box mt80">
             <div class="t-userinfo-avatar fl">
-                <img src="" alt="">
+                <img src="./img/ly2.jpg" alt="">
             </div>
             <div class="t-userinfo-nickname fl">我是昵称</div>
             <div class="t-userinfo-say mt10 fl">
@@ -142,8 +143,61 @@
                 </div>
             </div>
         </div>
+        <div class="t-nine-box mt100">
+            <div class="t-nine-target mr42" guess-result="false">
+                <p class="t-nine-text ab-c-w">目标1</p>
+                <img src="./img/t-nine1.png" alt="" class="wid100">
+                <img src="./img/t-x.png" alt="" class="guess-error ab-c-w">
+            </div>
+            <div class="t-nine-target mr42" guess-result="false">
+                <p class="t-nine-text ab-c-w">目标2</p>
+                <img src="./img/t-nine2.png" alt="" class="wid100">
+                <img src="./img/t-x.png" alt="" class="guess-error ab-c-w">
+            </div>
+            <div class="t-nine-target" guess-result="false">
+                <p class="t-nine-text ab-c-w">目标3</p>
+                <img src="./img/t-nine3.png" alt="" class="wid100">
+                <img src="./img/t-x.png" alt="" class="guess-error ab-c-w">
+            </div>
+            <div class="t-nine-target mr42 mt35" guess-result="false">
+                <p class="t-nine-text ab-c-w">目标4</p>
+                <img src="./img/t-nine4.png" alt="" class="wid100">
+                <img src="./img/t-x.png" alt="" class="guess-error ab-c-w">
+            </div>
+            <div class="t-nine-target mr42 mt35" guess-result="false">
+                <p class="t-nine-text ab-c-w">目标5</p>
+                <img src="./img/t-nine5.png" alt="" class="wid100">
+                <img src="./img/t-x.png" alt="" class="guess-error ab-c-w">
+            </div>
+            <div class="t-nine-target mt35" guess-result="false">
+                <p class="t-nine-text ab-c-w">目标6</p>
+                <img src="./img/t-nine6.png" alt="" class="wid100">
+                <img src="./img/t-x.png" alt="" class="guess-error ab-c-w">
+            </div>
+            <div class="t-nine-target mr42 mt35" guess-result="false">
+                <p class="t-nine-text ab-c-w">目标7</p>
+                <img src="./img/t-nine7.png" alt="" class="wid100">
+                <img src="./img/t-x.png" alt="" class="guess-error ab-c-w">
+            </div>
+            <div class="t-nine-target mr42 mt35" guess-result="false">
+                <p class="t-nine-text ab-c-w">目标8</p>
+                <img src="./img/t-nine8.png" alt="" class="wid100">
+                <img src="./img/t-x.png" alt="" class="guess-error ab-c-w">
+            </div>
+            <div class="t-nine-target mt35" guess-result="false">
+                <p class="t-nine-text ab-c-w">目标9</p>
+                <img src="./img/t-nine9.png" alt="" class="wid100">
+                <img src="./img/t-x.png" alt="" class="guess-error ab-c-w">
+            </div>
+        </div>
+        <div class="logo mt120">
+            <img src="./img/logo.png" alt="" class="wid100">
+        </div>
     </div>
+
+    <div id="generatePicShow" class="page"></div>
     <script src="./js/jquery-1.9.1.min.js"></script>
+    <script src="./js/html2canvas.js"></script>
     <!-- <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script> -->
     <script src="./js/swiper-3.3.1.min.js"></script>
     <script src="./js/swiper.animate1.0.2.min.js"></script>
@@ -171,9 +225,38 @@
                 console.log(opt.activeIndex);
             }
         })
-        $(".target-text").click(function(){
+        $(".target-text").click(function () {
             console.log($(this).attr('target-text'));
         })
+
+        function takeScreenshot() {
+            console.log('test');
+            var cntElem = $('#generatePic')[0];
+            var shareContent = cntElem;//需要截图的包裹的（原生的）DOM 对象
+            var width = shareContent.offsetWidth; //获取dom 宽度
+            var height = shareContent.offsetHeight; //获取dom 高度
+            var canvas = document.createElement("canvas"); //创建一个canvas节点
+            var scale = 2; //定义任意放大倍数 支持小数
+            canvas.width = width * scale; //定义canvas 宽度 * 缩放
+            canvas.height = height * scale; //定义canvas高度 *缩放
+            canvas.style.width = width + "px";
+            canvas.style.height = height + "px";
+            canvas.getContext("2d").scale(scale, scale); //获取context,设置scale 
+            html2canvas($("#generatePic"), {
+                canvas: canvas,
+                onrendered: function (canvas) {
+                    console.log(canvas);
+                    // var url = canvas.toDataURL();
+                    $('#generatePicShow').append(canvas).show();
+                }
+            });
+        }
+        
+
+        $("#generatePic").on("click", function () {               
+            takeScreenshot();
+            $(this).hide();
+        });
     </script>
 </body>
 
