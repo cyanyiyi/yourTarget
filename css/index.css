@@ -21,7 +21,12 @@ footer {
     margin: 0;
     padding: 0;
 }
-
+html {
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    -webkit-text-size-adjust: none;
+}
 body {
     width: 100%;
     height: 100%;
@@ -31,6 +36,11 @@ body {
     /*上下拉动滚动条卡顿设置*/
     -webkit-overflow-scrolling: touch;
     overflow-scrolling: touch;
+    /* ip x */
+    /* padding-top: constant(safe-area-inset-top);             
+    padding-left: constant(safe-area-inset-left);                
+    padding-right: constant(safe-area-inset-right);           
+    padding-bottom: constant(safe-area-inset-bottom);      */
     position: absolute;
     top: 0;
     left: 0;
@@ -55,12 +65,7 @@ input {
     border: none;
 }
 
-html {
-    width: 100%;
-    /* height: 100%; */
-    overflow-x: hidden;
-    -webkit-text-size-adjust: none;
-}
+
 
 
 
@@ -334,6 +339,10 @@ div {
     color: #ff0000;opacity:1;
 }
 
+.black-font {
+    color: #000 !important;
+}
+
 .wid100 {
     width: 100%;
 }
@@ -537,10 +546,11 @@ div {
 .page4 .t-userinfo-avatar {
     width: 1.28rem;
     height: 100%;
+    overflow: hidden;
 }
 .page4 .t-userinfo-avatar img {
     width: 1.28rem;
-    height: 1.28rem;
+    /* height: 1.28rem; */
     background: #fff;
 }
 .page4 .t-userinfo-nickname {
@@ -624,6 +634,76 @@ div {
     width: 4.7rem;
 }
 
+/* 好友猜 默契度列表页 */
+.page6 {
+    background: #ccc;
+    /* overflow-y: scroll; */
+}
+.page6 .result-myavatar-box {
+    width: 1.34rem;
+    height: 1.34rem;
+    margin: 0 auto;
+    overflow: hidden;
+    background: #fff;
+}
+.page6 .guessed-friendlist-box {
+    width: 6rem;
+    margin: 0 auto;
+    /* background: #33c9ff; */
+    overflow-y: scroll;
+    max-height: 8rem;
+    padding-bottom: 10px;
+}
+.page6 .no-friend {
+    height: 1rem;
+    line-height: 1rem;
+    font-size: 20px;
+    color: #000;
+    background: #fff;
+    text-align: center;
+}
+.page6 .guessed-friend {
+    /* width: 100%; */
+    height: 1.2rem;
+    line-height: 1.2rem;
+    margin-top: 15px;
+    font-size: 18px;
+    color: #fff;
+    overflow: hidden;
+}
+.page6 .guessed-friend .guessed-friend-info {
+    width: 4.2rem;
+    overflow: hidden;
+}
+.page6 .guessed-friend .guessed-friend-avatar {
+    width: 1.2rem;
+}
+.page6 .guessed-friend .guessed-friend-name {
+    width: 3rem;
+    text-indent: 5px;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+}
+.page6 .guessed-friend .guessed-friend-moqi {
+    width: 1.6rem;
+    text-align: center;
+}
+.page6 .guess-retarget {
+    width: 5rem;
+    height: 1rem;
+    line-height: 1rem;
+    font-size: 24px;
+    text-align: center;
+    background: #ffc100;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 30px;
+    margin: auto;
+}
+
+
 /* 九宫格部分 */
 .nine-box {
     width: 6.14rem;
@@ -659,6 +739,7 @@ div {
     background: #fff;
 }
 
+/* 弹出层部分 */
 .share-ta-layer {
     background-color: rgba(0, 0, 0, 0.7);
 }
