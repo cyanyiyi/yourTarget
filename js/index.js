@@ -15,6 +15,9 @@ main.initSwipper = function() {
         },
         onSlideChangeEnd: function (opt) {
             console.log(opt.activeIndex);
+            if(opt.activeIndex === 1) {
+                $('#video')[0].pause();
+            }
         }
     })
     var subSwiper = new Swiper('.swiper-container-target', {
@@ -23,9 +26,7 @@ main.initSwipper = function() {
         nextButton: '.swiper-button-next',
         prevButton: '.swiper-button-prev',
         onInit: function (opt) {},
-        onSlideChangeEnd: function (opt) {
-            console.log(opt.activeIndex);
-        }
+        onSlideChangeEnd: function (opt) {}
     })
     // mainSwiper.init();
     // subSwiper.init();
@@ -236,6 +237,11 @@ main.bindEvent = function () {
     })
     $('.save-pic-layer').on('click', function(){
         $(this).toggle();
+    })
+    // 播放视频
+    $(document).on('click', '#video-img', function(){
+        $(this).hide();
+        $('#video')[0].play();
     })
 
     
