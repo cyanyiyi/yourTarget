@@ -189,6 +189,10 @@ main.friendGuess = function () {
 };
 main.bindEvent = function () {
     // main.friendGuess();
+    // 输入目标
+    // $('#input-target').change(function(){
+    //     console.log($(this).val().length);
+    // })
     // 选择系统目标
     $(document).on('click','.target-text' ,function () {
         $('#input-target').val($(this).attr('target-text'));
@@ -199,24 +203,32 @@ main.bindEvent = function () {
         var _targetArr = ['目标1', '目标2', '目标3', '目标4', '目标5', '目标6', '目标7', '目标8', '目标9'];
         var domArrShare = $('.s-nine-text');
         var domArrPic = $('.t-nine-text');
-        if (!myTarget) {
-            $('.one-input').addClass('bounce').find('#input-target').addClass('red-input');
-            setTimeout(function () {
-                $('.one-input').removeClass('bounce').find('#input-target').removeClass('red-input');
-            }, 2000)
+        if(myTarget.length > 10) {
+            var $lengthTips = $('.length-layer');
+            $lengthTips.fadeIn('slow');
+            setTimeout(function(){
+                $lengthTips.fadeOut();
+            }, 1000)
         } else {
-            _targetArr = main.sort(_targetArr);
-            $('#selectSharewayPage').show();
-            $('#generatePic').show();
-            $('#home').hide();
-            if (_targetArr.indexOf(myTarget) === -1) {
-                _targetArr[5] = myTarget;
+            if (!myTarget) {
+                $('.one-input').addClass('bounce').find('#input-target').addClass('red-input');
+                setTimeout(function () {
+                    $('.one-input').removeClass('bounce').find('#input-target').removeClass('red-input');
+                }, 2000)
+            } else {
+                _targetArr = main.sort(_targetArr);
+                $('#selectSharewayPage').show();
+                $('#generatePic').show();
+                $('#home').hide();
+                if (_targetArr.indexOf(myTarget) === -1) {
+                    _targetArr[5] = myTarget;
+                }
+                var nickName = '柳岩';
+                var avatarUrl = './img/ly2.jpg';
+                main.initUserinfo('.t-userinfo-nickname', '.t-userinfo-avatar',nickName, avatarUrl);
+                main.Randomwish(_targetArr, domArrShare, domArrPic);
+                main.generateCode('www.tx.com?id=1');
             }
-            var nickName = '柳岩';
-            var avatarUrl = './img/ly2.jpg';
-            main.initUserinfo('.t-userinfo-nickname', '.t-userinfo-avatar',nickName, avatarUrl);
-            main.Randomwish(_targetArr, domArrShare, domArrPic);
-            main.generateCode('www.tx.com?id=1');
         }
     });
     // 选择分享方式
