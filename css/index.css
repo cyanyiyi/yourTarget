@@ -337,8 +337,14 @@ div {
 .wid100 {
     width: 100%;
 }
+.pt30 {
+    padding-top: 0.3rem !important;
+}
 .mt10 {
     margin-top: 0.1rem !important;
+}
+.mt20 {
+    margin-top: 0.2rem !important;
 }
 .mt35 {
     margin-top: 0.35rem !important;
@@ -369,6 +375,9 @@ div {
 }
 .mt170 {
     margin-top: 1.7rem !important;
+}
+.mt200 {
+    margin-top: 2rem !important;
 }
 .mr20 {
     margin-right: .2rem !important;
@@ -564,6 +573,56 @@ div {
 .page4 .t-say-r  img {
     width: 4.7rem;
 }
+/* 朋友猜 */
+.page5 {
+    background: url('../img/t-bg.png') no-repeat center center;
+	background-size: cover;
+	position: relative;
+}
+.page5 .g-userinfo-box{
+    width: 6.6rem;
+    height: 1.45rem;
+    margin: 0 auto;
+}
+.page5 .g-userinfo-avatar {
+    width: 1.28rem;
+    height: 100%;
+}
+.page5 .g-userinfo-avatar img {
+    width: 1.28rem;
+    height: 1.28rem;
+    background: #fff;
+}
+.page5 .g-userinfo-nickname {
+    width: 5.3rem;
+    height: 0.28rem;
+    line-height: 0.28rem;
+    font-size: 0.28rem;
+    text-indent: 30px;
+    color: #fff;
+}
+.page5 .g-userinfo-say {
+    width: 5.3rem;
+    height: 1rem;
+    overflow: hidden;
+}
+.page5 .g-say-l {
+    width: 0.18rem;
+    height: 1rem;
+    background: url('../img/t-xiaosj.png') no-repeat left 0.18rem;
+    background-size: contain;
+}
+.page5 .g-say-r {
+    width: 5rem;
+    height: 1rem;
+    line-height: 1rem;
+    background: url('../img/t-yuanjuxing.png') no-repeat -3px center;
+    background-size: contain;
+    position: relative;
+}
+.page5 .g-say-r  img {
+    width: 4.7rem;
+}
 
 /* 九宫格部分 */
 .nine-box {
@@ -623,6 +682,44 @@ div {
     color: #fff;
     font-size: 24px;
     text-align: center;
+}
+.guess-right-layer {
+    background-color: rgba(0, 0, 0, 0.3);
+}
+.guess-right-layer .guess-tips-box {
+    width: 5rem;
+    height: 6rem;
+    color: #fff;
+    text-align: center;
+}
+.guess-right-layer .guess-tips {
+    background-color: rgba(0, 0, 0, 0.7);
+    width: 5rem;
+    height: 3rem;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px 5px 5px 5px;
+    -webkit-border-radius: 5px 5px 5px 5px;
+}
+.guess-right-layer .guess-tips .guess-right-tip {
+    font-size: 32px;
+    padding-top:0.6rem; 
+}
+.guess-right-layer .guess-tips .guess-right-mqd {
+    font-size: 24px;
+}
+.guess-right-layer .guess-tips .guess-right-desc {
+    color: #33c9ff;
+    font-size: 16px;
+}
+.guess-right-layer .guess-generate {
+    background: #ffc100;
+    padding: 0 10px;
+    height: 0.8rem;
+    line-height: 0.8rem;
+    text-align: center;
+    color: #000;
+    font-size: 0.5rem;
 }
 
 #generatePicShow img {

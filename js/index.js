@@ -1,7 +1,34 @@
 var main = {};
+main.myTarget = '目标1';
 main.init = function () {
     // this.initShareInfo();
+    main.initSwipper();
     main.bindEvent();
+    main.initSwipper();
+}
+main.initSwipper = function() {
+    var mainSwiper = new Swiper('.swiper-container-main', {
+        direction: 'vertical',
+        onInit: function (opt) { //Swiper2.x的初始化是onFirstInit
+            swiperAnimateCache(opt); //隐藏动画元素 
+            swiperAnimate(opt); //初始化完成开始动画
+        },
+        onSlideChangeEnd: function (opt) {
+            console.log(opt.activeIndex);
+        }
+    })
+    var subSwiper = new Swiper('.swiper-container-target', {
+        direction: 'horizontal',
+        loop: true,
+        nextButton: '.swiper-button-next',
+        prevButton: '.swiper-button-prev',
+        onInit: function (opt) {},
+        onSlideChangeEnd: function (opt) {
+            console.log(opt.activeIndex);
+        }
+    })
+    // mainSwiper.init();
+    // subSwiper.init();
 }
 main.initShareInfo = function () {
     var currUrl = cqsj.url.replace(window.location.hash, '');
@@ -37,9 +64,9 @@ main.initShareInfo = function () {
     });
 }
 
-main.initUserinfo = function (nickName, avatarUrl) {
-    $('.t-userinfo-avatar img').attr("src", avatarUrl);
-    $('.t-userinfo-nickname').text(nickName);
+main.initUserinfo = function (nickSelector, avatarSelector, nickName, avatarUrl) {
+    $(nickSelector).text(nickName);
+    $(avatarSelector).find('img').attr("src", avatarUrl);
 
 }
 
@@ -88,19 +115,79 @@ main.sort = function (ARR) {
     return ARR;
 };
 
-main.Randomwish = function (domArrS, domArrP, target) {
+main.Randomwish = function (target, domArrS, domArrP) {
     var _target = main.sort(target);
     console.log(_target);
     for (var i = 0; i < domArrS.length; i++) {
         (function (i) {
-            $(domArrS[i]).text(_target[i]);
-            $(domArrP[i]).text(_target[i]);
+            if(domArrS){
+                $(domArrS[i]).text(_target[i]);
+            }
+            if(domArrP){
+                $(domArrP[i]).text(_target[i]);
+            }
         })(i)
     }
 
 };
+main.friendGuess = function () {
+    // 如果是朋友点进来 猜目标
+    var nickName = '柳岩';
+    var avatarUrl = './img/ly2.jpg';
+    var myTarget = '测试目标';
+    var _targetArr = ['目标1', '目标2', '目标3', '目标4', '目标5', '目标6', '目标7', '目标8', '目标9'];
+    var domArrGuess = $('.g-nine-text');
+    var caiIndex = 0;
+    var page4ErrorText = ['还能好好做朋友吗', '友谊的小船说翻就翻', '只想露出没默契的笑容', '卸下你爱我的伪装吧', '没默契=没关系'];
+    var caiTargetObj = [
+        {MOqibaifen: "默契度 100%", MOqiText: "命中注定，没有人比你们更相配。"},
+        {MOqibaifen: "默契度 88%", MOqiText: "最好的默契莫过于，我心里想的你都懂。"},
+        {MOqibaifen: "默契度 77%", MOqiText: "陪伴才是最长情的告白。"},
+        {MOqibaifen: "默契度 66%", MOqiText: "简单的默契，幸福的刚好。"},
+        {MOqibaifen: "默契度 55%", MOqiText: "爱上一匹野马，可我家里没有草原。"},
+        {MOqibaifen: "默契度 44%", MOqiText: "岁月静好,时光不负有心人。"},
+        {MOqibaifen: "默契度 33%", MOqiText: "手牵手,漫漫长路一起走。"},
+        {MOqibaifen: "默契度 22%", MOqiText: "嘘~恋爱的气息正在发酵"},
+        {MOqibaifen: "默契度 11%", MOqiText: "我终于发现了，你是来找茬的吧？！"}
+    ];
+    main.initUserinfo('.g-userinfo-nickname', '.g-userinfo-avatar',nickName, avatarUrl);
+    if (_targetArr.indexOf(myTarget) === -1) {
+        _targetArr[5] = myTarget;
+    }
+    main.Randomwish(_targetArr, domArrGuess);
+    $('#home').hide();
+    $('#friendGuess').show();
 
+    // 朋友猜
+    $(document).on('click', '.g-nine-target', function(){
+        var guessed = $(this).attr('guessed')
+        var guessTarget = $(this).find('.g-nine-text').text();
+        var $error = $(this).find('.guess-error')
+        if (guessed === "true") {
+            return false;
+        } else {
+            $(this).attr("guessed", "true");
+            if(guessTarget === myTarget) {
+                // 猜对了
+                $('#guess-mqd-text').text(caiTargetObj[caiIndex].MOqibaifen);
+                $('#guess-desc-text').text(caiTargetObj[caiIndex].MOqiText);
+                $('.guess-right-layer').fadeIn();
+                main.initSwipper();
+            } else {
+                $error.fadeIn('slow');
+            }
+            caiIndex++;
+        }
+    });
+    // 猜过后生成我的目标
+    $(document).on('click', '#generate-mytarget', function(){
+        $('#friendGuess').hide();
+        $('.guess-right-layer').hide();
+        $('#home').fadeIn();
+    })
+};
 main.bindEvent = function () {
+    // main.friendGuess();
     // 选择系统目标
     $(document).on('click','.target-text' ,function () {
         $('#input-target').val($(this).attr('target-text'));
@@ -126,8 +213,8 @@ main.bindEvent = function () {
             }
             var nickName = '柳岩';
             var avatarUrl = './img/ly2.jpg';
-            main.initUserinfo(nickName, avatarUrl);
-            main.Randomwish(domArrShare, domArrPic, _targetArr);
+            main.initUserinfo('.t-userinfo-nickname', '.t-userinfo-avatar',nickName, avatarUrl);
+            main.Randomwish(_targetArr, domArrShare, domArrPic);
             main.generateCode('www.tx.com?id=1');
         }
     });
@@ -150,6 +237,7 @@ main.bindEvent = function () {
     $('.save-pic-layer').on('click', function(){
         $(this).toggle();
     })
+
     
 }
 main.init();
