@@ -1,10 +1,32 @@
 var main = {};
 main.myTarget = '目标1';
 main.init = function () {
+    // main.getUserInfoByOpenid("wx8b9ddd1c943ce95f");
     // this.initShareInfo();
     main.initSwipper();
     main.bindEvent();
     main.initSwipper();
+}
+main.getUserInfoByOpenid = function(openid){
+    $(".ajaxLayer").fadeIn();
+    $.ajax({
+        headers: { 'Access-Control-Allow-Origin': '*' },
+        type: "get",
+        url: "http://txktapi.lingbokeji.cn/api/v1/user_info",
+        data: {
+            openid: openid
+        },
+        datatype: "json",
+        success: function(d){
+            console.log(d);
+        },
+        error: function(d) {
+            console.log(d);
+        },
+        complete: function () {
+            $(".ajaxLayer").fadeOut();
+        }
+    })
 }
 main.initSwipper = function() {
     var mainSwiper = new Swiper('.swiper-container-main', {
