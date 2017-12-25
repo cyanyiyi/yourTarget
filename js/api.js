@@ -1,4 +1,4 @@
-;(function () {
+; (function () {
 
     main.getUserInfoFriendList = function (openid, timeStamp, user, friendOpenid) {
 
@@ -34,18 +34,18 @@
                         var friendListObj = Result.data.friendList;
                         // $(".PMxinyuan").html(Result.data.desireStr);
 
-                        if(friendListObj==''){
+                        if (friendListObj == '') {
                             $(".Pm-conBody").append("<p style='font-size: 25px;width: 350px;'><img src='img/noList.png' class='ab-c-w' style='top:-50%'></p>");
-                            return ;
+                            return;
                         }
 
                         var PmHtml = function (friendHeadUrl, friendNickName, friendOpenid) {
 
                             var FriendNickNameG;
                             try {
-                                FriendNickNameG=decodeURIComponent(friendNickName);
+                                FriendNickNameG = decodeURIComponent(friendNickName);
                             } catch (e) {  //fresh
-                                FriendNickNameG="fresh";
+                                FriendNickNameG = "fresh";
                             }
 
                             var html = '<div class="PmText" dataOpenid="' + friendOpenid + '"><div class="userHeader"><img src="' + friendHeadUrl + '" alt=""> ' +
@@ -65,9 +65,9 @@
                             PmHtml(j.friendHeadUrl, j.friendNickName, j.friendOpenid);
                         });
 
-                        var Scroll = new iScroll("Pm-conBody2", {hScrollbar: false, vScrollbar: true, hideScrollbar: false});
+                        var Scroll = new iScroll("Pm-conBody2", { hScrollbar: false, vScrollbar: true, hideScrollbar: false });
 
-                         main.page7();
+                        main.page7();
                         //自己进来  获取好友列表
                         return;
                     }
@@ -96,11 +96,11 @@
                     //     alert("网络不给力,请您刷新后重试!")
                     // }
 
-                    if(Result.code == "5051"){
+                    if (Result.code == "5051") {
                         alert("用户在对应时段未发表心愿");
-                    }else if(Result.code == "5053"){
+                    } else if (Result.code == "5053") {
                         alert("该朋友信息不存在")
-                    }else{
+                    } else {
                         alert("网络不给力,请您刷新后重试!");
                     }
 
@@ -147,13 +147,13 @@
 
 
 
-                    var $link='http://valentinesday.comeyes.cn/index.html?friendOpenid='+openid+"&timeStamp="+timeStamp;
-                    var $imgUrl="http://valentinesday.comeyes.cn/img/FXIMG.jpg";
-                    _setShare("Fresh | 你懂我的心吗", "专属我们的七夕，你猜我的心愿是什么？", $link, $imgUrl,function () {
+                    var $link = 'http://valentinesday.comeyes.cn/index.html?friendOpenid=' + openid + "&timeStamp=" + timeStamp;
+                    var $imgUrl = "http://valentinesday.comeyes.cn/img/FXIMG.jpg";
+                    _setShare("Fresh | 你懂我的心吗", "专属我们的七夕，你猜我的心愿是什么？", $link, $imgUrl, function () {
                         ga('send', 'event', 'valentinesday', 'H5', "Share2");
-                        window.location.href="http://valentinesday.comeyes.cn/index.html?friendOpenid="+openid+"&timeStamp="+timeStamp;
-                    },function () {
-                        
+                        window.location.href = "http://valentinesday.comeyes.cn/index.html?friendOpenid=" + openid + "&timeStamp=" + timeStamp;
+                    }, function () {
+
                     });
 
 
@@ -227,9 +227,9 @@
                         "-webkit-filter": "blur(5px)"
                     });
 
-                    var $link= "http://valentinesday.comeyes.cn/endPage.html?hostOpenid="+openid+"&timeStamp="+timeStamp+"&friendOpenid="+friendOpenid;
-                    var $imgUrl="http://valentinesday.comeyes.cn/img/FXIMG.jpg";
-                    _setShare("Fresh | 七夕心愿TA来猜", "前方高能，一波狗粮正在来袭~", $link, $imgUrl,function(){},function(){});
+                    var $link = "http://valentinesday.comeyes.cn/endPage.html?hostOpenid=" + openid + "&timeStamp=" + timeStamp + "&friendOpenid=" + friendOpenid;
+                    var $imgUrl = "http://valentinesday.comeyes.cn/img/FXIMG.jpg";
+                    _setShare("Fresh | 七夕心愿TA来猜", "前方高能，一波狗粮正在来袭~", $link, $imgUrl, function () { }, function () { });
 
                 } else {
                     // Result.errMsg
@@ -254,7 +254,7 @@
         $.ajax({
             type: "get",
             url: "../oauth",
-            data: {"code": code},
+            data: { "code": code },
             datatype: "json",
             success: function (Result) {
                 // console.log(Result);
@@ -326,7 +326,3 @@
 
     }
 }());
-
-
-
-
