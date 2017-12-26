@@ -7,16 +7,24 @@ main.init = function () {
     main.bindEvent();
     main.initSwipper();
 }
+main.pageType = function() {
+    var url = window.location.href;
+    // 朋友查愿望id 猜愿望
+    // 自己查愿望id 看好友列表
+    // 没有愿望id 进入首页
+}
+/**
+ * 
+ * @param {*} openid 
+ */
 main.getUserInfoByOpenid = function(openid){
     $(".ajaxLayer").fadeIn();
     $.ajax({
-        headers: { 'Access-Control-Allow-Origin': '*' },
         type: "get",
         url: "http://txktapi.lingbokeji.cn/api/v1/user_info",
         data: {
             openid: openid
         },
-        datatype: "json",
         success: function(d){
             console.log(d);
         },
