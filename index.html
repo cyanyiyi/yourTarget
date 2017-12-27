@@ -19,22 +19,21 @@
     <link rel="stylesheet" href="./css/swiper-3.3.1.min.css">
     <link rel="stylesheet" href="./css/animate.css">
     <link rel="stylesheet" href="./css/index.css">
-    <script src="./js/jquery-1.9.1.min.js"></script>
     <script>
         // window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx8b9ddd1c943ce95f&redirect_uri=http://2018.0rh.cn&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect"
-        $.ajax({
-            type: "get",
-            url: "http://txktapi.lingbokeji.cn/api/v1/user_info",
-            data: {
-                openid: "wx8b9ddd1c943ce95f"
-            },
-            success: function(d){
-                console.log(d);
-            },
-            error: function(d){
-                console.log(d);
-            }
-        })
+        // $.ajax({
+        //     type: "get",
+        //     url: "http://txktapi.lingbokeji.cn/api/v1/user_info",
+        //     data: {
+        //         openid: "wx8b9ddd1c943ce95f"
+        //     },
+        //     success: function(d){
+        //         console.log(d);
+        //     },
+        //     error: function(d){
+        //         console.log(d);
+        //     }
+        // })
         // $.ajax({
         //     type: "post",
         //     url: "http://txktapi.lingbokeji.cn/api/v1/user_info",
@@ -495,7 +494,7 @@
     <div class="ajaxLayer ab-f">
         <img src="./img/loading.gif" class="ab-c">
     </div>
-
+    <script src="./js/jquery-1.9.1.min.js"></script>
     <script src="./js/html2canvas.js"></script>
     <script src="./js/qrcode.js"></script>
     <!-- <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script> -->
