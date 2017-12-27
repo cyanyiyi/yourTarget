@@ -14,19 +14,35 @@ main.pageType = function () {
     var friendOpenid = main.util.getParam(url_params, 'openid'); // 默认分享链接上带的是friendOpenid
     var wishid = main.util.getParam(url_params, 'wishid');
     var code = main.util.getParam(url_params, 'code');
-    if (friendOpenid && wishid) {
-        main.UT.setCookie('friendOpenid', friendOpenid);
-        main.UT.setCookie('wishid', wishid);
-    } else if (code) {
-        // main.UT.setCookie('code', code);
+    // if (friendOpenid && wishid) {
+    //     main.UT.setCookie('friendOpenid', friendOpenid);
+    //     main.UT.setCookie('wishid', wishid);
+    //     window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx8b9ddd1c943ce95f&redirect_uri=" + redirect_uri + "&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect";
+    // } else if (code) {
+    //     // main.UT.setCookie('code', code);
+    //     main.api.getUserInfoByCode(code);
+    //     $('#home').show();
+    // } else {
+    //     var openid = main.UT.getCookie('openid');
+    //     var nickName = main.UT.getCookie('nickName');
+    //     var headimgurl = main.UT.getCookie('headimgurl');
+    //     window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx8b9ddd1c943ce95f&redirect_uri=" + redirect_uri + "&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect";
+    // }
+    // 有code证明是授权之后重定向的链接 不需要再授权
+    if(code) {
         main.api.getUserInfoByCode(code);
-        $('#home').show();
+        var openid = main.util.getCookie('openid');
+        var friendOpenid = main.util.getCookie('friendOpenid');
+        var wishid = main.util.getCookie('wishid');
+        if (openid & friendOpenid & wishid) {
+            main.api.getUserWish({ 'openid': openid, 'wish_openid': friendOpenid, 'wishid': wishid})
+        }
     } else {
-        var openid = main.UT.getCookie('openid');
-        var nickName = main.UT.getCookie('nickName');
-        var headimgurl = main.UT.getCookie('headimgurl');
+        if (friendOpenid & wishid) {
+            main.UT.setCookie('friendOpenid', friendOpenid);
+            main.UT.setCookie('wishid', wishid);
+        }
         window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx8b9ddd1c943ce95f&redirect_uri=" + redirect_uri + "&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect";
-
     }
     
     // 朋友查愿望id 猜愿望
@@ -96,16 +112,69 @@ main.api = {
     },
     
     /**
-     * 根据openid获取用户信息
+     * 根据openid,wish_openid,wishid获取用户身份和愿望
      * @param {String} openid 
      */
-    getUserInfoByOpenid: function (openid) {
+    getUserWish: function (opt) {
         $(".ajaxLayer").fadeIn();
         $.ajax({
             type: "get",
-            url: main.proxy + "/api/v1/user_info",
+            url: main.proxy + "/api/v1/user_wish",
             data: {
-                openid: openid
+                openid: opt.openid,
+                wish_openid: opt.wish_openid,
+                wishid: opt.wishid
+            },
+            success: function (d) {
+                console.log(d);
+            },
+            error: function (d) {
+                console.log(d);
+            },
+            complete: function () {
+                $(".ajaxLayer").fadeOut();
+            }
+        })
+    },
+    /**
+     * 保存用户自己的愿望和九个要猜的愿望
+     * @param {String} openid 
+     */
+    saveUserWish: function (opt) {
+        $(".ajaxLayer").fadeIn();
+        $.ajax({
+            type: "post",
+            url: main.proxy + "/api/v1/user_wish",
+            data: {
+                openid: opt.openid,
+                wish: opt.wish,
+                all_wish: opt.all_wish,
+            },
+            success: function (d) {
+                console.log(d);
+            },
+            error: function (d) {
+                console.log(d);
+            },
+            complete: function () {
+                $(".ajaxLayer").fadeOut();
+            }
+        })
+    },
+    /**
+     * 保存好友猜愿望的结果
+     * @param {String} openid 
+     */
+    saveGuessWish: function (opt) {
+        $(".ajaxLayer").fadeIn();
+        $.ajax({
+            type: "post",
+            url: main.proxy + "/api/v1/guess_wish",
+            data: {
+                wishid: opt.wishid,
+                openid: opt.openid,
+                number: opt.number,
+                wish: opt.wish,
             },
             success: function (d) {
                 console.log(d);
