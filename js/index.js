@@ -129,7 +129,6 @@ main.pageSelectShare = function () {
     // 选择分享方式
     // 1.右上角分享
     $(document).on('click touchstart', '#share-ta-btn', function() { 
-        alert('邀ta猜');
         $('.share-ta-layer').fadeIn("slow");
         // var shareOpenid = main.openid || main.UT.getCookie('openid');
         // var shareMywishid = main.mywishid || main.UT.getCookie('mywishid');
@@ -146,7 +145,6 @@ main.pageSelectShare = function () {
     })
     // 2.生成图片分享
     $(document).on('click touchstart', '#share-pic-btn', function() { 
-        alert('生成图片猜')
         main.takeScreenshot();
         $('.share-pic-layer').fadeIn("slow");
         setTimeout(function () {
