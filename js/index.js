@@ -106,7 +106,7 @@ main.pageHome = function() {
                 main.api.saveUserWish({
                     'openid': main.openid || main.UT.getCookie('openid'),
                     'wish': myTarget,
-                    'all_wish': saveTargetArr.toString()
+                    'all_wish': saveTargetArr
                 });
                 var shareOpenid = main.openid || main.UT.getCookie('openid');
                 var shareMywishid = main.mywishid || main.UT.getCookie('mywishid');
