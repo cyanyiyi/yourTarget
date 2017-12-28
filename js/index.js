@@ -27,8 +27,8 @@ main.pageType = function () {
     if(main.code) {
         main.api.getUserInfoByCode(main.code);
         main.openid = main.UT.getCookie('openid');
-        main.friendOpenid = main.UT.getCookie('friendOpenid') || getQueryString('openid');
-        main.wishid = main.UT.getCookie('wishid') || getQueryString('wishid');
+        main.friendOpenid = main.UT.getCookie('friendOpenid') || main.UT.getQueryString('openid');
+        main.wishid = main.UT.getCookie('wishid') || main.UT.getQueryString('wishid');
         if (main.openid & main.friendOpenid & main.wishid) {
             main.api.getUserWish({ 'openid': main.openid, 'wish_openid': main.friendOpenid, 'wishid': main.wishid})
         } else {
