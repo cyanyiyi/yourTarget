@@ -617,13 +617,12 @@ div {
 }
 .page4 .t-userinfo-avatar {
     width: 1.28rem;
-    height: 100%;
+    height: 1.28rem;
     overflow: hidden;
 }
 .page4 .t-userinfo-avatar img {
     width: 1.28rem;
-    /* height: 1.28rem; */
-    background: #fff;
+    height: 1.28rem;
 }
 .page4 .t-userinfo-nickname {
     width: 4rem;
@@ -661,13 +660,12 @@ div {
 }
 .page5 .g-userinfo-avatar {
     width: 1.28rem;
-    height: 100%;
+    height: 1.28rem;
     overflow: hidden;
 }
 .page5 .g-userinfo-avatar img {
     width: 1.28rem;
-    /* height: 1.28rem; */
-    background: #fff;
+    height: 1.28rem;
 }
 .page5 .g-userinfo-nickname {
     width: 4rem;

@@ -7,6 +7,8 @@ main.wishid = undefined;
 main.mywishid = undefined;
 main.openid = undefined;
 main.friendOpenid = undefined;
+main.nickname = '';
+main.headimgurl = '';
 main.init = function () {
     // main.bindEvent();
     // main.initSwipper();
@@ -57,21 +59,21 @@ main.pageHome = function() {
     main.mainSwiper.init();
     main.subSwiper.init();
     // 播放视频
-    $(document).on('click', '#video-img', function () {
+    $(document).on('click touchstart', '#video-img', function () {
         $(this).hide();
         $('#video')[0].play();
     })
     // 输入目标
-    $(document).on('click', '#input-target', function () {
+    $(document).on('click touchstart', '#input-target', function () {
         $("#input-tips").hide();
     })
     // 选择系统目标
-    $(document).on('click', '.target-text', function () {
+    $(document).on('click touchstart', '.target-text', function () {
         $("#input-tips").hide();
         $('#input-target').val($(this).attr('target-text'));
     })
     // 提交我的目标
-    $(document).on('click', '#submit-target', function () {
+    $(document).on('click touchstart', '#submit-target', function () {
         var myTarget = $('#input-target').val();
         var _targetArr = ['工资翻倍收入UP', '规律生活不熬夜', '来一趟海外旅行', '脱单狂撒狗粮', '练就腹肌马甲线', '多点时间陪家人', '佛系养生不拖延', '光明正大跳广场舞', '脱贫脱肉不脱发'];
         var domArrShare = $('.s-nine-text');
@@ -95,12 +97,11 @@ main.pageHome = function() {
                     _targetArr[5] = myTarget;
                 }
                 var saveTargetArr = main.Randomwish(_targetArr, domArrShare, domArrPic);
-                var nickName = main.UT.getCookie('nickname');
-                var avatarUrl = main.UT.getCookie('headimgurl');
-                $('#selectSharewayPage').show();
-                $('#generatePic').show();
-                $('#generatePic').css('opacity', 1);
-                main.initUserinfo('.t-userinfo-nickname', '.t-userinfo-avatar', nickName, avatarUrl);
+                var nickname = main.nickname || main.UT.getCookie('nickname');
+                var avatarUrl = main.headimgurl || main.UT.getCookie('headimgurl');
+                $('#selectSharewayPage').show().css('z-index', 20);
+                $('#generatePic').show().css('opacity', 1);
+                main.initUserinfo('.t-userinfo-nickname', '.t-userinfo-avatar', nickname, avatarUrl);
                 main.api.saveUserWish({
                     'openid': main.openid || main.UT.getCookie('openid'),
                     'wish': myTarget,
@@ -127,8 +128,8 @@ main.pageHome = function() {
 main.pageSelectShare = function () {
     // 选择分享方式
     // 1.右上角分享
-    $(document).on('click', '#share-ta-btn', function() { 
-        console.log('邀ta猜');
+    $(document).on('click touchstart', '#share-ta-btn', function() { 
+        alert('邀ta猜');
         $('.share-ta-layer').fadeIn("slow");
         // var shareOpenid = main.openid || main.UT.getCookie('openid');
         // var shareMywishid = main.mywishid || main.UT.getCookie('mywishid');
@@ -140,19 +141,19 @@ main.pageSelectShare = function () {
         // }
         // main._resetShare(resetShareOpt);
     })
-    $(document).on('click', '.share-ta-layer', function() { 
+    $(document).on('click touchstart', '.share-ta-layer', function() { 
         $(this).toggle();
     })
     // 2.生成图片分享
-    $(document).on('click', '#share-pic-btn', function() { 
-        console.log('生成图片猜')
+    $(document).on('click touchstart', '#share-pic-btn', function() { 
+        alert('生成图片猜')
         main.takeScreenshot();
         $('.share-pic-layer').fadeIn("slow");
         setTimeout(function () {
             $('.share-pic-layer').hide();
         }, 4000)
     })
-    $(document).on('click', '.save-pic-layer', function() { 
+    $(document).on('click touchstart', '.save-pic-layer', function() { 
         $(this).toggle();
     })
 }
@@ -162,7 +163,7 @@ main.pageFriendGuess = function (data) {
     main.wish = d.data.wish_info.wish;
     main.wishid = d.data.wish_info.wishid;
     var allWishArr = d.data.wish_info.all_wish;
-    var nickName = d.data.nickname;
+    var nickname = d.data.nickname;
     var avatarUrl = d.data.headimgurl;
     var domArrGuess = $('.g-nine-text');
     var caiIndex = 0;
@@ -179,7 +180,7 @@ main.pageFriendGuess = function (data) {
     ];
     main.UT.setCookie('wishid', main.wishid);
     // 初始化用户信息
-    main.initUserinfo('.g-userinfo-nickname', '.g-userinfo-avatar', nickName, avatarUrl);
+    main.initUserinfo('.g-userinfo-nickname', '.g-userinfo-avatar', nickname, avatarUrl);
     // 初始化待猜的目标
     for(var i=0; i<allWishArr.length; i++){
         (function(i){
@@ -194,7 +195,7 @@ main.pageFriendGuess = function (data) {
     $('#friendGuess').show();
 
     // 朋友猜
-    $(document).on('click', '.g-nine-target', function () {
+    $(document).on('click touchstart', '.g-nine-target', function () {
         var guessed = $(this).attr('guessed')
         var guessTarget = $(this).find('.g-nine-text').text();
         var $error = $(this).find('.guess-error')
@@ -222,7 +223,7 @@ main.pageFriendGuess = function (data) {
         }
     });
     // 猜过后生成我的目标
-    $(document).on('click', '#generate-mytarget', function () {
+    $(document).on('click touchstart', '#generate-mytarget', function () {
         main.UT.delCookie('openid');
         main.UT.delCookie('friendOpenid');
         main.UT.delCookie('wishid');
@@ -288,7 +289,7 @@ main.pageGuessList = function(data) {
     }
     $('#guessResultList').fadeIn();
     // 再玩一次
-    $(document).on('click', '#target-restart', function () {
+    $(document).on('click touchstart', '#target-restart', function () {
         main.UT.delCookie('openid');
         main.UT.delCookie('friendOpenid');
         main.UT.delCookie('wishid');
@@ -350,7 +351,7 @@ main.api = {
                 main.nickname = d.data.nickname;
                 main.headimgurl = d.data.headimgurl;
                 main.UT.setCookie('openid', main.openid);
-                main.UT.setCookie('nickname', main.nickName);
+                main.UT.setCookie('nickname', main.nickname);
                 main.UT.setCookie('headimgurl', main.headimgurl);
             },
             error: function (d) {
@@ -565,8 +566,8 @@ main.initShareInfo = function (data) {
     });
 }
 
-main.initUserinfo = function (nickSelector, avatarSelector, nickName, avatarUrl) {
-    $(nickSelector).text(nickName);
+main.initUserinfo = function (nickSelector, avatarSelector, nickname, avatarUrl) {
+    $(nickSelector).text(nickname);
     $(avatarSelector).find('img').attr("src", avatarUrl);
 
 }
