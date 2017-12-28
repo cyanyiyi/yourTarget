@@ -25,20 +25,46 @@ main.pageType = function () {
     main.code = main.UT.getQueryString('code');
     // 有code证明是授权之后重定向的链接 不需要再授权
     if(main.code) {
-        main.api.getUserInfoByCode(main.code);
-        main.openid = main.UT.getCookie('openid');
-        main.friendOpenid = main.UT.getCookie('friendOpenid') || main.UT.getQueryString('openid');
-        main.wishid = main.UT.getCookie('wishid') || main.UT.getQueryString('wishid');
-        if (main.openid & main.friendOpenid & main.wishid) {
-            main.api.getUserWish({ 'openid': main.openid, 'wish_openid': main.friendOpenid, 'wishid': main.wishid})
-        } else {
-            main.pageHome();
-        }
-        var url = window.location.href.split('?')[0];
-        main.api.getJsConfig({
-            'url':url,
-            'openid':main.openid
+        // main.api.getUserInfoByCode(main.code);
+        // 通过code获取用户openid和头像昵称
+        $.ajax({
+            type: "post",
+            url: main.proxy + "/api/v1/weixinLogin",
+            async: false,
+            data: {
+                code: main.code
+            },
+            success: function (d) {
+                main.openid = d.data.openid;
+                main.nickname = d.data.nickname;
+                main.headimgurl = d.data.headimgurl;
+                // main.headimg_base64 = "data:image/png;base64," + d.data.headimg_base64;
+                main.UT.setCookie('openid', main.openid, 30);
+                main.UT.setCookie('nickname', main.nickname, 30);
+                main.UT.setCookie('headimgurl', main.headimgurl, 30);
+                // main.UT.setCookie('headimg_base64', main.headimg_base64, 30);
+                main.friendOpenid = main.UT.getCookie('friendOpenid') || main.UT.getQueryString('openid');
+                main.wishid = main.UT.getCookie('wishid') || main.UT.getQueryString('wishid');
+                if (main.openid & main.friendOpenid & main.wishid) {
+                    main.api.getUserWish({ 'openid': main.openid, 'wish_openid': main.friendOpenid, 'wishid': main.wishid})
+                } else {
+                    main.pageHome();
+                }
+                var url = window.location.href.split('?')[0];
+                main.api.getJsConfig({
+                    'url':url,
+                    'openid':main.openid
+                })
+            },
+            error: function (d) {
+                console.log(d);
+            },
+            complete: function () {
+                $(".ajaxLayer").fadeOut();
+            }
         })
+        
+        
     } else {
         if (main.friendOpenid & main.wishid) {
             main.UT.setCookie('friendOpenid', main.friendOpenid, 30);
@@ -132,6 +158,10 @@ main.pageHome = function() {
                             link: shareLink,
                             imgUrl: '',
                         }
+                        alert('cookie openid', main.UT.getCookie('openid'));
+                        alert('d.data.wish_openid', d.data.wish_openid);
+                        alert('d.data.wishid', d.data.wishid);
+                        alert('shareLink', shareLink);
                         main.generateCode(shareLink);
                         main._resetShare(resetShareOpt);
                         $('.share-pic-layer').fadeOut();
@@ -333,33 +363,33 @@ main.api = {
      * 根据code获取微信用户信息
      * @param {String} code
      */
-    getUserInfoByCode: function (code) {
-        $(".ajaxLayer").fadeIn();
-        $.ajax({
-            type: "post",
-            url: main.proxy + "/api/v1/weixinLogin",
-            async: false,
-            data: {
-                code: code
-            },
-            success: function (d) {
-                main.openid = d.data.openid;
-                main.nickname = d.data.nickname;
-                main.headimgurl = d.data.headimgurl;
-                main.headimg_base64 = "data:image/png;base64," + d.data.headimg_base64;
-                main.UT.setCookie('openid', main.openid, 30);
-                main.UT.setCookie('nickname', main.nickname, 30);
-                main.UT.setCookie('headimgurl', main.headimgurl, 30);
-                main.UT.setCookie('headimg_base64', main.headimg_base64, 30);
-            },
-            error: function (d) {
-                console.log(d);
-            },
-            complete: function () {
-                $(".ajaxLayer").fadeOut();
-            }
-        })
-    },
+    // getUserInfoByCode: function (code) {
+    //     $(".ajaxLayer").fadeIn();
+    //     $.ajax({
+    //         type: "post",
+    //         url: main.proxy + "/api/v1/weixinLogin",
+    //         async: false,
+    //         data: {
+    //             code: code
+    //         },
+    //         success: function (d) {
+    //             main.openid = d.data.openid;
+    //             main.nickname = d.data.nickname;
+    //             main.headimgurl = d.data.headimgurl;
+    //             main.headimg_base64 = "data:image/png;base64," + d.data.headimg_base64;
+    //             main.UT.setCookie('openid', main.openid, 30);
+    //             main.UT.setCookie('nickname', main.nickname, 30);
+    //             main.UT.setCookie('headimgurl', main.headimgurl, 30);
+    //             main.UT.setCookie('headimg_base64', main.headimg_base64, 30);
+    //         },
+    //         error: function (d) {
+    //             console.log(d);
+    //         },
+    //         complete: function () {
+    //             $(".ajaxLayer").fadeOut();
+    //         }
+    //     })
+    // },
     // /api/v1/get_js_config
     /**
      * 获取js config
