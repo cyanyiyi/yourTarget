@@ -8,8 +8,6 @@ main.mywishid = undefined;
 main.openid = undefined;
 main.friendOpenid = undefined;
 main.init = function () {
-    // main.getUserInfoByOpenid("wx8b9ddd1c943ce95f");
-    // this.initShareInfo();
     main.bindEvent();
     main.initSwipper();
     main.pageType();
@@ -25,7 +23,7 @@ main.pageType = function () {
     main.code = main.UT.getParam(url_params, 'code');
     // 有code证明是授权之后重定向的链接 不需要再授权
     if(main.code) {
-        main.api.getUserInfoByCode(code);
+        main.api.getUserInfoByCode(main.code);
         main.openid = main.UT.getCookie('openid');
         main.friendOpenid = main.UT.getCookie('friendOpenid');
         main.wishid = main.UT.getCookie('wishid');
@@ -189,6 +187,11 @@ main.pageFriendGuess = function (data) {
     });
     // 猜过后生成我的目标
     $(document).on('click', '#generate-mytarget', function () {
+        main.UT.delCookie('openid');
+        main.UT.delCookie('friendOpenid');
+        main.UT.delCookie('wishid');
+        main.UT.delCookie('wish');
+        main.UT.delCookie('mywishid');
         $('#friendGuess').hide();
         $('.guess-right-layer').hide();
         main.pageHome();
@@ -250,6 +253,11 @@ main.pageGuessList = function(data) {
     $('#guessResultList').fadeIn();
     // 再玩一次
     $(document).on('click', '#target-restart', function () {
+        main.UT.delCookie('openid');
+        main.UT.delCookie('friendOpenid');
+        main.UT.delCookie('wishid');
+        main.UT.delCookie('wish');
+        main.UT.delCookie('mywishid');
         $('#guessResultList').hide();
         main.pageHome();
     })
