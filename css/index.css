@@ -594,11 +594,17 @@ div {
     overflow: hidden;
 }
 .shareway-btn-box .shareway-btn {
+    display: block;
     width: 2.3rem;
     height: 0.66rem;
+    line-height: 0.66rem;
     border-radius: 5px;
     -webkit-border-radius:5px;
     background: #454545;
+    color: #fff;
+    font-size: 14px;
+    text-align: center;
+    letter-spacing: 2px;
 }
 
 
