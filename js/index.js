@@ -21,15 +21,15 @@ main.init = function () {
 main.pageType = function () {
     var redirect_uri = window.location.href; // http://2018.0rh.cn?openid=11
     var url_params = window.location.search.substr(1);
-    main.friendOpenid = main.UT.getParam(url_params, 'openid'); // 默认分享链接上带的是friendOpenid
-    main.wishid = main.UT.getParam(url_params, 'wishid');
-    main.code = main.UT.getParam(url_params, 'code');
+    main.friendOpenid = main.UT.getQueryString('openid'); // 默认分享链接上带的是friendOpenid
+    main.wishid = main.UT.getQueryString('wishid');
+    main.code = main.UT.getQueryString('code');
     // 有code证明是授权之后重定向的链接 不需要再授权
     if(main.code) {
         main.api.getUserInfoByCode(main.code);
         main.openid = main.UT.getCookie('openid');
-        main.friendOpenid = main.UT.getCookie('friendOpenid');
-        main.wishid = main.UT.getCookie('wishid');
+        main.friendOpenid = main.UT.getCookie('friendOpenid') || getQueryString('openid');
+        main.wishid = main.UT.getCookie('wishid') || getQueryString('wishid');
         if (main.openid & main.friendOpenid & main.wishid) {
             main.api.getUserWish({ 'openid': main.openid, 'wish_openid': main.friendOpenid, 'wishid': main.wishid})
         } else {
@@ -42,8 +42,8 @@ main.pageType = function () {
         })
     } else {
         if (main.friendOpenid & main.wishid) {
-            main.UT.setCookie('friendOpenid', main.friendOpenid);
-            main.UT.setCookie('wishid', main.wishid);
+            main.UT.setCookie('friendOpenid', main.friendOpenid, 30);
+            main.UT.setCookie('wishid', main.wishid, 30);
         }
         window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx8b9ddd1c943ce95f&redirect_uri=" + redirect_uri + "&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect";
     }
@@ -104,24 +104,49 @@ main.pageHome = function() {
                 main.pageSelectShare();
                 $('#generate-avatar').attr('src', headimg_base64);
                 $('#generate-nickname').text(nickname);
-                main.api.saveUserWish({
-                    'openid': main.openid || main.UT.getCookie('openid'),
-                    'wish': myTarget,
-                    'all_wish': saveTargetArr
-                });
-                var shareOpenid = main.openid || main.UT.getCookie('openid');
-                var shareMywishid = main.mywishid || main.UT.getCookie('mywishid');
-                var shareLink = (main.txktUrl || '2018.0rh.cn') + '?openid='+shareOpenid+'&wishid='+shareMywishid;
-                var resetShareOpt = {
-                    title: '你能猜中我2018年的目标吗?',
-                    desc: '我想的希望你也知道',
-                    link: shareLink,
-                    imgUrl: '',
-                }
-                main.generateCode(shareLink);
-                main._resetShare(resetShareOpt);
-                $('.share-pic-layer').fadeOut();
-                $('#home').hide();
+                // main.api.saveUserWish({
+                //     'openid': main.openid || main.UT.getCookie('openid'),
+                //     'wish': myTarget,
+                //     'all_wish': saveTargetArr
+                // });
+                // 存目标
+                $.ajax({
+                    type: "post",
+                    url: main.proxy + "/api/v1/user_wish",
+                    async: false,
+                    data: {
+                        openid: main.openid || main.UT.getCookie('openid'),
+                        wish: myTarget,
+                        all_wish: saveTargetArr
+                    },
+                    success: function (d) {
+                        console.log(d);
+                        main.mywishid = d.data.wishid;
+                        main.UT.setCookie('mywishid', main.mywishid, 30);
+
+                        var shareOpenid = d.data.wish_openid || main.openid || main.UT.getCookie('openid');
+                        var shareMywishid = d.data.wishid || main.mywishid || main.UT.getCookie('mywishid');
+                        var shareLink = (main.txktUrl || '2018.0rh.cn') + '?openid='+shareOpenid+'&wishid='+shareMywishid;
+                        var resetShareOpt = {
+                            title: '你能猜中我2018年的目标吗?',
+                            desc: '我想的希望你也知道',
+                            link: shareLink,
+                            imgUrl: '',
+                        }
+                        main.generateCode(shareLink);
+                        main._resetShare(resetShareOpt);
+                        $('.share-pic-layer').fadeOut();
+                        $('#home').hide();
+                    },
+                    error: function (d) {
+                        console.log(d);
+                    },
+                    complete: function () {
+                        $(".ajaxLayer").fadeOut();
+                    }
+                })
+
+                
             }
         }
     });
@@ -131,15 +156,6 @@ main.pageSelectShare = function () {
     // 1.右上角分享
     $(document).on('click touchstart', '#share-ta-btn', function() { 
         $('.share-ta-layer').css('z-index', 30).fadeIn("slow");
-        // var shareOpenid = main.openid || main.UT.getCookie('openid');
-        // var shareMywishid = main.mywishid || main.UT.getCookie('mywishid');
-        // var resetShareOpt = {
-        //     title: '你能猜中我2018年的目标吗?',
-        //     desc: '我想的希望你也知道',
-        //     link: main.txktUrl + '?openid='+shareOpenid+'&wishid='+shareMywishid,
-        //     imgUrl: '',
-        // }
-        // main._resetShare(resetShareOpt);
     })
     $(document).on('click touchstart', '.share-ta-layer', function() { 
         $(this).hide();
@@ -178,7 +194,7 @@ main.pageFriendGuess = function (data) {
         { MOqibaifen: "20%", MOqiText: "真是塑料姐妹情呀" },
         { MOqibaifen: "20%", MOqiText: "真是塑料姐妹情呀" }
     ];
-    main.UT.setCookie('wishid', main.wishid);
+    main.UT.setCookie('wishid', main.wishid, 30);
     // 初始化用户信息
     $('#friend-guess-myavatar').attr('src', avatarUrl);
     $('#friend-guess-mynickname').text(nickname);
@@ -236,33 +252,6 @@ main.pageFriendGuess = function (data) {
     })
 };
 main.pageGuessList = function(data) {
-    // var d = {
-    //     "code":200,
-    //     "msg":"",   
-    //     "data":{
-    //      "nickname":"该目标创建者的昵称",
-    //      "headimgurl":"该目标创建者的头像地址",
-    //      "is_self":1, 
-    //      "friendList":[
-    //       {
-    //        "nickname":"昵称",
-    //        "headimgurl":"头像地址",
-    //        "score":"默契值"
-    //       },
-    //       {
-    //         "nickname":"昵称",
-    //         "headimgurl":"头像地址",
-    //         "score":"默契值"
-    //        },
-    //        {
-    //         "nickname":"昵称",
-    //         "headimgurl":"头像地址",
-    //         "score":"默契值"
-    //        }
-    //      ]
-    //     }
-        
-    //    }
     var d = data;
     var friendList = d.data.friendList;
     $('#friendlist-myavatar').attr('src', d.data.headimgurl);
@@ -291,21 +280,21 @@ main.pageGuessList = function(data) {
     $('#guessResultList').fadeIn();
     // 再玩一次
     $(document).on('click touchstart', '#target-restart', function () {
-        main.UT.delCookie('openid');
-        main.UT.delCookie('friendOpenid');
-        main.UT.delCookie('wishid');
-        main.UT.delCookie('wish');
-        main.UT.delCookie('mywishid');
+        // main.UT.delCookie('openid');
+        // main.UT.delCookie('friendOpenid');
+        // main.UT.delCookie('wishid');
+        // main.UT.delCookie('wish');
+        // main.UT.delCookie('mywishid');
         $('#guessResultList').hide();
         main.pageHome();
     })
 }
 main.UT = {
-    setCookie: function (n, v) {
-        var Days = 7;
-        var exp = new Date();
-        exp.setTime(exp.getTime() + Days * 24 * 60 * 60 * 1000);
-        document.cookie = n + "=" + escape(v) + ";expires=" + exp.toGMTString();
+    setCookie: function (c_name,value,expiredays) {
+        var exdate=new Date()
+        exdate.setDate(exdate.getDate()+expiredays)
+        document.cookie=c_name+ "=" +escape(value)+
+        ((expiredays==null) ? "" : ";expires="+exdate.toGMTString())
     },
     getCookie: function (n) { 
         var arr, reg = new RegExp("(^| )" + n + "=([^;]*)(;|$)"); 
@@ -324,8 +313,17 @@ main.UT = {
     getParam: function (url, name) {
         var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
         var matchArr = url.match(reg);
-        if (matchArr && matchArr[2]) {
+        if (matchArr != null) {
             return matchArr[2];
+        } else {
+            return null;
+        }
+    },
+    getQueryString: function (name) {
+        var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+        var r = window.location.search.substr(1).match(reg);//获取当前url中
+        if (r != null) {
+            return (r[2]);
         } else {
             return null;
         }
@@ -350,10 +348,10 @@ main.api = {
                 main.nickname = d.data.nickname;
                 main.headimgurl = d.data.headimgurl;
                 main.headimg_base64 = "data:image/png;base64," + d.data.headimg_base64;
-                main.UT.setCookie('openid', main.openid);
-                main.UT.setCookie('nickname', main.nickname);
-                main.UT.setCookie('headimgurl', main.headimgurl);
-                main.UT.setCookie('headimg_base64', main.headimg_base64);
+                main.UT.setCookie('openid', main.openid, 30);
+                main.UT.setCookie('nickname', main.nickname, 30);
+                main.UT.setCookie('headimgurl', main.headimgurl, 30);
+                main.UT.setCookie('headimg_base64', main.headimg_base64, 30);
             },
             error: function (d) {
                 console.log(d);
@@ -441,7 +439,7 @@ main.api = {
             success: function (d) {
                 console.log(d);
                 main.mywishid = d.data.wishid;
-                main.UT.setCookie('mywishid', main.mywishid);
+                main.UT.setCookie('mywishid', main.mywishid, 30);
             },
             error: function (d) {
                 console.log(d);
@@ -575,6 +573,32 @@ main.generateCode = function (url) {
     qrcode.makeCode(url);
 }
 
+// main.takeScreenshotAvatar = function () {
+//     var cntElem = $('#generatePic')[0];
+//     var shareContent = cntElem; //需要截图的包裹的（原生的）DOM 对象
+//     var width = shareContent.offsetWidth; //获取dom 宽度
+//     var height = shareContent.offsetHeight; //获取dom 高度
+//     var canvas = document.createElement("canvas"); //创建一个canvas节点
+//     var scale = 3; //定义任意放大倍数 支持小数
+//     canvas.width = width * scale; //定义canvas 宽度 * 缩放
+//     canvas.height = height * scale; //定义canvas高度 *缩放
+//     canvas.style.width = width + "px";
+//     canvas.style.height = height + "px";
+//     canvas.getContext("2d").scale(scale, scale); //获取context,设置scale 
+//     html2canvas($("#generatePic"), {
+//         canvas: canvas,
+//         onrendered: function (canvas) {
+//             var strDataURI = canvas.toDataURL("image/jpeg");
+//             // $('#generatePicShow').show().find('img').attr('src', strDataURI);
+//             $('#generatePicShow').find('img').attr('src', strDataURI);
+//             setTimeout(function () {
+//                 $('#generatePicShow').css('z-index',40).show();
+//                 $('.save-pic-layer').show().delay(1000).fadeOut('slow');
+//             }, 4500);
+//         }
+//     });
+// }
+
 main.takeScreenshot = function () {
     var cntElem = $('#generatePic')[0];
     var shareContent = cntElem; //需要截图的包裹的（原生的）DOM 对象
@@ -589,6 +613,7 @@ main.takeScreenshot = function () {
     canvas.getContext("2d").scale(scale, scale); //获取context,设置scale 
     html2canvas($("#generatePic"), {
         canvas: canvas,
+        useCORS:true,
         onrendered: function (canvas) {
             var strDataURI = canvas.toDataURL("image/jpeg");
             // $('#generatePicShow').show().find('img').attr('src', strDataURI);
