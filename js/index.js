@@ -10,7 +10,6 @@ main.init = function () {
     main.friendOpenid = undefined;
     main.nickname = '';
     main.headimgurl = '';
-    main.headimg_base64 = null;
     main.initSwipper();
     main.pageType();
     // main.pageFriendGuess();
@@ -20,9 +19,13 @@ main.init = function () {
 main.pageType = function () {
     var redirect_uri = window.location.href; // http://2018.0rh.cn?openid=11
     var url_params = window.location.search.substr(1);
+    alert(redirect_uri);
+    alert(url_params);
     main.friendOpenid = main.UT.getQueryString('openid'); // 默认分享链接上带的是friendOpenid
     main.wishid = main.UT.getQueryString('wishid');
     main.code = main.UT.getQueryString('code');
+    alert('openid'+main.UT.getQueryString('openid'));
+    alert('wishid'+main.UT.getQueryString('wishid'));
     // 有code证明是授权之后重定向的链接 不需要再授权
     if(main.code) {
         // main.api.getUserInfoByCode(main.code);
@@ -38,13 +41,14 @@ main.pageType = function () {
                 main.openid = d.data.openid;
                 main.nickname = d.data.nickname;
                 main.headimgurl = d.data.headimgurl;
-                // main.headimg_base64 = "data:image/png;base64," + d.data.headimg_base64;
                 main.UT.setCookie('openid', main.openid, 30);
                 main.UT.setCookie('nickname', main.nickname, 30);
                 main.UT.setCookie('headimgurl', main.headimgurl, 30);
-                // main.UT.setCookie('headimg_base64', main.headimg_base64, 30);
                 main.friendOpenid = main.UT.getCookie('friendOpenid') || main.UT.getQueryString('openid');
                 main.wishid = main.UT.getCookie('wishid') || main.UT.getQueryString('wishid');
+                alert('openid'+d.data.openid);
+                alert('friendOpenid'+main.friendOpenid);
+                alert('wishid'+main.wishid);
                 if (main.openid & main.friendOpenid & main.wishid) {
                     main.api.getUserWish({ 'openid': main.openid, 'wish_openid': main.friendOpenid, 'wishid': main.wishid})
                 } else {
@@ -123,17 +127,11 @@ main.pageHome = function() {
                 var saveTargetArr = main.Randomwish(_targetArr, domArrShare, domArrPic);
                 var nickname = main.nickname || main.UT.getCookie('nickname') || '';
                 var avatarUrl = main.headimgurl || main.UT.getCookie('headimgurl');
-                var headimg_base64 = main.headimg_base64 || main.UT.getCookie('headimg_base64');
                 $('#selectSharewayPage').show().css('z-index', 20);
                 $('#generatePic').show().css('opacity', 1);
                 main.pageSelectShare();
                 $('#generate-avatar').attr('src', avatarUrl);
                 $('#generate-nickname').text(nickname);
-                // main.api.saveUserWish({
-                //     'openid': main.openid || main.UT.getCookie('openid'),
-                //     'wish': myTarget,
-                //     'all_wish': saveTargetArr
-                // });
                 // 存目标
                 $.ajax({
                     type: "post",
@@ -157,10 +155,21 @@ main.pageHome = function() {
                             link: shareLink,
                             imgUrl: '',
                         }
-                        main.generateCode(shareLink);
+                        // main.generateCode(shareLink);
                         main._resetShare(resetShareOpt);
-                        $('.share-pic-layer').fadeOut();
-                        $('#home').hide();
+                        $.ajax({
+                            type: 'get',
+                            url: main.proxy + '/api/v1/get_wish_qrcode',
+                            async: false,
+                            data: {
+                                wishid: main.mywishid
+                            },
+                            success: function(res){
+                                $('#share-code').attr('src', res.data.img);
+                                $('.share-pic-layer').fadeOut();
+                                $('#home').hide();
+                            }
+                        })
                     },
                     error: function (d) {
                         console.log(d);
@@ -587,7 +596,6 @@ main.initShareInfo = function (data) {
 
 main.generateCode = function (url) {
     console.log(url);
-    alert(url);
     var url = encodeURIComponent(url); 
     var codeEl = $('#share-code')[0];
     var width = codeEl.offsetWidth;
