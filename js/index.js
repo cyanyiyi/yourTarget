@@ -12,7 +12,7 @@ main.init = function () {
     // this.initShareInfo();
     main.bindEvent();
     main.initSwipper();
-    main.pageType();
+    // main.pageType();
     // main.pageFriendGuess();
     // main.pageGuessList();
     // main.pageHome();
@@ -20,15 +20,15 @@ main.init = function () {
 main.pageType = function () {
     var redirect_uri = window.location.href; // http://2018.0rh.cn?openid=11
     var url_params = window.location.search.substr(1);
-    main.friendOpenid = main.util.getParam(url_params, 'openid'); // 默认分享链接上带的是friendOpenid
-    main.wishid = main.util.getParam(url_params, 'wishid');
-    main.code = main.util.getParam(url_params, 'code');
+    main.friendOpenid = main.UT.getParam(url_params, 'openid'); // 默认分享链接上带的是friendOpenid
+    main.wishid = main.UT.getParam(url_params, 'wishid');
+    main.code = main.UT.getParam(url_params, 'code');
     // 有code证明是授权之后重定向的链接 不需要再授权
     if(main.code) {
         main.api.getUserInfoByCode(code);
-        main.openid = main.util.getCookie('openid');
-        main.friendOpenid = main.util.getCookie('friendOpenid');
-        main.wishid = main.util.getCookie('wishid');
+        main.openid = main.UT.getCookie('openid');
+        main.friendOpenid = main.UT.getCookie('friendOpenid');
+        main.wishid = main.UT.getCookie('wishid');
         if (main.openid & main.friendOpenid & main.wishid) {
             main.api.getUserWish({ 'openid': main.openid, 'wish_openid': main.friendOpenid, 'wishid': main.wishid})
         } else {
@@ -88,6 +88,7 @@ main.pageHome = function() {
                     $('.one-input').removeClass('bounce').find('#input-target').removeClass('red-input');
                 }, 2000)
             } else {
+                $('.share-pic-layer').fadeIn();
                 _targetArr = main.sort(_targetArr);
                 if (_targetArr.indexOf(myTarget) === -1) {
                     _targetArr[5] = myTarget;
@@ -99,12 +100,23 @@ main.pageHome = function() {
                 $('#generatePic').show();
                 $('#generatePic').css('opacity', 1);
                 main.initUserinfo('.t-userinfo-nickname', '.t-userinfo-avatar', nickName, avatarUrl);
-                main.generateCode('http://2018.0rh.cn?openid=10');
                 main.api.saveUserWish({
-                    'openid': main.openid || main.util.getCookie('openid'),
+                    'openid': main.openid || main.UT.getCookie('openid'),
                     'wish': myTarget,
                     'all_wish': saveTargetArr.toString()
                 });
+                var shareOpenid = main.openid || main.UT.getCookie('openid');
+                var shareMywishid = main.mywishid || main.UT.getCookie('mywishid');
+                var shareLink = main.txktUrl + '?openid='+shareOpenid+'&wishid='+shareMywishid;
+                var resetShareOpt = {
+                    title: '你能猜中我2018年的目标吗?',
+                    desc: '我想的希望你也知道',
+                    link: shareLink,
+                    imgUrl: '',
+                }
+                main.generateCode(shareLink);
+                main._resetShare(resetShareOpt);
+                $('.share-pic-layer').fadeOut();
                 $('#home').hide();
             }
         }
@@ -118,10 +130,6 @@ main.pageFriendGuess = function (data) {
     var allWishArr = d.data.wish_info.all_wish;
     var nickName = d.data.nickname;
     var avatarUrl = d.data.headimgurl;
-    // $('#friend-guess-myavatar').attr('src', d.data.headimgurl);
-    // $('#friend-guess-mynickname').attr('src', d.data.nickname);]
-    // var myTarget = '测试目标';
-    // var _targetArr = ['工资翻倍收入UP', '规律生活不熬夜', '来一趟海外旅行', '脱单狂撒狗粮', '练就腹肌马甲线', '多点时间陪家人', '佛系养生不拖延', '光明正大跳广场舞', '脱贫脱肉不脱发'];;
     var domArrGuess = $('.g-nine-text');
     var caiIndex = 0;
     var caiTargetObj = [
@@ -148,10 +156,6 @@ main.pageFriendGuess = function (data) {
             $('.g-nine-text')[i].text(allWishArr[i]);
         })(i)
     }
-    // if (_targetArr.indexOf(myTarget) === -1) {
-    //     _targetArr[5] = myTarget;
-    // }
-    // main.Randomwish(_targetArr, domArrGuess);
     $('#home').hide();
     $('#friendGuess').show();
 
@@ -167,7 +171,7 @@ main.pageFriendGuess = function (data) {
             if (guessTarget === main.wish) {
                 // 猜对了 存好友猜的结果
                 var moqifen = caiTargetObj[caiIndex].MOqibaifen;
-                var guessOpenid = main.openid || main.util.getCookie('openid');
+                var guessOpenid = main.openid || main.UT.getCookie('openid');
                 var guessWishid = $(this).attr('wishid') || main.wishid || main.UT.getCookie('wishid');
                 $('#guess-mqd-text').text(moqifen);
                 $('#guess-desc-text').text(caiTargetObj[caiIndex].MOqiText);
@@ -326,7 +330,7 @@ main.api = {
                 openid: opt.openid
             },
             success: function (d) {
-                main.initShareInfo(d);
+                main.initShareInfo(d.data);
             },
             error: function (d) {
                 console.log(d);
