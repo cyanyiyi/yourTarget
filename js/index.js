@@ -102,7 +102,7 @@ main.pageHome = function() {
                 $('#selectSharewayPage').show().css('z-index', 20);
                 $('#generatePic').show().css('opacity', 1);
                 main.pageSelectShare();
-                $('#generate-avatar').attr('src', headimg_base64);
+                $('#generate-avatar').attr('src', avatarUrl);
                 $('#generate-nickname').text(nickname);
                 // main.api.saveUserWish({
                 //     'openid': main.openid || main.UT.getCookie('openid'),
