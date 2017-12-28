@@ -538,8 +538,8 @@ main.initShareInfo = function (data) {
         debug: false,
         appId: data.appId,
         timestamp: data.timestamp,
-        nonceStr: data.nonceStr,
-        signature: data.signature,
+        nonceStr: data.noncestr,
+        signature: data.signStr,
         jsApiList: [
             'checkJsApi',
             'onMenuShareTimeline',
