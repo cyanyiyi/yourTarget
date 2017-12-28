@@ -12,7 +12,7 @@ main.init = function () {
     // this.initShareInfo();
     main.bindEvent();
     main.initSwipper();
-    // main.pageType();
+    main.pageType();
     // main.pageFriendGuess();
     // main.pageGuessList();
     // main.pageHome();
@@ -52,7 +52,7 @@ main.pageType = function () {
     // 没有愿望id 进入首页
 }
 main.pageHome = function() {
-    $('#home').fadeIn();
+    $('#home').show();
     main.mainSwiper.init();
     main.subSwiper.init();
     // 播放视频
