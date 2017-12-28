@@ -1,16 +1,16 @@
 var main = {};
-main.proxy = 'http://txktapi.lingbokeji.cn';
-main.txkturl = '2018.0rh.cn';
-main.code = undefined;
-main.wish = undefined;
-main.wishid = undefined;
-main.mywishid = undefined;
-main.openid = undefined;
-main.friendOpenid = undefined;
-main.nickname = '';
-main.headimgurl = '';
-main.headimg_base64 = null;
 main.init = function () {
+    main.proxy = 'http://txktapi.lingbokeji.cn';
+    main.txkturl = '2018.0rh.cn';
+    main.code = undefined;
+    main.wish = undefined;
+    main.wishid = undefined;
+    main.mywishid = undefined;
+    main.openid = undefined;
+    main.friendOpenid = undefined;
+    main.nickname = '';
+    main.headimgurl = '';
+    main.headimg_base64 = null;
     // main.bindEvent();
     // main.initSwipper();
     main.pageType();
@@ -110,7 +110,7 @@ main.pageHome = function() {
                 });
                 var shareOpenid = main.openid || main.UT.getCookie('openid');
                 var shareMywishid = main.mywishid || main.UT.getCookie('mywishid');
-                var shareLink = main.txktUrl + '?openid='+shareOpenid+'&wishid='+shareMywishid;
+                var shareLink = (main.txktUrl || '2018.0rh.cn') + '?openid='+shareOpenid+'&wishid='+shareMywishid;
                 var resetShareOpt = {
                     title: '你能猜中我2018年的目标吗?',
                     desc: '我想的希望你也知道',
@@ -347,7 +347,7 @@ main.api = {
                 main.openid = d.data.openid;
                 main.nickname = d.data.nickname;
                 main.headimgurl = d.data.headimgurl;
-                main.headimg_base64 = d.data.headimg_base64;
+                main.headimg_base64 = "data:image/png;base64," + d.data.headimg_base64;
                 main.UT.setCookie('openid', main.openid);
                 main.UT.setCookie('nickname', main.nickname);
                 main.UT.setCookie('headimgurl', main.headimgurl);
@@ -602,7 +602,7 @@ main.takeScreenshot = function () {
             setTimeout(function () {
                 $('#generatePicShow').css('z-index',40).show();
                 $('.save-pic-layer').show().delay(1000).fadeOut('slow');
-            }, 5000);
+            }, 4500);
         }
     });
 }
