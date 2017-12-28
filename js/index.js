@@ -42,6 +42,8 @@ main.pageType = function () {
                 main.UT.setCookie('openid', main.openid, 30);
                 main.UT.setCookie('nickname', main.nickname, 30);
                 main.UT.setCookie('headimgurl', main.headimgurl, 30);
+                main.UT.setCookie('test', 'test', 30);
+                alert('test:'+main.UT.getCookie('test'));
                 // main.UT.setCookie('headimg_base64', main.headimg_base64, 30);
                 main.friendOpenid = main.UT.getCookie('friendOpenid') || main.UT.getQueryString('openid');
                 main.wishid = main.UT.getCookie('wishid') || main.UT.getQueryString('wishid');
@@ -146,9 +148,11 @@ main.pageHome = function() {
                     },
                     success: function (d) {
                         console.log(d);
+                        alert(d);
+                        alert(JSON.stringify(d));
                         main.mywishid = d.data.wishid;
                         main.UT.setCookie('mywishid', main.mywishid, 30);
-
+                        alert('main.openid:'+main.openid);
                         var shareOpenid = d.data.wish_openid || main.openid || main.UT.getCookie('openid');
                         var shareMywishid = d.data.wishid || main.mywishid || main.UT.getCookie('mywishid');
                         var shareLink = (main.txktUrl || '2018.0rh.cn') + '?openid='+shareOpenid+'&wishid='+shareMywishid;
@@ -158,10 +162,10 @@ main.pageHome = function() {
                             link: shareLink,
                             imgUrl: '',
                         }
-                        alert('cookie openid', main.UT.getCookie('openid'));
-                        alert('d.data.wish_openid', d.data.wish_openid);
-                        alert('d.data.wishid', d.data.wishid);
-                        alert('shareLink', shareLink);
+                        alert('cookie openid:'+main.UT.getCookie('openid'));
+                        alert('d.data.wish_openid:'+d.data.wish_openid);
+                        alert('d.data.wishid:'+d.data.wishid);
+                        alert('shareLink:'+shareLink);
                         main.generateCode(shareLink);
                         main._resetShare(resetShareOpt);
                         $('.share-pic-layer').fadeOut();
