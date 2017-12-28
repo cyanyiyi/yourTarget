@@ -502,8 +502,6 @@ main.initSwipper = function () {
         onInit: function (opt) {},
         onSlideChangeEnd: function (opt) {}
     })
-    // mainSwiper.init();
-    // subSwiper.init();
 }
 main._resetShare = function (opt) {
     //分享到朋友圈
