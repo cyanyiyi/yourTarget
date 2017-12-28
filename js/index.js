@@ -150,7 +150,7 @@ main.pageHome = function() {
                         main.UT.setCookie('mywishid', main.mywishid, 30);
                         var shareOpenid = d.data.wish_openid || main.openid || main.UT.getCookie('openid');
                         var shareMywishid = d.data.wishid || main.mywishid || main.UT.getCookie('mywishid');
-                        var shareLink = (main.txktUrl || '2018.0rh.cn') + '?openid='+shareOpenid+'&wishid='+shareMywishid;
+                        var shareLink = (main.txktUrl || 'http://2018.0rh.cn') + '?openid='+shareOpenid+'&wishid='+shareMywishid;
                         var resetShareOpt = {
                             title: '你能猜中我2018年的目标吗?',
                             desc: '我想的希望你也知道',
@@ -573,13 +573,13 @@ main.initShareInfo = function (data) {
         wx.onMenuShareAppMessage({
             title: '你能猜中我2018年的目标吗？', // 分享标题
             desc: '我想的希望你也知道', // 分享描述
-            link: '2018.0rh.cn', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+            link: 'http://2018.0rh.cn', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
             // imgUrl: '' // 分享图标
         });
         // 分享到朋友圈
         wx.onMenuShareTimeline({
             title: '你能猜中我2018年的目标吗？', // 分享标题
-            link: '2018.0rh.cn', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+            link: 'http://2018.0rh.cn', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
             // imgUrl: '' // 分享图标
         });
     });
