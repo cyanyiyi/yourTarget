@@ -58,21 +58,21 @@ main.pageHome = function() {
     main.mainSwiper.init();
     main.subSwiper.init();
     // 播放视频
-    $(document).on('click', '#video-img', function () {
+    $(document).on('click touchstart', '#video-img', function () {
         $(this).hide();
         $('#video')[0].play();
     })
     // 输入目标
-    $(document).on('click', '#input-target', function () {
+    $(document).on('click touchstart', '#input-target', function () {
         $("#input-tips").hide();
     })
     // 选择系统目标
-    $(document).on('click', '.target-text', function () {
+    $(document).on('click touchstart', '.target-text', function () {
         $("#input-tips").hide();
         $('#input-target').val($(this).attr('target-text'));
     })
     // 提交我的目标
-    $(document).on('click', '#submit-target', function () {
+    $(document).on('click touchstart', '#submit-target', function () {
         var myTarget = $('#input-target').val();
         var _targetArr = ['工资翻倍收入UP', '规律生活不熬夜', '来一趟海外旅行', '脱单狂撒狗粮', '练就腹肌马甲线', '多点时间陪家人', '佛系养生不拖延', '光明正大跳广场舞', '脱贫脱肉不脱发'];
         var domArrShare = $('.s-nine-text');
@@ -128,7 +128,7 @@ main.pageHome = function() {
 main.pageSelectShare = function () {
     // 选择分享方式
     // 1.右上角分享
-    $(document).on('click', '#share-ta-btn', function() { 
+    $(document).on('click touchstart', '#share-ta-btn', function() { 
         $('.share-ta-layer').css('z-index', 30).fadeIn("slow");
         // var shareOpenid = main.openid || main.UT.getCookie('openid');
         // var shareMywishid = main.mywishid || main.UT.getCookie('mywishid');
@@ -140,11 +140,11 @@ main.pageSelectShare = function () {
         // }
         // main._resetShare(resetShareOpt);
     })
-    $(document).on('click', '.share-ta-layer', function() { 
-        $(this).toggle();
+    $(document).on('click touchstart', '.share-ta-layer', function() { 
+        $(this).hide();
     })
     // 2.生成图片分享
-    $(document).on('click', '#share-pic-btn', function() { 
+    $(document).on('click touchstart', '#share-pic-btn', function() { 
         main.takeScreenshot();
         $('.share-pic-layer').fadeIn("slow");
         setTimeout(function () {
@@ -152,7 +152,7 @@ main.pageSelectShare = function () {
             $('#selectSharewayPage').css('z-index', 1).hide();
         }, 5000)
     })
-    $(document).on('click', '.save-pic-layer', function() { 
+    $(document).on('click touchstart', '.save-pic-layer', function() { 
         $(this).toggle();
     })
 }
@@ -194,7 +194,7 @@ main.pageFriendGuess = function (data) {
     $('#friendGuess').show();
 
     // 朋友猜
-    $(document).on('click', '.g-nine-target', function () {
+    $(document).on('click touchstart', '.g-nine-target', function () {
         var guessed = $(this).attr('guessed')
         var guessTarget = $(this).find('.g-nine-text').text();
         var $error = $(this).find('.guess-error')
@@ -222,7 +222,7 @@ main.pageFriendGuess = function (data) {
         }
     });
     // 猜过后生成我的目标
-    $(document).on('click', '#generate-mytarget', function () {
+    $(document).on('click touchstart', '#generate-mytarget', function () {
         main.UT.delCookie('openid');
         main.UT.delCookie('friendOpenid');
         main.UT.delCookie('wishid');
@@ -288,7 +288,7 @@ main.pageGuessList = function(data) {
     }
     $('#guessResultList').fadeIn();
     // 再玩一次
-    $(document).on('click', '#target-restart', function () {
+    $(document).on('click touchstart', '#target-restart', function () {
         main.UT.delCookie('openid');
         main.UT.delCookie('friendOpenid');
         main.UT.delCookie('wishid');
