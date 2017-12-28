@@ -9,7 +9,7 @@ main.openid = undefined;
 main.friendOpenid = undefined;
 main.init = function () {
     main.bindEvent();
-    main.initSwipper();
+    // main.initSwipper();
     main.pageType();
     // main.pageFriendGuess();
     // main.pageGuessList();
@@ -53,6 +53,7 @@ main.pageType = function () {
 }
 main.pageHome = function() {
     $('#home').show();
+    main.initSwipper();
     main.mainSwiper.init();
     main.subSwiper.init();
     // 播放视频
@@ -116,11 +117,44 @@ main.pageHome = function() {
                 }
                 main.generateCode(shareLink);
                 main._resetShare(resetShareOpt);
+                main.pageSelectShare();
                 $('.share-pic-layer').fadeOut();
                 $('#home').hide();
             }
         }
     });
+}
+main.pageSelectShare = function () {
+    // 选择分享方式
+    // 1.右上角分享
+    $(document).on('click', '#share-ta-btn', function() { 
+        console.log('邀ta猜');
+        $('.share-ta-layer').fadeIn("slow");
+        // var shareOpenid = main.openid || main.UT.getCookie('openid');
+        // var shareMywishid = main.mywishid || main.UT.getCookie('mywishid');
+        // var resetShareOpt = {
+        //     title: '你能猜中我2018年的目标吗?',
+        //     desc: '我想的希望你也知道',
+        //     link: main.txktUrl + '?openid='+shareOpenid+'&wishid='+shareMywishid,
+        //     imgUrl: '',
+        // }
+        // main._resetShare(resetShareOpt);
+    })
+    $(document).on('click', '.share-ta-layer', function() { 
+        $(this).toggle();
+    })
+    // 2.生成图片分享
+    $(document).on('click', '#share-pic-btn', function() { 
+        console.log('生成图片猜')
+        main.takeScreenshot();
+        $('.share-pic-layer').fadeIn("slow");
+        setTimeout(function () {
+            $('.share-pic-layer').hide();
+        }, 4000)
+    })
+    $(document).on('click', '.save-pic-layer', function() { 
+        $(this).toggle();
+    })
 }
 main.pageFriendGuess = function (data) {
     // 如果是朋友点进来 猜目标
@@ -600,33 +634,35 @@ main.Randomwish = function (target, domArrS, domArrP) {
 
 main.bindEvent = function () {
     
-    // 选择分享方式
-    // 1.右上角分享
-    $(document).on('click', '#share-ta-btn', function() { 
-        $('.share-ta-layer').fadeIn("slow");
-        var shareOpenid = main.openid || main.UT.getCookie('openid');
-        var shareMywishid = main.mywishid || main.UT.getCookie('mywishid');
-        var resetShareOpt = {
-            title: '你能猜中我2018年的目标吗?',
-            desc: '我想的希望你也知道',
-            link: main.txktUrl + '?openid='+shareOpenid+'&wishid='+shareMywishid,
-            imgUrl: '',
-        }
-        main._resetShare(resetShareOpt);
-    })
-    $(document).on('click', '.share-ta-layer', function() { 
-        $(this).toggle();
-    })
-    // 2.生成图片分享
-    $(document).on('click', '#share-pic-btn', function() { 
-        main.takeScreenshot();
-        $('.share-pic-layer').fadeIn("slow");
-        setTimeout(function () {
-            $('.share-pic-layer').hide();
-        }, 4000)
-    })
-    $(document).on('click', '.save-pic-layer', function() { 
-        $(this).toggle();
-    })
+    // // 选择分享方式
+    // // 1.右上角分享
+    // $(document).on('click', '#share-ta-btn', function() { 
+    //     console.log('邀ta猜');
+    //     $('.share-ta-layer').fadeIn("slow");
+    //     var shareOpenid = main.openid || main.UT.getCookie('openid');
+    //     var shareMywishid = main.mywishid || main.UT.getCookie('mywishid');
+    //     var resetShareOpt = {
+    //         title: '你能猜中我2018年的目标吗?',
+    //         desc: '我想的希望你也知道',
+    //         link: main.txktUrl + '?openid='+shareOpenid+'&wishid='+shareMywishid,
+    //         imgUrl: '',
+    //     }
+    //     main._resetShare(resetShareOpt);
+    // })
+    // $(document).on('click', '.share-ta-layer', function() { 
+    //     $(this).toggle();
+    // })
+    // // 2.生成图片分享
+    // $(document).on('click', '#share-pic-btn', function() { 
+    //     console.loh('生成图片猜')
+    //     main.takeScreenshot();
+    //     $('.share-pic-layer').fadeIn("slow");
+    //     setTimeout(function () {
+    //         $('.share-pic-layer').hide();
+    //     }, 4000)
+    // })
+    // $(document).on('click', '.save-pic-layer', function() { 
+    //     $(this).toggle();
+    // })
 }
 main.init();
