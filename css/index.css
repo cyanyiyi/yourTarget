@@ -346,6 +346,15 @@ div {
 .wid100 {
     width: 100%;
 }
+.wid160 {
+    width: 1.6rem;
+}
+.wid225 {
+    width: 2.25rem;
+}
+.wid325 {
+    width: 3.25rem;
+}
 .pt30 {
     padding-top: 0.3rem !important;
 }
@@ -388,6 +397,9 @@ div {
 .mt200 {
     margin-top: 2rem !important;
 }
+.mb360 {
+    margin-bottom: 3.6rem !important;
+}
 .mr10 {
     margin-right: .1rem !important;
 }
@@ -398,8 +410,8 @@ div {
     margin-right: .42rem !important;
 }
 .logo {
-    width: 2.25rem;
-    height: 0.56rem;
+    width: 1.9rem;
+    height: 0.44rem;
     margin: 0 auto;
 }
 /* home页 */
@@ -444,39 +456,78 @@ div {
 
 /* 选择目标页 */
 .page2 {
-    background: url('../img/one-bg.png') no-repeat center center;
+    background: url('../img/new-inputmb-bg.png') no-repeat center center;
 	background-size: cover;
 	position: relative;
 }
 .page2 .one-title {
-    width: 4.35rem;
-    height: 0.6rem;
+    width: 5rem;
+    height: 0.62rem;
     margin: 0 auto;
 }
 
 .page2 .one-input {
     width: 4.6rem;
-    height: 0.6rem;
+    height: 1.2rem;
     margin: 0 auto;
+    position: relative;
+
 }
 .page2 .one-input input {
     width: 100%;
+    height: 0.9rem;
+    line-height: 1.2rem;
     text-align: center;
     font-size: 0.32rem;
     color:#fff;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 10px;
+    margin: auto;
+    z-index: 10;
+}
+.page2 .one-input .input-tips {
+    width: 2.20rem;
+    height: 0.74rem;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 15px;
+    margin: auto;
+}
+.page2 .one-input .input-border {
+    width: 100%;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 5px;
+    margin: auto;
 }
 
 .page2 .one-target-con {
     width: 100%;
-    height: 4.6rem;
+    height: 2.4rem;
 }
 .page2 .one-target-box {
     position: relative;
 }
 .page2 .target-circle {
-    width: 2.3rem;
-    height: 2.3rem;
-    background: url('../img/one-circle.png') no-repeat center center;
+    line-height: 0.6rem;
+    font-size: 16px;
+    text-align: center;
+    color: #fff;
+}
+.page2 .target-circle1 {
+    width: 3.6rem;
+    height: 0.6rem;
+    background: url('../img/new-inputmb-lbox.png') no-repeat center center;
+    background-size: contain;
+}
+.page2 .target-circle2 {
+    width: 2.75rem;
+    height: 0.6rem;
+    background: url('../img/new-inputmb-sbox.png') no-repeat center center;
     background-size: contain;
 }
 .page2 .target1{
@@ -488,8 +539,8 @@ div {
 }
 .page2 .target2{
     position: absolute;
-    top: 1.15rem;
-    right: 1rem;
+    top: 0.9rem;
+    right: 0.75rem;
 } 
 .page2 .target3{
     position: absolute;
@@ -500,22 +551,28 @@ div {
 }
 .page2 .target4{
     position: absolute;
-    left: 1rem;
-    top: 1.15rem;
+    left: 0.75rem;
+    top: 0.9rem;
 }
 .page2 .target-circle img {
-    width: 1.2rem;
+    height: 0.33rem;
 }
 .page2 .target-submit {
     width: 3rem;
-    height: 0.8rem;
-    line-height: 0.8rem;
-    text-align: center;
-    color: #000;
-    font-size: 0.5rem;
-    background: #ffc100;
+    height: 0.84rem;
     margin: 0 auto;
+    position: relative;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    overflow: hidden;
+    background: url('../img/new-inputmb-confirmbg.png') no-repeat center center;
+    background-size: contain;
 }
+.page2 .target-submit img {
+    width: 1.4rem;
+    height: 0.4rem;
+}
+
 /* 选择目标分享方式页 */
 .page3 {
     background: url('../img/new-nine-bg.png') no-repeat center center;
@@ -549,13 +606,13 @@ div {
 
 /* 用于生成生成目标图片的起始页 */
 .page4 {
-    background: url('../img/t-bg.png') no-repeat center center;
+    background: url('../img/new-nine-bg.png') no-repeat center center;
 	background-size: cover;
 	position: relative;
 }
 .page4 .t-userinfo-box{
-    width: 6.6rem;
-    height: 1.45rem;
+    width: 5.3rem;
+    height: 1.3rem;
     margin: 0 auto;
 }
 .page4 .t-userinfo-avatar {
@@ -569,89 +626,76 @@ div {
     background: #fff;
 }
 .page4 .t-userinfo-nickname {
-    width: 5.3rem;
+    width: 4rem;
     height: 0.28rem;
     line-height: 0.28rem;
     font-size: 0.28rem;
-    text-indent: 30px;
+    text-indent: 10px;
     color: #fff;
 }
 .page4 .t-userinfo-say {
-    width: 5.3rem;
-    height: 1rem;
+    width: 4rem;
+    height: 0.9rem;
     overflow: hidden;
 }
-.page4 .t-say-l {
-    width: 0.18rem;
-    height: 1rem;
-    background: url('../img/t-xiaosj.png') no-repeat left 0.18rem;
-    background-size: contain;
-}
-.page4 .t-say-r {
-    width: 5rem;
-    height: 1rem;
-    line-height: 1rem;
-    background: url('../img/t-yuanjuxing.png') no-repeat -3px center;
+.page4 .t-say {
+    width: 4rem;
+    height: 0.9rem;
+    background: url('../img/new-t-saybox.png') no-repeat center center;
     background-size: contain;
     position: relative;
 }
-.page4 .t-say-r  img {
-    width: 4.7rem;
+.page4 .t-say  img {
+    width: 3.27rem;
 }
 /* 朋友猜 */
 .page5 {
-    background: url('../img/t-bg.png') no-repeat center center;
+    background: url('../img/new-nine-bg.png') no-repeat center center;
 	background-size: cover;
 	position: relative;
 }
 .page5 .g-userinfo-box{
-    width: 6.6rem;
-    height: 1.45rem;
+    width: 5.3rem;
+    height: 1.3rem;
     margin: 0 auto;
 }
 .page5 .g-userinfo-avatar {
     width: 1.28rem;
     height: 100%;
+    overflow: hidden;
 }
 .page5 .g-userinfo-avatar img {
     width: 1.28rem;
-    height: 1.28rem;
+    /* height: 1.28rem; */
     background: #fff;
 }
 .page5 .g-userinfo-nickname {
-    width: 5.3rem;
+    width: 4rem;
     height: 0.28rem;
     line-height: 0.28rem;
     font-size: 0.28rem;
-    text-indent: 30px;
+    text-indent: 10px;
     color: #fff;
 }
 .page5 .g-userinfo-say {
-    width: 5.3rem;
-    height: 1rem;
+    width: 4rem;
+    height: 0.9rem;
     overflow: hidden;
 }
-.page5 .g-say-l {
-    width: 0.18rem;
-    height: 1rem;
-    background: url('../img/t-xiaosj.png') no-repeat left 0.18rem;
-    background-size: contain;
-}
-.page5 .g-say-r {
-    width: 5rem;
-    height: 1rem;
-    line-height: 1rem;
-    background: url('../img/t-yuanjuxing.png') no-repeat -3px center;
+.page5 .g-say {
+    width: 4rem;
+    height: 0.9rem;
+    background: url('../img/new-t-saybox.png') no-repeat center center;
     background-size: contain;
     position: relative;
 }
-.page5 .g-say-r  img {
-    width: 4.7rem;
+.page5 .g-say  img {
+    width: 3.27rem;
 }
 
 /* 好友猜 默契度列表页 */
 .page6 {
-    background: #ccc;
+    background: url('../img/new-guess-bg.png');
     /* overflow-y: scroll; */
 }
 .page6 .result-myavatar-box {
@@ -661,20 +705,33 @@ div {
     overflow: hidden;
     background: #fff;
 }
+.page6 .result-mynickname-box {
+    width: 100%;
+    height: 0.5rem;
+    line-height: 0.5rem;
+    font-size: 16px;
+    text-align: center;
+    overflow: hidden;
+    color: #fff;
+}
 .page6 .guessed-friendlist-box {
     width: 6rem;
     margin: 0 auto;
     /* background: #33c9ff; */
     overflow-y: scroll;
-    max-height: 8rem;
+    max-height: 6rem;
     padding-bottom: 10px;
+}
+.page6 .guess-line {
+    width: 100%;
+    height: 0.2rem;
+    position: relative;
 }
 .page6 .no-friend {
     height: 1rem;
     line-height: 1rem;
     font-size: 20px;
-    color: #000;
-    background: #fff;
+    color: #fff;
     text-align: center;
 }
 .page6 .guessed-friend {
@@ -705,17 +762,16 @@ div {
     text-align: center;
 }
 .page6 .guess-retarget {
-    width: 5rem;
-    height: 1rem;
-    line-height: 1rem;
-    font-size: 24px;
+    width: 2.4rem;
+    height: 0.84rem;
+    line-height: 0.84rem;
+    font-size: 16px;
     text-align: center;
-    background: #ffc100;
-    position: fixed;
-    left: 0;
-    right: 0;
-    bottom: 30px;
-    margin: auto;
+    background: rgba(0, 0, 0, 0.4);
+    margin: 0 auto;
+    color: #fff;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
 }
 
 
@@ -752,9 +808,14 @@ div {
     margin: auto;
 }
 .guess-error {
-    width: 0.6rem;
-    height: 0.74rem;
+    width: 1.66rem;
+    height: 1.68rem;
     display: none;
+    background: rgba(0, 0, 0, 0.7);
+}
+.guess-error img{
+    width: 1.13rem;
+    height: 0.67rem;
 }
 .share-code {
     width: 1.34rem;
@@ -781,16 +842,32 @@ div {
     background-color: rgba(0, 0, 0, 0.7);
 }
 
-.share-ta-layer img {
-
+.share-ta-layer .share-arrow-box {
+    width: 4.3rem;
+    height: 1.9rem;
+    line-height: 3.8rem;
+    position: absolute;
+    top: 0.2rem;
+    right: 0.6rem;
+    background: url('../img/new-share-arrow.png') no-repeat right top;
+    background-size: 1.7rem 1.3rem;
+    color: #fff;
+    font-size: 16px;
 }
 
 .share-pic-layer {
     background-color: rgba(0, 0, 0, 0.7);
 }
 
-.share-pic-layer img {
-
+.share-pic-layer div {
+    width: 4rem;
+    height: 2.4rem;
+    line-height: 2.4rem;
+    border-radius: 5px 5px 5px 5px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    font-size: 16px;
+    text-align: center;
 }
 .save-pic-layer {
     background-color: rgba(0, 0, 0, 0.7);
@@ -805,23 +882,24 @@ div {
     background-color: rgba(0, 0, 0, 0.3);
 }
 .guess-right-layer .guess-tips-box {
-    width: 5rem;
-    height: 6rem;
+    width: 4.14rem;
+    height: 2.73rem;
     color: #fff;
     text-align: center;
+    background: url('../img/new-guess-box.png') no-repeat center center;
+    background-size: contain;
 }
 .guess-right-layer .guess-tips {
     background-color: rgba(0, 0, 0, 0.7);
-    width: 5rem;
-    height: 3rem;
+    width: 3.9rem;
+    height: 2.4rem;
     color: #fff;
     text-align: center;
-    border-radius: 5px 5px 5px 5px;
-    -webkit-border-radius: 5px 5px 5px 5px;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
 }
 .guess-right-layer .guess-tips .guess-right-tip {
     font-size: 32px;
-    padding-top:0.6rem; 
 }
 .guess-right-layer .guess-tips .guess-right-mqd {
     font-size: 24px;
@@ -831,13 +909,19 @@ div {
     font-size: 16px;
 }
 .guess-right-layer .guess-generate {
-    background: #ffc100;
-    padding: 0 10px;
+    background-color: rgba(0, 0, 0, 0.7);
+    width: 2.1rem;
     height: 0.8rem;
     line-height: 0.8rem;
-    text-align: center;
-    color: #000;
-    font-size: 0.5rem;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 3.7rem;
+    margin: auto;
+}
+.guess-right-layer .guess-generate img {
+    width: 1.93rem;
+    height: 0.28rem;
 }
 
 #generatePicShow img {
