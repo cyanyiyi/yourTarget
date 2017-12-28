@@ -8,7 +8,7 @@ main.mywishid = undefined;
 main.openid = undefined;
 main.friendOpenid = undefined;
 main.init = function () {
-    main.bindEvent();
+    // main.bindEvent();
     // main.initSwipper();
     main.pageType();
     // main.pageFriendGuess();
