@@ -149,6 +149,7 @@ main.pageSelectShare = function () {
         $('.share-pic-layer').fadeIn("slow");
         setTimeout(function () {
             $('.share-pic-layer').hide();
+            $('#selectSharewayPage').css('z-index', 1).hide();
         }, 4000)
     })
     $(document).on('click touchstart', '.save-pic-layer', function() { 
