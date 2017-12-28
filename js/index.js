@@ -11,8 +11,7 @@ main.init = function () {
     main.nickname = '';
     main.headimgurl = '';
     main.headimg_base64 = null;
-    // main.bindEvent();
-    // main.initSwipper();
+    main.initSwipper();
     main.pageType();
     // main.pageFriendGuess();
     // main.pageGuessList();
