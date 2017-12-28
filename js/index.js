@@ -101,6 +101,7 @@ main.pageHome = function() {
                 var avatarUrl = main.headimgurl || main.UT.getCookie('headimgurl');
                 $('#selectSharewayPage').show().css('z-index', 20);
                 $('#generatePic').show().css('opacity', 1);
+                main.pageSelectShare();
                 main.initUserinfo('.t-userinfo-nickname', '.t-userinfo-avatar', nickname, avatarUrl);
                 main.api.saveUserWish({
                     'openid': main.openid || main.UT.getCookie('openid'),
@@ -118,7 +119,6 @@ main.pageHome = function() {
                 }
                 main.generateCode(shareLink);
                 main._resetShare(resetShareOpt);
-                main.pageSelectShare();
                 $('.share-pic-layer').fadeOut();
                 $('#home').hide();
             }
@@ -129,7 +129,7 @@ main.pageSelectShare = function () {
     // 选择分享方式
     // 1.右上角分享
     $(document).on('click touchstart', '#share-ta-btn', function() { 
-        $('.share-ta-layer').fadeIn("slow");
+        $('.share-ta-layer').css('z-index', 30).fadeIn("slow");
         // var shareOpenid = main.openid || main.UT.getCookie('openid');
         // var shareMywishid = main.mywishid || main.UT.getCookie('mywishid');
         // var resetShareOpt = {
@@ -601,9 +601,9 @@ main.takeScreenshot = function () {
             // $('#generatePicShow').show().find('img').attr('src', strDataURI);
             $('#generatePicShow').find('img').attr('src', strDataURI);
             setTimeout(function () {
-                $('#generatePicShow').show();
+                $('#generatePicShow').css('z-index',40).show();
                 $('.save-pic-layer').show().delay(1000).fadeOut('slow');
-            }, 4000);
+            }, 5000);
         }
     });
 }
