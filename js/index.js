@@ -96,13 +96,14 @@ main.pageHome = function() {
                     _targetArr[5] = myTarget;
                 }
                 var saveTargetArr = main.Randomwish(_targetArr, domArrShare, domArrPic);
-                var nickname = main.nickname || main.UT.getCookie('nickname');
+                var nickname = main.nickname || main.UT.getCookie('nickname') || '';
                 var avatarUrl = main.headimgurl || main.UT.getCookie('headimgurl');
                 var headimg_base64 = main.headimg_base64 || main.UT.getCookie('headimg_base64');
                 $('#selectSharewayPage').show().css('z-index', 20);
                 $('#generatePic').show().css('opacity', 1);
                 main.pageSelectShare();
-                main.initUserinfo('.t-userinfo-nickname', '.t-userinfo-avatar', nickname, headimg_base64);
+                $('#generate-avatar').attr('src', headimg_base64);
+                $('#generate-nickname').text(nickname);
                 main.api.saveUserWish({
                     'openid': main.openid || main.UT.getCookie('openid'),
                     'wish': myTarget,
@@ -179,7 +180,8 @@ main.pageFriendGuess = function (data) {
     ];
     main.UT.setCookie('wishid', main.wishid);
     // 初始化用户信息
-    main.initUserinfo('.g-userinfo-nickname', '.g-userinfo-avatar', nickname, avatarUrl);
+    $('#friend-guess-myavatar').attr('src', avatarUrl);
+    $('#friend-guess-mynickname').text(nickname);
     // 初始化待猜的目标
     for(var i=0; i<allWishArr.length; i++){
         (function(i){
@@ -561,12 +563,6 @@ main.initShareInfo = function (data) {
             // imgUrl: '' // 分享图标
         });
     });
-}
-
-main.initUserinfo = function (nickSelector, avatarSelector, nickname, avatarUrl) {
-    $(nickSelector).text(nickname);
-    $(avatarSelector).find('img').attr("src", avatarUrl);
-
 }
 
 main.generateCode = function (url) {
