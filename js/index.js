@@ -54,7 +54,7 @@ main.pageType = function () {
                 } else {
                     main.pageHome();
                 }
-                var url = window.location.href.split('?')[0];
+                var url = window.location.href.split('#')[0];
                 main.api.getJsConfig({
                     'url':url,
                     'openid':main.openid
@@ -594,18 +594,18 @@ main.initShareInfo = function (data) {
     });
 }
 
-main.generateCode = function (url) {
-    console.log(url);
-    var url = encodeURIComponent(url); 
-    var codeEl = $('#share-code')[0];
-    var width = codeEl.offsetWidth;
-    var height = codeEl.offsetHeight;
-    var qrcode = new QRCode(codeEl, {
-        width: width,
-        height: height
-    });
-    qrcode.makeCode(url);
-}
+// main.generateCode = function (url) {
+//     console.log(url);
+//     var url = encodeURIComponent(url); 
+//     var codeEl = $('#share-code')[0];
+//     var width = codeEl.offsetWidth;
+//     var height = codeEl.offsetHeight;
+//     var qrcode = new QRCode(codeEl, {
+//         width: width,
+//         height: height
+//     });
+//     qrcode.makeCode(url);
+// }
 
 // main.takeScreenshotAvatar = function () {
 //     var cntElem = $('#generatePic')[0];
