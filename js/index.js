@@ -9,6 +9,7 @@ main.openid = undefined;
 main.friendOpenid = undefined;
 main.nickname = '';
 main.headimgurl = '';
+main.headimg_base64 = null;
 main.init = function () {
     // main.bindEvent();
     // main.initSwipper();
@@ -25,9 +26,7 @@ main.pageType = function () {
     main.code = main.UT.getParam(url_params, 'code');
     // 有code证明是授权之后重定向的链接 不需要再授权
     if(main.code) {
-        console.log('start getUserInfoByCode')
         main.api.getUserInfoByCode(main.code);
-        console.log('end getUserInfoByCode')
         main.openid = main.UT.getCookie('openid');
         main.friendOpenid = main.UT.getCookie('friendOpenid');
         main.wishid = main.UT.getCookie('wishid');
@@ -99,10 +98,11 @@ main.pageHome = function() {
                 var saveTargetArr = main.Randomwish(_targetArr, domArrShare, domArrPic);
                 var nickname = main.nickname || main.UT.getCookie('nickname');
                 var avatarUrl = main.headimgurl || main.UT.getCookie('headimgurl');
+                var headimg_base64 = main.headimg_base64 || main.UT.getCookie('headimg_base64');
                 $('#selectSharewayPage').show().css('z-index', 20);
                 $('#generatePic').show().css('opacity', 1);
                 main.pageSelectShare();
-                main.initUserinfo('.t-userinfo-nickname', '.t-userinfo-avatar', nickname, avatarUrl);
+                main.initUserinfo('.t-userinfo-nickname', '.t-userinfo-avatar', nickname, headimg_base64);
                 main.api.saveUserWish({
                     'openid': main.openid || main.UT.getCookie('openid'),
                     'wish': myTarget,
@@ -150,7 +150,7 @@ main.pageSelectShare = function () {
         setTimeout(function () {
             $('.share-pic-layer').hide();
             $('#selectSharewayPage').css('z-index', 1).hide();
-        }, 4000)
+        }, 5000)
     })
     $(document).on('click touchstart', '.save-pic-layer', function() { 
         $(this).toggle();
@@ -344,24 +344,22 @@ main.api = {
                 code: code
             },
             success: function (d) {
-                console.log('success getUserInfoByCode')
-                console.log(d);
                 main.openid = d.data.openid;
                 main.nickname = d.data.nickname;
                 main.headimgurl = d.data.headimgurl;
+                main.headimg_base64 = d.data.headimg_base64;
                 main.UT.setCookie('openid', main.openid);
                 main.UT.setCookie('nickname', main.nickname);
                 main.UT.setCookie('headimgurl', main.headimgurl);
+                main.UT.setCookie('headimg_base64', main.headimg_base64);
             },
             error: function (d) {
-                console.log('error getUserInfoByCode')
                 console.log(d);
             },
             complete: function () {
                 $(".ajaxLayer").fadeOut();
             }
         })
-        console.log('ajax end')
     },
     // /api/v1/get_js_config
     /**
@@ -554,13 +552,13 @@ main.initShareInfo = function (data) {
             title: '你能猜中我2018年的目标吗？', // 分享标题
             desc: '我想的希望你也知道', // 分享描述
             link: '2018.0rh.cn', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-            imgUrl: '' // 分享图标
+            // imgUrl: '' // 分享图标
         });
         // 分享到朋友圈
         wx.onMenuShareTimeline({
             title: '你能猜中我2018年的目标吗？', // 分享标题
             link: '2018.0rh.cn', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-            imgUrl: '', // 分享图标
+            // imgUrl: '' // 分享图标
         });
     });
 }
@@ -631,38 +629,4 @@ main.Randomwish = function (target, domArrS, domArrP) {
     return _target;
 
 };
-
-main.bindEvent = function () {
-    
-    // // 选择分享方式
-    // // 1.右上角分享
-    // $(document).on('click', '#share-ta-btn', function() { 
-    //     console.log('邀ta猜');
-    //     $('.share-ta-layer').fadeIn("slow");
-    //     var shareOpenid = main.openid || main.UT.getCookie('openid');
-    //     var shareMywishid = main.mywishid || main.UT.getCookie('mywishid');
-    //     var resetShareOpt = {
-    //         title: '你能猜中我2018年的目标吗?',
-    //         desc: '我想的希望你也知道',
-    //         link: main.txktUrl + '?openid='+shareOpenid+'&wishid='+shareMywishid,
-    //         imgUrl: '',
-    //     }
-    //     main._resetShare(resetShareOpt);
-    // })
-    // $(document).on('click', '.share-ta-layer', function() { 
-    //     $(this).toggle();
-    // })
-    // // 2.生成图片分享
-    // $(document).on('click', '#share-pic-btn', function() { 
-    //     console.loh('生成图片猜')
-    //     main.takeScreenshot();
-    //     $('.share-pic-layer').fadeIn("slow");
-    //     setTimeout(function () {
-    //         $('.share-pic-layer').hide();
-    //     }, 4000)
-    // })
-    // $(document).on('click', '.save-pic-layer', function() { 
-    //     $(this).toggle();
-    // })
-}
 main.init();
