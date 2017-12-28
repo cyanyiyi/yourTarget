@@ -23,7 +23,9 @@ main.pageType = function () {
     main.code = main.UT.getParam(url_params, 'code');
     // 有code证明是授权之后重定向的链接 不需要再授权
     if(main.code) {
+        console.log('start getUserInfoByCode')
         main.api.getUserInfoByCode(main.code);
+        console.log('end getUserInfoByCode')
         main.openid = main.UT.getCookie('openid');
         main.friendOpenid = main.UT.getCookie('friendOpenid');
         main.wishid = main.UT.getCookie('wishid');
@@ -303,10 +305,12 @@ main.api = {
         $.ajax({
             type: "post",
             url: main.proxy + "/api/v1/weixinLogin",
+            async: false,
             data: {
                 code: code
             },
             success: function (d) {
+                console.log('success getUserInfoByCode')
                 console.log(d);
                 main.openid = d.data.openid;
                 main.nickname = d.data.nickname;
@@ -316,12 +320,14 @@ main.api = {
                 main.UT.setCookie('headimgurl', main.headimgurl);
             },
             error: function (d) {
+                console.log('error getUserInfoByCode')
                 console.log(d);
             },
             complete: function () {
                 $(".ajaxLayer").fadeOut();
             }
         })
+        console.log('ajax end')
     },
     // /api/v1/get_js_config
     /**
@@ -333,6 +339,7 @@ main.api = {
         $.ajax({
             type: "post",
             url: main.proxy + "/api/v1/get_js_config",
+            async: false,
             data: {
                 url: opt.url,
                 openid: opt.openid
@@ -358,6 +365,7 @@ main.api = {
         $.ajax({
             type: "get",
             url: main.proxy + "/api/v1/user_wish",
+            async: false,
             data: {
                 openid: opt.openid,
                 wish_openid: opt.wish_openid,
@@ -390,6 +398,7 @@ main.api = {
         $.ajax({
             type: "post",
             url: main.proxy + "/api/v1/user_wish",
+            async: false,
             data: {
                 openid: opt.openid,
                 wish: opt.wish,
@@ -417,6 +426,7 @@ main.api = {
         $.ajax({
             type: "post",
             url: main.proxy + "/api/v1/guess_wish",
+            async: false,
             data: {
                 wishid: opt.wishid,
                 openid: opt.openid,
