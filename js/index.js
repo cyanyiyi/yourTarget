@@ -72,7 +72,7 @@ main.loadNum = function(){
         }
         $('#load-num').text(num);
         num++
-    }, 200)
+    }, 120)
 }
 main.pageHome = function() {
     $('#home').css('opacity', 1).show();
@@ -290,10 +290,10 @@ main.pageFriendGuess = function (data) {
         // main.UT.delCookie('wishid');
         // main.UT.delCookie('wish');
         // main.UT.delCookie('mywishid');
-        // window.location.href = 'http://2018.0rh.cn';
         $('#friendGuess').hide();
         $('.guess-right-layer').hide();
-        main.pageHome();
+        // main.pageHome();
+        window.location.href = 'http://2018.0rh.cn';
     })
 };
 main.pageGuessList = function(data) {
@@ -330,9 +330,9 @@ main.pageGuessList = function(data) {
         // main.UT.delCookie('wishid');
         // main.UT.delCookie('wish');
         // main.UT.delCookie('mywishid');
-        // window.location.href = 'http://2018.0rh.cn';
         $('#guessResultList').hide();
-        main.pageHome();
+        // main.pageHome();
+        window.location.href = 'http://2018.0rh.cn';
     })
 }
 main.UT = {
