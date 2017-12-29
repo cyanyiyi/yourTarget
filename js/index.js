@@ -214,8 +214,8 @@ main.pageFriendGuess = function (data) {
     var caiIndex = 0;
     var caiTargetObj = [
         { MOqibaifen: "100%", MOqiText: "我平时真没白疼你" },
-        { MOqibaifen: "80%", MOqiText: "再加把劲！我们的默契就满分了！" },
-        { MOqibaifen: "80%", MOqiText: "再加把劲！我们的默契就满分了！" },
+        { MOqibaifen: "80%", MOqiText: "我们的默契接近满分啦" },
+        { MOqibaifen: "80%", MOqiText: "我们的默契接近满分啦" },
         { MOqibaifen: "60%", MOqiText: "咦，没想到你这么了解我" },
         { MOqibaifen: "60%", MOqiText: "咦，没想到你这么了解我" },
         { MOqibaifen: "40%", MOqiText: "你这样会失去本宝宝的" },
