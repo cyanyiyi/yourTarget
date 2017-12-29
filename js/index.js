@@ -38,10 +38,10 @@ main.pageType = function () {
                 main.UT.setCookie('headimgurl', main.headimgurl, 30);
                 main.friendopenid =  main.UT.getQueryString('friendopenid');
                 main.wishid = main.UT.getQueryString('wishid') || d.data.wishid;
+                main.loading();
                 if (main.openid && main.friendopenid && main.wishid) {
                     main.api.getUserWish({ 'openid': main.openid, 'wish_openid': main.friendopenid, 'wishid': main.wishid})
                 } else {
-                    main.loading();
                     main.pageHome();
                 }
                 var url = window.location.href.split('#')[0];
