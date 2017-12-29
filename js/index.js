@@ -62,7 +62,6 @@ main.pageType = function () {
     }
 }
 main.loading = function(){
-    $('.ajaxLayer').fadeIn();
     var num = 0;
     var timer = setInterval(function(){
         $(".load-line").width(num);

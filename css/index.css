@@ -241,9 +241,9 @@ div {
 }
 
 .ajaxLayer {
-    display: none;
+    /* display: none;
     z-index: 99999;
-    background-color: rgba(0, 0, 0, 1);
+    background-color: rgba(0, 0, 0, 1); */
 }
 .ajaxLayer .ajaxLayer-inbox{
     width: 240px;
