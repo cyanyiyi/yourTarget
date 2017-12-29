@@ -71,7 +71,7 @@ main.loading = function(){
             $('.ajaxLayer').fadeOut('slow').css('z-index', 1).hide();
         }
         num+=1
-    }, 100)
+    }, 150)
 }
 main.pageHome = function() {
     $('#home').css('opacity', 1).show().css('z-index', 1);
