@@ -54,7 +54,7 @@ main.pageType = function () {
                 console.log(d);
             },
             complete: function () {
-                $(".ajaxLayer").fadeOut();
+                // $(".ajaxLayer").fadeOut();
             }
         })
         
@@ -161,7 +161,7 @@ main.pageHome = function() {
                         console.log(d);
                     },
                     complete: function () {
-                        $(".ajaxLayer").fadeOut();
+                        // $(".ajaxLayer").fadeOut();
                     }
                 })
 
@@ -387,7 +387,7 @@ main.api = {
      * @param {String} code
      */
     getJsConfig: function (opt) {
-        $(".ajaxLayer").fadeIn();
+        // $(".ajaxLayer").fadeIn();
         $.ajax({
             type: "post",
             url: main.proxy + "/api/v1/get_js_config",
@@ -403,7 +403,7 @@ main.api = {
                 console.log(d);
             },
             complete: function () {
-                $(".ajaxLayer").fadeOut();
+                // $(".ajaxLayer").fadeOut();
             }
         })
     },
@@ -413,7 +413,7 @@ main.api = {
      * @param {String} openid 
      */
     getUserWish: function (opt) {
-        $(".ajaxLayer").fadeIn();
+        // $(".ajaxLayer").fadeIn();
         $.ajax({
             type: "get",
             url: main.proxy + "/api/v1/user_wish",
@@ -439,7 +439,7 @@ main.api = {
                 alert('getUserWishErr:'+ JSON.stringify(d));
             },
             complete: function () {
-                $(".ajaxLayer").fadeOut();
+                // $(".ajaxLayer").fadeOut();
             }
         })
     },
@@ -448,7 +448,7 @@ main.api = {
      * @param {String} openid 
      */
     saveUserWish: function (opt) {
-        $(".ajaxLayer").fadeIn();
+        // $(".ajaxLayer").fadeIn();
         $.ajax({
             type: "post",
             url: main.proxy + "/api/v1/user_wish",
@@ -467,7 +467,7 @@ main.api = {
                 console.log(d);
             },
             complete: function () {
-                $(".ajaxLayer").fadeOut();
+                // $(".ajaxLayer").fadeOut();
             }
         })
     },
@@ -476,7 +476,7 @@ main.api = {
      * @param {String} openid 
      */
     saveGuessWish: function (opt) {
-        $(".ajaxLayer").fadeIn();
+        // $(".ajaxLayer").fadeIn();
         $.ajax({
             type: "post",
             url: main.proxy + "/api/v1/guess_wish",
@@ -493,7 +493,7 @@ main.api = {
                 console.log(d);
             },
             complete: function () {
-                $(".ajaxLayer").fadeOut();
+                // $(".ajaxLayer").fadeOut();
             }
         })
     }
