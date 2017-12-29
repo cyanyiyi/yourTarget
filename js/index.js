@@ -71,7 +71,7 @@ main.loading = function(){
             $('.ajaxLayer').fadeOut('slow').css('z-index', 1).hide();
         }
         num+=1
-    }, 120)
+    }, 50)
 }
 main.manualEndLoading = function(){
     clearInterval(main.timer);
