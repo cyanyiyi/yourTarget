@@ -603,7 +603,9 @@ div {
 .page3 {
     background: url('../img/new-nine-bg.png') no-repeat center center;
 	background-size: cover;
-	position: absolute;
+    /* position: relative; */
+    position: absolute;
+    z-index: 5;
 }
 .s-question {
     width: 4.63rem;
@@ -642,6 +644,7 @@ div {
 	background-size: cover;
     /* position: relative; */
     position: absolute;
+    z-index: 4;
 }
 .page4 .t-userinfo-box{
     width: 5.3rem;
@@ -686,6 +689,7 @@ div {
 	background-size: cover;
     /* position: relative; */
     position: absolute;
+    z-index: 3;
 }
 .page5 .g-userinfo-box{
     width: 5.3rem;

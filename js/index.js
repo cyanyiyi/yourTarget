@@ -68,13 +68,13 @@ main.loading = function(){
         $(".load-line").width(num);
         if(num > 100){
             clearInterval(timer);
-            $('.ajaxLayer').fadeOut('slow');
+            $('.ajaxLayer').fadeOut('slow').css('z-index', 1).hide();
         }
         num+=1
     }, 100)
 }
 main.pageHome = function() {
-    $('#home').css('opacity', 1).show();
+    $('#home').css('opacity', 1).show().css('z-index', 1);
     main.initSwipper();
     main.mainSwiper.init();
     main.subSwiper.init();
@@ -159,7 +159,7 @@ main.pageHome = function() {
                             },
                             success: function(res){
                                 $('#share-code').attr('src', res.data.img);
-                                $('#home').hide();
+                                $('#home').hide().css('z-index', 1);
                             }
                         })
                         $('.target-upload-layer').fadeOut();
@@ -189,7 +189,7 @@ main.pageSelectShare = function () {
         main.takeScreenshot();
         $('.share-pic-layer').fadeIn("slow");
         setTimeout(function () {
-            $('.share-pic-layer').hide();
+            $('.share-pic-layer').css('z-index', 1).hide();
             $('#selectSharewayPage').css('z-index', 1).hide();
         }, 5000)
     })
@@ -198,7 +198,7 @@ main.pageSelectShare = function () {
     })
 }
 main.pageFriendGuess = function (data) {
-    $('#home').hide();
+    $('#home').css('z-index', 1).hide();
     $('#friendGuess').css('opacity', 1).show();
     // 如果是朋友点进来 猜目标
     var d = data;
@@ -284,8 +284,8 @@ main.pageFriendGuess = function (data) {
         // main.UT.delCookie('wishid');
         // main.UT.delCookie('wish');
         // main.UT.delCookie('mywishid');
-        $('#friendGuess').hide();
-        $('.guess-right-layer').hide();
+        $('#friendGuess').css('z-index', 1).hide();
+        $('.guess-right-layer').css('z-index', 1).hide();
         // main.pageHome();
         window.location.href = 'http://2018.0rh.cn';
     })
@@ -312,9 +312,9 @@ main.pageGuessList = function(data) {
         }
         $('.have-friend').append(resultHtml);
         $('.have-friend').show();
-        $('.no-friend').hide();
+        $('.no-friend').css('z-index', 1).hide();
     } else {
-        $('.have-friend').hide();
+        $('.have-friend').css('z-index', 1).hide();
         $('.no-friend').show();
     }
     // 再玩一次
@@ -324,7 +324,7 @@ main.pageGuessList = function(data) {
         // main.UT.delCookie('wishid');
         // main.UT.delCookie('wish');
         // main.UT.delCookie('mywishid');
-        $('#guessResultList').hide();
+        $('#guessResultList').css('z-index', 1).hide();
         // main.pageHome();
         window.location.href = 'http://2018.0rh.cn';
     })
