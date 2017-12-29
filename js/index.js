@@ -18,8 +18,6 @@ main.pageType = function () {
     var uri = decodeURIComponent(window.location.href); // http://2018.0rh.cn?openid=11
     var url_params = window.location.search.substr(1);
     var sign_url = uri.split('#')[0];
-    alert(uri);
-    alert(url_params);
     main.code = main.UT.getQueryString('code');
     // 有code证明是授权之后重定向的链接 不需要再授权
     if(main.code) {
@@ -39,13 +37,8 @@ main.pageType = function () {
                 main.UT.setCookie('openid', main.openid, 30);
                 main.UT.setCookie('nickname', main.nickname, 30);
                 main.UT.setCookie('headimgurl', main.headimgurl, 30);
-                // main.friendopenid =  main.UT.getCookie('friendopenid') || main.UT.getQueryString('friendopenid');
-                // main.wishid = main.UT.getCookie('wishid') || main.UT.getQueryString('wishid') || d.data.wishid;
                 main.friendopenid =  main.UT.getQueryString('friendopenid');
                 main.wishid = main.UT.getQueryString('wishid') || d.data.wishid;
-                alert('openid'+d.data.openid);
-                alert('friendopenid'+main.friendopenid);
-                alert('wishid'+main.wishid);
                 if (main.openid && main.friendopenid && main.wishid) {
                     main.api.getUserWish({ 'openid': main.openid, 'wish_openid': main.friendopenid, 'wishid': main.wishid})
                 } else {
@@ -67,19 +60,6 @@ main.pageType = function () {
         
         
     } else {
-        // var friendopenid = main.UT.getQueryString('openid');
-        // var wishid = main.UT.getQueryString('wishid');
-        // if(friendopenid) {
-        //     main.friendOpenid = main.UT.getQueryString('openid'); // 默认分享链接上带的是friendopenid
-        //     main.UT.setCookie('friendopenid', main.friendopenid, 30);
-        // }
-        // if(wishid) {
-        //     main.wishid = main.UT.getQueryString('wishid');
-        //     main.UT.setCookie('wishid', main.wishid, 30);
-        // }
-        // alert('openid'+main.UT.getQueryString('openid'));
-        // alert('wishid'+main.UT.getQueryString('wishid'));
-        
         window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx8b9ddd1c943ce95f&redirect_uri=" + encodeURIComponent(uri) + "&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect";
     }
     
@@ -88,7 +68,7 @@ main.pageType = function () {
     // 没有愿望id 进入首页
 }
 main.pageHome = function() {
-    $('#home').show();
+    $('#home').css('opacity', 1).show();
     main.initSwipper();
     main.mainSwiper.init();
     main.subSwiper.init();
@@ -153,7 +133,7 @@ main.pageHome = function() {
                         main.mywishid = d.data.wishid;
                         main.UT.setCookie('mywishid', main.mywishid, 30);
                         var shareOpenid = d.data.wish_openid || main.openid || main.UT.getCookie('openid');
-                        var shareMywishid = d.data.wishid || main.mywishid || main.UT.getCookie('mywishid');
+                        var shareMywishid = d.data.wishid || main.mywishid;
                         var shareLink = (main.txktUrl || 'http://2018.0rh.cn') + '?friendopenid='+shareOpenid+'&wishid='+shareMywishid;
                         var resetShareOpt = {
                             title: '你能猜中我2018年的目标吗?',
@@ -291,6 +271,7 @@ main.pageFriendGuess = function (data) {
     })
 };
 main.pageGuessList = function(data) {
+    alert('pageGuessListData:'+JSON.stringify(data));
     var d = data;
     var friendList = d.data.friendList;
     $('#guessResultList').fadeIn();
