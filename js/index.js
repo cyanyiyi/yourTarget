@@ -227,7 +227,7 @@ main.pageFriendGuess = function (data) {
                 $('.g-nine-text')[i].attr('wishid', main.wishid);
             }
             alert('.g-nine-text:'+$('.g-nine-text')[i]);
-            alert('allWishArr[i]:'+allWishArr[i];
+            alert('allWishArr[i]:'+allWishArr[i]);
             $('.g-nine-text')[i].text(allWishArr[i]);
         })(i)
     }
