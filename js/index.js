@@ -49,7 +49,7 @@ main.pageType = function () {
                 alert('openid'+d.data.openid);
                 alert('friendOpenid'+main.friendOpenid);
                 alert('wishid'+main.wishid);
-                if (main.openid & main.friendOpenid & main.wishid) {
+                if (main.openid && main.friendOpenid && main.wishid) {
                     main.api.getUserWish({ 'openid': main.openid, 'wish_openid': main.friendOpenid, 'wishid': main.wishid})
                 } else {
                     main.pageHome();
@@ -70,7 +70,7 @@ main.pageType = function () {
         
         
     } else {
-        if (main.friendOpenid & main.wishid) {
+        if (main.friendOpenid && main.wishid) {
             main.UT.setCookie('friendOpenid', main.friendOpenid, 30);
             main.UT.setCookie('wishid', main.wishid, 30);
         }
