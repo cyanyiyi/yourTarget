@@ -21,11 +21,7 @@ main.pageType = function () {
     var url_params = window.location.search.substr(1);
     alert(redirect_uri);
     alert(url_params);
-    main.friendOpenid = main.UT.getQueryString('openid'); // 默认分享链接上带的是friendOpenid
-    main.wishid = main.UT.getQueryString('wishid');
     main.code = main.UT.getQueryString('code');
-    alert('openid'+main.UT.getQueryString('openid'));
-    alert('wishid'+main.UT.getQueryString('wishid'));
     // 有code证明是授权之后重定向的链接 不需要再授权
     if(main.code) {
         // main.api.getUserInfoByCode(main.code);
@@ -45,7 +41,7 @@ main.pageType = function () {
                 main.UT.setCookie('nickname', main.nickname, 30);
                 main.UT.setCookie('headimgurl', main.headimgurl, 30);
                 main.friendOpenid = main.UT.getCookie('friendOpenid') || main.UT.getQueryString('openid');
-                main.wishid = main.UT.getCookie('wishid') || main.UT.getQueryString('wishid');
+                var wishid = main.wishid || main.UT.getCookie('wishid') || main.UT.getQueryString('wishid');
                 alert('openid'+d.data.openid);
                 alert('friendOpenid'+main.friendOpenid);
                 alert('wishid'+main.wishid);
@@ -70,10 +66,18 @@ main.pageType = function () {
         
         
     } else {
-        if (main.friendOpenid && main.wishid) {
+        var friendOpenid = main.UT.getQueryString('openid');
+        var wishid = main.UT.getQueryString('wishid');
+        if(friendOpenid) {
+            main.friendOpenid = main.UT.getQueryString('openid'); // 默认分享链接上带的是friendOpenid
             main.UT.setCookie('friendOpenid', main.friendOpenid, 30);
+        }
+        if(wishid) {
+            main.wishid = main.UT.getQueryString('wishid');
             main.UT.setCookie('wishid', main.wishid, 30);
         }
+        alert('openid'+main.UT.getQueryString('openid'));
+        alert('wishid'+main.UT.getQueryString('wishid'));
         window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx8b9ddd1c943ce95f&redirect_uri=" + redirect_uri + "&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect";
     }
     
