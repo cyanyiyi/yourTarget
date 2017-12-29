@@ -194,7 +194,6 @@ main.pageSelectShare = function () {
 }
 main.pageFriendGuess = function (data) {
     $('#home').hide();
-    $('#friendGuess').show();
     // 如果是朋友点进来 猜目标
     var d = data;
     main.wish = d.data.wish_info.wish;
@@ -220,12 +219,15 @@ main.pageFriendGuess = function (data) {
     $('#friend-guess-myavatar').attr('src', avatarUrl);
     $('#friend-guess-mynickname').text(nickname);
     // 初始化待猜的目标
+    alert('allWishArr.length:'+allWishArr.length);
     for(var i=0; i<allWishArr.length; i++){
         (function(i){
             if(allWishArr[i] === main.wish){
                 // 正确目标
                 $('.g-nine-text')[i].attr('wishid', main.wishid);
             }
+            alert('.g-nine-text:'+$('.g-nine-text')[i]);
+            alert('allWishArr[i]:'+allWishArr[i];
             $('.g-nine-text')[i].text(allWishArr[i]);
         })(i)
     }
@@ -269,6 +271,7 @@ main.pageFriendGuess = function (data) {
         $('.guess-right-layer').hide();
         main.pageHome();
     })
+    $('#friendGuess').show();
 };
 main.pageGuessList = function(data) {
     alert('pageGuessListData:'+JSON.stringify(data));
