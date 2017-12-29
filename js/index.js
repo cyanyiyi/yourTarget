@@ -72,7 +72,7 @@ main.loadNum = function(){
         }
         $('#load-num').text(num);
         num++
-    }, 120)
+    }, 100)
 }
 main.pageHome = function() {
     $('#home').css('opacity', 1).show();
