@@ -593,7 +593,7 @@ div {
 .page3 {
     background: url('../img/new-nine-bg.png') no-repeat center center;
 	background-size: cover;
-	position: relative;
+	position: absolute;
 }
 .s-question {
     width: 4.63rem;
@@ -630,7 +630,8 @@ div {
 .page4 {
     background: url('../img/new-nine-bg.png') no-repeat center center;
 	background-size: cover;
-	position: relative;
+    /* position: relative; */
+    position: absolute;
 }
 .page4 .t-userinfo-box{
     width: 5.3rem;
@@ -673,7 +674,8 @@ div {
 .page5 {
     background: url('../img/new-nine-bg.png') no-repeat center center;
 	background-size: cover;
-	position: relative;
+    /* position: relative; */
+    position: absolute;
 }
 .page5 .g-userinfo-box{
     width: 5.3rem;

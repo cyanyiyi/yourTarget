@@ -173,9 +173,6 @@ main.pageHome = function() {
                         // $(".ajaxLayer").fadeOut();
                     }
                 })
-                
-
-                
             }
         }
     });
