@@ -7,7 +7,7 @@ main.init = function () {
     main.wishid = undefined;
     main.mywishid = undefined;
     main.openid = undefined;
-    main.friendOpenid = undefined;
+    main.friendopenid = undefined;
     main.nickname = '';
     main.headimgurl = '';
     main.initSwipper();
@@ -19,6 +19,7 @@ main.init = function () {
 main.pageType = function () {
     var redirect_uri = window.location.href; // http://2018.0rh.cn?openid=11
     var url_params = window.location.search.substr(1);
+    var sign_url = window.location.href.split('#')[0];
     alert(redirect_uri);
     alert(url_params);
     main.code = main.UT.getQueryString('code');
@@ -40,19 +41,19 @@ main.pageType = function () {
                 main.UT.setCookie('openid', main.openid, 30);
                 main.UT.setCookie('nickname', main.nickname, 30);
                 main.UT.setCookie('headimgurl', main.headimgurl, 30);
-                main.friendOpenid = main.UT.getCookie('friendOpenid') || main.UT.getQueryString('openid');
+                var friendopenid = main.friendopenid || main.UT.getCookie('friendopenid');
                 var wishid = main.wishid || main.UT.getCookie('wishid') || main.UT.getQueryString('wishid');
                 alert('openid'+d.data.openid);
-                alert('friendOpenid'+main.friendOpenid);
+                alert('friendopenid'+main.friendopenid);
                 alert('wishid'+main.wishid);
-                if (main.openid && main.friendOpenid && main.wishid) {
-                    main.api.getUserWish({ 'openid': main.openid, 'wish_openid': main.friendOpenid, 'wishid': main.wishid})
+                if (main.openid && main.friendopenid && main.wishid) {
+                    main.api.getUserWish({ 'openid': main.openid, 'wish_openid': main.friendopenid, 'wishid': main.wishid})
                 } else {
                     main.pageHome();
                 }
                 var url = window.location.href.split('#')[0];
                 main.api.getJsConfig({
-                    'url':url,
+                    'url':sign_url,
                     'openid':main.openid
                 })
             },
@@ -66,11 +67,11 @@ main.pageType = function () {
         
         
     } else {
-        var friendOpenid = main.UT.getQueryString('openid');
+        var friendopenid = main.UT.getQueryString('openid');
         var wishid = main.UT.getQueryString('wishid');
-        if(friendOpenid) {
-            main.friendOpenid = main.UT.getQueryString('openid'); // 默认分享链接上带的是friendOpenid
-            main.UT.setCookie('friendOpenid', main.friendOpenid, 30);
+        if(friendopenid) {
+            main.friendOpenid = main.UT.getQueryString('openid'); // 默认分享链接上带的是friendopenid
+            main.UT.setCookie('friendopenid', main.friendopenid, 30);
         }
         if(wishid) {
             main.wishid = main.UT.getQueryString('wishid');
@@ -152,7 +153,7 @@ main.pageHome = function() {
                         main.UT.setCookie('mywishid', main.mywishid, 30);
                         var shareOpenid = d.data.wish_openid || main.openid || main.UT.getCookie('openid');
                         var shareMywishid = d.data.wishid || main.mywishid || main.UT.getCookie('mywishid');
-                        var shareLink = (main.txktUrl || 'http://2018.0rh.cn') + '?openid='+shareOpenid+'&wishid='+shareMywishid;
+                        var shareLink = (main.txktUrl || 'http://2018.0rh.cn') + '?friendopenid='+shareOpenid+'&wishid='+shareMywishid;
                         var resetShareOpt = {
                             title: '你能猜中我2018年的目标吗?',
                             desc: '我想的希望你也知道',
@@ -278,11 +279,11 @@ main.pageFriendGuess = function (data) {
     });
     // 猜过后生成我的目标
     $(document).on('click touchstart', '#generate-mytarget', function () {
-        main.UT.delCookie('openid');
-        main.UT.delCookie('friendOpenid');
-        main.UT.delCookie('wishid');
-        main.UT.delCookie('wish');
-        main.UT.delCookie('mywishid');
+        // main.UT.delCookie('openid');
+        // main.UT.delCookie('friendopenid');
+        // main.UT.delCookie('wishid');
+        // main.UT.delCookie('wish');
+        // main.UT.delCookie('mywishid');
         $('#friendGuess').hide();
         $('.guess-right-layer').hide();
         main.pageHome();
@@ -318,7 +319,7 @@ main.pageGuessList = function(data) {
     // 再玩一次
     $(document).on('click touchstart', '#target-restart', function () {
         // main.UT.delCookie('openid');
-        // main.UT.delCookie('friendOpenid');
+        // main.UT.delCookie('friendopenid');
         // main.UT.delCookie('wishid');
         // main.UT.delCookie('wish');
         // main.UT.delCookie('mywishid');
