@@ -244,17 +244,9 @@ main.pageFriendGuess = function (data) {
                 // 猜对了 存好友猜的结果
                 var moqifen = caiTargetObj[caiIndex].MOqibaifen;
                 var guessOpenid = main.openid || main.UT.getCookie('openid');
-                var guessWishid = $(this).attr('wishid') || main.wishid || main.UT.getCookie('wishid');
+                var guessWishid = $(this).find('.g-nine-text').attr('wishid') || main.wishid || main.UT.getCookie('wishid');
                 $('#guess-mqd-text').text(moqifen);
                 $('#guess-desc-text').text(caiTargetObj[caiIndex].MOqiText);
-                alert('guessWishid:'+guessWishid)
-                alert('guessOpenid:'+guessOpenid)
-                alert('moqifen:'+moqifen)
-                // main.api.saveGuessWish({
-                //     'wishid': guessWishid,
-                //     'openid': guessOpenid,
-                //     'score': moqifen
-                // })
                 $.ajax({
                     type: "post",
                     url: main.proxy + "/api/v1/guess_wish",
@@ -266,11 +258,9 @@ main.pageFriendGuess = function (data) {
                     },
                     success: function (d) {
                         $('.guess-right-layer').fadeIn();
-                        alert('save friend success:'+JSON.stringify(d))
                         console.log(d);
                     },
                     error: function (d) {
-                        alert('save friend err:'+JSON.stringify(d))
                         console.log(d);
                     },
                     complete: function () {
@@ -301,8 +291,6 @@ main.pageGuessList = function(data) {
     $('#guessResultList').fadeIn();
     $('#friendlist-myavatar').attr('src', d.data.headimgurl);
     $('#friendlist-mynickname').text(d.data.nickname);
-    alert('friendlist data:'+data);
-    alert('friendlist length:'+friendList.length);
     if(friendList.length > 0){
         var resultHtml = '';
         for(var i=0; i<friendList.length; i++) {
@@ -511,11 +499,9 @@ main.api = {
                 score: opt.score
             },
             success: function (d) {
-                alert('save friend success:'+JSON.stringify(d))
                 console.log(d);
             },
             error: function (d) {
-                alert('save friend err:'+JSON.stringify(d))
                 console.log(d);
             },
             complete: function () {
