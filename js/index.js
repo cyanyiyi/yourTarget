@@ -14,7 +14,6 @@ main.init = function () {
     main.pageType();
 }
 main.pageType = function () {
-    // var redirect_uri = window.location.href; // http://2018.0rh.cn?openid=11
     var uri = decodeURIComponent(window.location.href); // http://2018.0rh.cn?openid=11
     var url_params = window.location.search.substr(1);
     var sign_url = uri.split('#')[0];
@@ -57,25 +56,21 @@ main.pageType = function () {
                 // $(".ajaxLayer").fadeOut();
             }
         })
-        
-        
     } else {
         window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx8b9ddd1c943ce95f&redirect_uri=" + encodeURIComponent(uri) + "&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect";
     }
-    
-    // 朋友查愿望id 猜愿望
-    // 自己查愿望id 看好友列表
-    // 没有愿望id 进入首页
 }
 main.pageHome = function() {
     $('#home').css('opacity', 1).show();
     main.initSwipper();
     main.mainSwiper.init();
     main.subSwiper.init();
+    $('#video')[0].pause();
+    $('#video-img').show();
     // 播放视频
     $(document).on('click touchstart', '#video-img', function () {
-        $(this).hide();
         $('#video')[0].play();
+        $(this).fadeOut();
     })
     // 输入目标
     $(document).on('click touchstart', '#input-target', function () {
@@ -141,7 +136,6 @@ main.pageHome = function() {
                             link: shareLink,
                             imgUrl: 'http://7xj7xs.com1.z0.glb.clouddn.com/wxshare.jpg',
                         }
-                        // main.generateCode(shareLink);
                         main._resetShare(resetShareOpt);
                         $.ajax({
                             type: 'get',
@@ -280,6 +274,7 @@ main.pageFriendGuess = function (data) {
         // main.UT.delCookie('wishid');
         // main.UT.delCookie('wish');
         // main.UT.delCookie('mywishid');
+        // window.location.href = 'http://2018.0rh.cn';
         $('#friendGuess').hide();
         $('.guess-right-layer').hide();
         main.pageHome();
@@ -319,6 +314,7 @@ main.pageGuessList = function(data) {
         // main.UT.delCookie('wishid');
         // main.UT.delCookie('wish');
         // main.UT.delCookie('mywishid');
+        // window.location.href = 'http://2018.0rh.cn';
         $('#guessResultList').hide();
         main.pageHome();
     })
@@ -364,38 +360,6 @@ main.UT = {
     }
 }
 main.api = {
-    /**
-     * 根据code获取微信用户信息
-     * @param {String} code
-     */
-    // getUserInfoByCode: function (code) {
-    //     $(".ajaxLayer").fadeIn();
-    //     $.ajax({
-    //         type: "post",
-    //         url: main.proxy + "/api/v1/weixinLogin",
-    //         async: false,
-    //         data: {
-    //             code: code
-    //         },
-    //         success: function (d) {
-    //             main.openid = d.data.openid;
-    //             main.nickname = d.data.nickname;
-    //             main.headimgurl = d.data.headimgurl;
-    //             main.headimg_base64 = "data:image/png;base64," + d.data.headimg_base64;
-    //             main.UT.setCookie('openid', main.openid, 30);
-    //             main.UT.setCookie('nickname', main.nickname, 30);
-    //             main.UT.setCookie('headimgurl', main.headimgurl, 30);
-    //             main.UT.setCookie('headimg_base64', main.headimg_base64, 30);
-    //         },
-    //         error: function (d) {
-    //             console.log(d);
-    //         },
-    //         complete: function () {
-    //             $(".ajaxLayer").fadeOut();
-    //         }
-    //     })
-    // },
-    // /api/v1/get_js_config
     /**
      * 获取js config
      * @param {String} code
@@ -625,11 +589,12 @@ main.takeScreenshot = function () {
         useCORS:true,
         onrendered: function (canvas) {
             var strDataURI = canvas.toDataURL("image/jpeg");
-            // $('#generatePicShow').show().find('img').attr('src', strDataURI);
             $('#generatePicShow').find('img').attr('src', strDataURI);
+            setTimeout(function(){
+                $('.save-pic-layer').fadeIn('slow').delay(1000).fadeOut('slow');
+            }, 4000)
             setTimeout(function () {
                 $('#generatePicShow').css('z-index',40).show();
-                $('.save-pic-layer').show().delay(1000).fadeOut('slow');
             }, 4500);
         }
     });

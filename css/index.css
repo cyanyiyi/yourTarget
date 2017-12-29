@@ -723,7 +723,7 @@ div {
     margin: 0 auto;
     /* background: #33c9ff; */
     overflow-y: scroll;
-    max-height: 6rem;
+    max-height: 5.8rem;
     padding-bottom: 10px;
 }
 .page6 .guess-line {
