@@ -292,7 +292,7 @@ main.pageFriendGuess = function (data) {
 main.pageGuessList = function(data) {
     var d = data;
     var friendList = d.data.friendList;
-    $('#guessResultList').fadeIn();
+    $('#guessResultList').css('z-index', 20).fadeIn();
     $('#friendlist-myavatar').attr('src', d.data.headimgurl);
     $('#friendlist-mynickname').text(d.data.nickname);
     if(friendList.length > 0){
