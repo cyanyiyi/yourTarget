@@ -277,6 +277,8 @@ main.pageGuessList = function(data) {
     $('#guessResultList').fadeIn();
     $('#friendlist-myavatar').attr('src', d.data.headimgurl);
     $('#friendlist-mynickname').text(d.data.nickname);
+    alert('friendlist data:'+data);
+    alert('friendlist length:'+friendList.length);
     if(friendList.length > 0){
         var resultHtml = '';
         for(var i=0; i<friendList.length; i++) {
