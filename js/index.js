@@ -221,32 +221,14 @@ main.pageFriendGuess = function (data) {
     $('#friend-guess-mynickname').text(nickname);
     // 初始化待猜的目标
     
-
-    // for (var i = 0; i < domArrS.length; i++) {
-    //     (function (i) {
-    //         if (domArrS) {
-    //             $(domArrS[i]).text(_target[i]);
-    //         }
-    //         if (domArrP) {
-    //             $(domArrP[i]).text(_target[i]);
-    //         }
-    //     })(i)
-    // }
     var $guessTarget = $('.g-nine-text');
-    alert('$guessTarget.length:'+$guessTarget.length);
-    alert('allWishArr.length:'+allWishArr.length);
-    alert('main.wish:'+main.wish);
 
     for(var i=0; i<allWishArr.length; i++){
-        // (function(i){
         if(allWishArr[i] === main.wish){
             // 正确目标
             $($guessTarget[i]).attr('wishid', main.wishid);
         }
-        alert('allWishArr[i]:'+allWishArr[i]);
-        // $('.g-nine-text')[i].innerHtml = allWishArr[i];
         $($guessTarget[i]).text(allWishArr[i]);
-        // })(i)
     }
 
     // 朋友猜
@@ -290,7 +272,6 @@ main.pageFriendGuess = function (data) {
     })
 };
 main.pageGuessList = function(data) {
-    alert('pageGuessListData:'+JSON.stringify(data));
     var d = data;
     var friendList = d.data.friendList;
     $('#guessResultList').fadeIn();
@@ -444,7 +425,6 @@ main.api = {
             },
             success: function (d) {
                 console.log(d);
-                alert('getUserWishSuccess:'+ JSON.stringify(d));
                 if(d.data.is_self === 0) {
                     // 朋友
                     main.pageFriendGuess(d);
@@ -455,7 +435,6 @@ main.api = {
             },
             error: function (d) {
                 console.log(d);
-                alert('getUserWishErr:'+ JSON.stringify(d));
             },
             complete: function () {
                 // $(".ajaxLayer").fadeOut();
