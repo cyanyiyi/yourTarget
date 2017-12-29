@@ -63,6 +63,7 @@ main.pageType = function () {
 }
 main.loadNum = function(){
     var num = 0;
+    $('.ajaxLayer').fadeIn();
     var timer = setInterval(function(){
         if(num > 99){
             clearInterval(timer);
