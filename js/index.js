@@ -41,6 +41,7 @@ main.pageType = function () {
                 if (main.openid && main.friendopenid && main.wishid) {
                     main.api.getUserWish({ 'openid': main.openid, 'wish_openid': main.friendopenid, 'wishid': main.wishid})
                 } else {
+                    main.loadNum();
                     main.pageHome();
                 }
                 var url = window.location.href.split('#')[0];
@@ -59,6 +60,17 @@ main.pageType = function () {
     } else {
         window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx8b9ddd1c943ce95f&redirect_uri=" + encodeURIComponent(uri) + "&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect";
     }
+}
+main.loadNum = function(){
+    var num = 0;
+    var timer = setInterval(function(){
+        if(num > 99){
+            clearInterval(timer);
+            $('.ajaxLayer').fadeOut();
+        }
+        $('#load-num').text(num);
+        num++
+    }, 200)
 }
 main.pageHome = function() {
     $('#home').css('opacity', 1).show();
@@ -100,7 +112,7 @@ main.pageHome = function() {
                     $('.one-input').removeClass('bounce').find('#input-target').removeClass('red-input');
                 }, 2000)
             } else {
-                $('.share-pic-layer').fadeIn();
+                $('.target-upload-layer').fadeIn();
                 _targetArr = main.sort(_targetArr);
                 if (_targetArr.indexOf(myTarget) === -1) {
                     _targetArr[5] = myTarget;
@@ -146,18 +158,20 @@ main.pageHome = function() {
                             },
                             success: function(res){
                                 $('#share-code').attr('src', res.data.img);
-                                $('.share-pic-layer').fadeOut();
                                 $('#home').hide();
                             }
                         })
+                        $('.target-upload-layer').fadeOut();
                     },
                     error: function (d) {
                         console.log(d);
+                        $('.target-upload-layer').fadeOut();
                     },
                     complete: function () {
                         // $(".ajaxLayer").fadeOut();
                     }
                 })
+                
 
                 
             }

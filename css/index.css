@@ -243,8 +243,24 @@ div {
 .ajaxLayer {
     display: none;
     z-index: 99999;
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: rgba(0, 0, 0, 0.9);
 }
+.ajaxLayer .ajaxLayer-inbox{
+    width: 1.28rem;
+    height: 4rem;
+}
+.ajaxLayer .ajaxLayer-inbox img{
+    width: 1.28rem;
+}
+.ajaxLayer .ajaxLayer-inbox div{
+    width: 1.28rem;
+    height: 2rem;
+    line-height: 2rem;
+    text-align: center;
+    font-size: 20px;
+    color: #fff;
+}
+
 
 .up {
     top: -100%;
@@ -416,7 +432,7 @@ div {
 }
 /* home页 */
 .page1 {
-    background: url('../img/new-home-bg.jpeg') no-repeat center center;
+    background: url('http://7xj7xs.com1.z0.glb.clouddn.com/txktbg.jpg') no-repeat center center;
 	background-size: cover;
 	position: relative;
 }
@@ -440,13 +456,13 @@ div {
     position: relative;
 }
 .page1 .home-video-con .video-img {
-    width: 6.8rem;
-    height: 4.5rem;
+    width: 95%;
+    height: 4.6rem;
     z-index:10;
 }
 .page1 .video {
-    width: 6.5rem;
-    height: 4.2rem;
+    width: 94%;
+    height: 4.4rem;
 }
 .page1 .home-see {
     width: 3.5rem;
@@ -929,8 +945,8 @@ div {
     font-size: 16px;
 }
 .guess-right-layer .guess-generate {
-    background-color: rgba(0, 0, 0, 0.7);
-    width: 2.1rem;
+    background:rgba(50, 140, 220, 0.8);
+    width: 2.4rem;
     height: 0.8rem;
     line-height: 0.8rem;
     position: absolute;
@@ -938,6 +954,8 @@ div {
     right: 0;
     bottom: 3.7rem;
     margin: auto;
+    border-radius: 5px;
+    -webkit-border-radius:5px;
 }
 .guess-right-layer .guess-generate img {
     width: 1.93rem;
