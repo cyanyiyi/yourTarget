@@ -194,7 +194,7 @@ main.pageSelectShare = function () {
 }
 main.pageFriendGuess = function (data) {
     $('#home').hide();
-    $('#friendGuess').show();
+    $('#friendGuess').css('opacity', 1).show();
     // 如果是朋友点进来 猜目标
     var d = data;
     main.wish = d.data.wish_info.wish;
@@ -220,14 +220,32 @@ main.pageFriendGuess = function (data) {
     $('#friend-guess-myavatar').attr('src', avatarUrl);
     $('#friend-guess-mynickname').text(nickname);
     // 初始化待猜的目标
+    
+
+    // for (var i = 0; i < domArrS.length; i++) {
+    //     (function (i) {
+    //         if (domArrS) {
+    //             $(domArrS[i]).text(_target[i]);
+    //         }
+    //         if (domArrP) {
+    //             $(domArrP[i]).text(_target[i]);
+    //         }
+    //     })(i)
+    // }
+    var $guessTarget = $('.g-nine-text');
+    alert('$guessTarget.length:'+$guessTarget.length);
     alert('allWishArr.length:'+allWishArr.length);
+    alert('main.wish:'+main.wish);
+
     for(var i=0; i<allWishArr.length; i++){
         // (function(i){
         if(allWishArr[i] === main.wish){
             // 正确目标
-            $($('.g-nine-text')[i]).attr('wishid', main.wishid);
+            $($guessTarget[i]).attr('wishid', main.wishid);
         }
-        $('.g-nine-text')[i].innerHtml = allWishArr[i];
+        alert('allWishArr[i]:'+allWishArr[i]);
+        // $('.g-nine-text')[i].innerHtml = allWishArr[i];
+        $($guessTarget[i]).text(allWishArr[i]);
         // })(i)
     }
 
