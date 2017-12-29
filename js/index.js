@@ -222,13 +222,13 @@ main.pageFriendGuess = function (data) {
     // 初始化待猜的目标
     alert('allWishArr.length:'+allWishArr.length);
     for(var i=0; i<allWishArr.length; i++){
-        (function(i){
-            if(allWishArr[i] === main.wish){
-                // 正确目标
-                $($('.g-nine-text')[i]).attr('wishid', main.wishid);
-            }
-            $('.g-nine-text')[i].innerHtml(allWishArr[i]);
-        })(i)
+        // (function(i){
+        if(allWishArr[i] === main.wish){
+            // 正确目标
+            $($('.g-nine-text')[i]).attr('wishid', main.wishid);
+        }
+        $('.g-nine-text')[i].innerHtml = allWishArr[i];
+        // })(i)
     }
 
     // 朋友猜
