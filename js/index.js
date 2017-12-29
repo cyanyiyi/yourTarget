@@ -139,7 +139,7 @@ main.pageHome = function() {
                             title: '你能猜中我2018年的目标吗?',
                             desc: '我想的希望你也知道',
                             link: shareLink,
-                            imgUrl: '',
+                            imgUrl: 'http://7xj7xs.com1.z0.glb.clouddn.com/wxshare.jpg',
                         }
                         // main.generateCode(shareLink);
                         main._resetShare(resetShareOpt);
@@ -247,12 +247,36 @@ main.pageFriendGuess = function (data) {
                 var guessWishid = $(this).attr('wishid') || main.wishid || main.UT.getCookie('wishid');
                 $('#guess-mqd-text').text(moqifen);
                 $('#guess-desc-text').text(caiTargetObj[caiIndex].MOqiText);
-                main.api.saveGuessWish({
-                    'wishid': guessWishid,
-                    'openid': guessOpenid,
-                    'score': moqifen
+                alert('guessWishid:'+guessWishid)
+                alert('guessOpenid:'+guessOpenid)
+                alert('moqifen:'+moqifen)
+                // main.api.saveGuessWish({
+                //     'wishid': guessWishid,
+                //     'openid': guessOpenid,
+                //     'score': moqifen
+                // })
+                $.ajax({
+                    type: "post",
+                    url: main.proxy + "/api/v1/guess_wish",
+                    async: false,
+                    data: {
+                        wishid: guessWishid,
+                        openid: guessOpenid,
+                        score: moqifen
+                    },
+                    success: function (d) {
+                        $('.guess-right-layer').fadeIn();
+                        alert('save friend success:'+JSON.stringify(d))
+                        console.log(d);
+                    },
+                    error: function (d) {
+                        alert('save friend err:'+JSON.stringify(d))
+                        console.log(d);
+                    },
+                    complete: function () {
+                        // $(".ajaxLayer").fadeOut();
+                    }
                 })
-                $('.guess-right-layer').fadeIn();
             } else {
                 $error.fadeIn('slow');
             }
@@ -487,9 +511,11 @@ main.api = {
                 score: opt.score
             },
             success: function (d) {
+                alert('save friend success:'+JSON.stringify(d))
                 console.log(d);
             },
             error: function (d) {
+                alert('save friend err:'+JSON.stringify(d))
                 console.log(d);
             },
             complete: function () {
@@ -572,13 +598,13 @@ main.initShareInfo = function (data) {
             title: '你能猜中我2018年的目标吗？', // 分享标题
             desc: '我想的希望你也知道', // 分享描述
             link: 'http://2018.0rh.cn', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-            // imgUrl: '' // 分享图标
+            imgUrl: 'http://7xj7xs.com1.z0.glb.clouddn.com/wxshare.jpg' // 分享图标
         });
         // 分享到朋友圈
         wx.onMenuShareTimeline({
             title: '你能猜中我2018年的目标吗？', // 分享标题
             link: 'http://2018.0rh.cn', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-            // imgUrl: '' // 分享图标
+            imgUrl: 'http://7xj7xs.com1.z0.glb.clouddn.com/wxshare.jpg' // 分享图标
         });
     });
 }
