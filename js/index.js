@@ -8,6 +8,7 @@ main.init = function () {
     main.mywishid = undefined;
     main.openid = undefined;
     main.friendopenid = undefined;
+    main.timer = null;
     main.nickname = '';
     main.headimgurl = '';
     main.initSwipper();
@@ -63,14 +64,21 @@ main.pageType = function () {
 }
 main.loading = function(){
     var num = 0;
-    var timer = setInterval(function(){
+    main.timer = setInterval(function(){
         $(".load-line").width(num);
         if(num > 100){
-            clearInterval(timer);
+            clearInterval(main.timer);
             $('.ajaxLayer').fadeOut('slow').css('z-index', 1).hide();
         }
         num+=1
     }, 150)
+}
+main.manualEndLoading = function(){
+    clearInterval(main.timer);
+    $(".load-line").width(100);
+    setTimeout(function(){
+        $('.ajaxLayer').css('z-index', 1).hide();
+    }, 100)
 }
 main.pageHome = function() {
     $('#home').css('opacity', 1).show().css('z-index', 1);
