@@ -425,6 +425,7 @@ main.api = {
             },
             success: function (d) {
                 console.log(d);
+                alert('getUserWishSuccess:'+ JSON.stringify(d));
                 if(d.data.is_self === 0) {
                     // 朋友
                     main.pageFriendGuess(d);
@@ -435,6 +436,7 @@ main.api = {
             },
             error: function (d) {
                 console.log(d);
+                alert('getUserWishErr:'+ JSON.stringify(d));
             },
             complete: function () {
                 $(".ajaxLayer").fadeOut();
@@ -592,32 +594,6 @@ main.initShareInfo = function (data) {
 //         height: height
 //     });
 //     qrcode.makeCode(url);
-// }
-
-// main.takeScreenshotAvatar = function () {
-//     var cntElem = $('#generatePic')[0];
-//     var shareContent = cntElem; //需要截图的包裹的（原生的）DOM 对象
-//     var width = shareContent.offsetWidth; //获取dom 宽度
-//     var height = shareContent.offsetHeight; //获取dom 高度
-//     var canvas = document.createElement("canvas"); //创建一个canvas节点
-//     var scale = 3; //定义任意放大倍数 支持小数
-//     canvas.width = width * scale; //定义canvas 宽度 * 缩放
-//     canvas.height = height * scale; //定义canvas高度 *缩放
-//     canvas.style.width = width + "px";
-//     canvas.style.height = height + "px";
-//     canvas.getContext("2d").scale(scale, scale); //获取context,设置scale 
-//     html2canvas($("#generatePic"), {
-//         canvas: canvas,
-//         onrendered: function (canvas) {
-//             var strDataURI = canvas.toDataURL("image/jpeg");
-//             // $('#generatePicShow').show().find('img').attr('src', strDataURI);
-//             $('#generatePicShow').find('img').attr('src', strDataURI);
-//             setTimeout(function () {
-//                 $('#generatePicShow').css('z-index',40).show();
-//                 $('.save-pic-layer').show().delay(1000).fadeOut('slow');
-//             }, 4500);
-//         }
-//     });
 // }
 
 main.takeScreenshot = function () {
