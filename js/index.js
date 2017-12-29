@@ -12,9 +12,6 @@ main.init = function () {
     main.headimgurl = '';
     main.initSwipper();
     main.pageType();
-    // main.pageFriendGuess();
-    // main.pageGuessList();
-    // main.pageHome();
 }
 main.pageType = function () {
     // var redirect_uri = window.location.href; // http://2018.0rh.cn?openid=11
@@ -42,8 +39,10 @@ main.pageType = function () {
                 main.UT.setCookie('openid', main.openid, 30);
                 main.UT.setCookie('nickname', main.nickname, 30);
                 main.UT.setCookie('headimgurl', main.headimgurl, 30);
-                main.friendopenid =  main.UT.getCookie('friendopenid') || main.UT.getQueryString('friendopenid');
-                main.wishid = main.UT.getCookie('wishid') || main.UT.getQueryString('wishid') || d.data.wishid;
+                // main.friendopenid =  main.UT.getCookie('friendopenid') || main.UT.getQueryString('friendopenid');
+                // main.wishid = main.UT.getCookie('wishid') || main.UT.getQueryString('wishid') || d.data.wishid;
+                main.friendopenid =  main.UT.getQueryString('friendopenid');
+                main.wishid = main.UT.getQueryString('wishid') || d.data.wishid;
                 alert('openid'+d.data.openid);
                 alert('friendopenid'+main.friendopenid);
                 alert('wishid'+main.wishid);
@@ -68,18 +67,18 @@ main.pageType = function () {
         
         
     } else {
-        var friendopenid = main.UT.getQueryString('openid');
-        var wishid = main.UT.getQueryString('wishid');
-        if(friendopenid) {
-            main.friendOpenid = main.UT.getQueryString('openid'); // 默认分享链接上带的是friendopenid
-            main.UT.setCookie('friendopenid', main.friendopenid, 30);
-        }
-        if(wishid) {
-            main.wishid = main.UT.getQueryString('wishid');
-            main.UT.setCookie('wishid', main.wishid, 30);
-        }
-        alert('openid'+main.UT.getQueryString('openid'));
-        alert('wishid'+main.UT.getQueryString('wishid'));
+        // var friendopenid = main.UT.getQueryString('openid');
+        // var wishid = main.UT.getQueryString('wishid');
+        // if(friendopenid) {
+        //     main.friendOpenid = main.UT.getQueryString('openid'); // 默认分享链接上带的是friendopenid
+        //     main.UT.setCookie('friendopenid', main.friendopenid, 30);
+        // }
+        // if(wishid) {
+        //     main.wishid = main.UT.getQueryString('wishid');
+        //     main.UT.setCookie('wishid', main.wishid, 30);
+        // }
+        // alert('openid'+main.UT.getQueryString('openid'));
+        // alert('wishid'+main.UT.getQueryString('wishid'));
         
         window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx8b9ddd1c943ce95f&redirect_uri=" + encodeURIComponent(uri) + "&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect";
     }
@@ -294,8 +293,9 @@ main.pageFriendGuess = function (data) {
 main.pageGuessList = function(data) {
     var d = data;
     var friendList = d.data.friendList;
+    $('#guessResultList').fadeIn();
     $('#friendlist-myavatar').attr('src', d.data.headimgurl);
-    $('#friendlist-mynickname').attr('src', d.data.nickname);
+    $('#friendlist-mynickname').text(d.data.nickname);
     if(friendList.length > 0){
         var resultHtml = '';
         for(var i=0; i<friendList.length; i++) {
@@ -317,7 +317,6 @@ main.pageGuessList = function(data) {
         $('.have-friend').hide();
         $('.no-friend').show();
     }
-    $('#guessResultList').fadeIn();
     // 再玩一次
     $(document).on('click touchstart', '#target-restart', function () {
         // main.UT.delCookie('openid');
