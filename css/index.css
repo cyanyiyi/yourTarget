@@ -243,22 +243,32 @@ div {
 .ajaxLayer {
     display: none;
     z-index: 99999;
-    background-color: rgba(0, 0, 0, 0.9);
+    background-color: rgba(0, 0, 0, 1);
 }
 .ajaxLayer .ajaxLayer-inbox{
-    width: 1.28rem;
-    height: 4rem;
+    width: 240px;
+    height: 200px;
 }
-.ajaxLayer .ajaxLayer-inbox img{
-    width: 1.28rem;
-}
-.ajaxLayer .ajaxLayer-inbox div{
-    width: 1.28rem;
-    height: 2rem;
-    line-height: 2rem;
+.ajaxLayer .ajaxLayer-inbox .load-tips{
+    height: 80px;
+    line-height: 80px;
     text-align: center;
     font-size: 20px;
     color: #fff;
+}
+.ajaxLayer .ajaxLayer-inbox .load-linebox{
+    width: 100px;
+    height: 5px;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 2px;
+    -webkit-border-radius: 2px;
+    overflow: hidden;
+}
+.ajaxLayer .ajaxLayer-inbox .load-linebox .load-line {
+    width: 1px;
+    height: 5px;
+    background: #33c9ff;
 }
 
 

@@ -41,7 +41,7 @@ main.pageType = function () {
                 if (main.openid && main.friendopenid && main.wishid) {
                     main.api.getUserWish({ 'openid': main.openid, 'wish_openid': main.friendopenid, 'wishid': main.wishid})
                 } else {
-                    main.loadNum();
+                    main.loading();
                     main.pageHome();
                 }
                 var url = window.location.href.split('#')[0];
@@ -54,7 +54,6 @@ main.pageType = function () {
                 console.log(d);
             },
             complete: function () {
-                // $(".ajaxLayer").fadeOut();
             }
         })
     } else {
@@ -62,16 +61,16 @@ main.pageType = function () {
         window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxffa91fe0c055f72f&redirect_uri=" + encodeURIComponent(uri) + "&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect";
     }
 }
-main.loadNum = function(){
-    var num = 0;
+main.loading = function(){
     $('.ajaxLayer').fadeIn();
+    var num = 0;
     var timer = setInterval(function(){
-        if(num > 99){
+        $(".load-line").width(num);
+        if(num > 100){
             clearInterval(timer);
-            $('.ajaxLayer').fadeOut();
+            $('.ajaxLayer').fadeOut('slow');
         }
-        $('#load-num').text(num);
-        num++
+        num+=1
     }, 100)
 }
 main.pageHome = function() {
@@ -170,7 +169,6 @@ main.pageHome = function() {
                         $('.target-upload-layer').fadeOut();
                     },
                     complete: function () {
-                        // $(".ajaxLayer").fadeOut();
                     }
                 })
             }
@@ -271,7 +269,6 @@ main.pageFriendGuess = function (data) {
                         console.log(d);
                     },
                     complete: function () {
-                        // $(".ajaxLayer").fadeOut();
                     }
                 })
             } else {
@@ -378,7 +375,6 @@ main.api = {
      * @param {String} code
      */
     getJsConfig: function (opt) {
-        // $(".ajaxLayer").fadeIn();
         $.ajax({
             type: "post",
             url: main.proxy + "/api/v1/get_js_config",
@@ -394,7 +390,6 @@ main.api = {
                 console.log(d);
             },
             complete: function () {
-                // $(".ajaxLayer").fadeOut();
             }
         })
     },
@@ -404,7 +399,6 @@ main.api = {
      * @param {String} openid 
      */
     getUserWish: function (opt) {
-        // $(".ajaxLayer").fadeIn();
         $.ajax({
             type: "get",
             url: main.proxy + "/api/v1/user_wish",
@@ -428,7 +422,6 @@ main.api = {
                 console.log(d);
             },
             complete: function () {
-                // $(".ajaxLayer").fadeOut();
             }
         })
     },
@@ -437,7 +430,6 @@ main.api = {
      * @param {String} openid 
      */
     saveUserWish: function (opt) {
-        // $(".ajaxLayer").fadeIn();
         $.ajax({
             type: "post",
             url: main.proxy + "/api/v1/user_wish",
@@ -456,7 +448,6 @@ main.api = {
                 console.log(d);
             },
             complete: function () {
-                // $(".ajaxLayer").fadeOut();
             }
         })
     },
@@ -465,7 +456,6 @@ main.api = {
      * @param {String} openid 
      */
     saveGuessWish: function (opt) {
-        // $(".ajaxLayer").fadeIn();
         $.ajax({
             type: "post",
             url: main.proxy + "/api/v1/guess_wish",
@@ -482,7 +472,6 @@ main.api = {
                 console.log(d);
             },
             complete: function () {
-                // $(".ajaxLayer").fadeOut();
             }
         })
     }
