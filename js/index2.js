@@ -7,7 +7,7 @@ main.init = function () {
     main.wishid = undefined;
     main.mywishid = undefined;
     main.openid = undefined;
-    main.friendopenid = undefined;
+    main.friendOpenid = undefined;
     main.nickname = '';
     main.headimgurl = '';
     main.initSwipper();
@@ -17,17 +17,32 @@ main.init = function () {
     // main.pageHome();
 }
 main.pageType = function () {
-    // var redirect_uri = window.location.href; // http://2018.0rh.cn?openid=11
-    var uri = decodeURIComponent(window.location.href); // http://2018.0rh.cn?openid=11
+    var redirect_uri = window.location.href; // http://2018.0rh.cn?openid=11
     var url_params = window.location.search.substr(1);
-    var sign_url = uri.split('#')[0];
-    alert(uri);
-    alert(url_params);
+    var sign_url = window.location.href.split('#')[0];
+    // alert(redirect_uri);
+    // alert(url_params);
+    main.friendOpenid = main.UT.getQueryString('openid'); // 默认分享链接上带的是friendOpenid
+    main.wishid = main.UT.getQueryString('wishid');
     main.code = main.UT.getQueryString('code');
+
+    main.openid = main.UT.getCookie('openid');
+    // alert('openid'+main.UT.getQueryString('openid'));
+    // alert('wishid'+main.UT.getQueryString('wishid'));
     // 有code证明是授权之后重定向的链接 不需要再授权
-    if(main.code) {
+
+    if (main.friendOpenid & main.wishid) {
+        main.UT.setCookie('friendOpenid', main.friendOpenid, 30);
+        main.UT.setCookie('wishid', main.wishid, 30);
+    }
+
+    if(!main.openid && !main.code) {
+        window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx8b9ddd1c943ce95f&redirect_uri=" + redirect_uri + "&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect";
+        return ;
+    }    
         // main.api.getUserInfoByCode(main.code);
         // 通过code获取用户openid和头像昵称
+    if (!main.openid && main.code) {
         $.ajax({
             type: "post",
             url: main.proxy + "/api/v1/weixinLogin",
@@ -42,17 +57,17 @@ main.pageType = function () {
                 main.UT.setCookie('openid', main.openid, 30);
                 main.UT.setCookie('nickname', main.nickname, 30);
                 main.UT.setCookie('headimgurl', main.headimgurl, 30);
-                main.friendopenid =  main.UT.getCookie('friendopenid') || main.UT.getQueryString('friendopenid');
-                main.wishid = main.UT.getCookie('wishid') || main.UT.getQueryString('wishid') || d.data.wishid;
-                alert('openid'+d.data.openid);
-                alert('friendopenid'+main.friendopenid);
-                alert('wishid'+main.wishid);
-                if (main.openid && main.friendopenid && main.wishid) {
-                    main.api.getUserWish({ 'openid': main.openid, 'wish_openid': main.friendopenid, 'wishid': main.wishid})
+                main.friendOpenid = main.UT.getCookie('friendOpenid');
+                main.wishid = main.UT.getCookie('wishid');
+                // alert('openid'+d.data.openid);
+                // alert('friendOpenid'+main.friendOpenid);
+                // alert('wishid'+main.wishid);
+                if (main.openid & main.friendOpenid & main.wishid) {
+                    main.api.getUserWish({ 'openid': main.openid, 'wish_openid': main.friendOpenid, 'wishid': main.wishid})
                 } else {
                     main.pageHome();
                 }
-                var url = window.location.href.split('#')[0];
+                
                 main.api.getJsConfig({
                     'url':sign_url,
                     'openid':main.openid
@@ -65,23 +80,17 @@ main.pageType = function () {
                 $(".ajaxLayer").fadeOut();
             }
         })
-        
-        
     } else {
-        var friendopenid = main.UT.getQueryString('openid');
-        var wishid = main.UT.getQueryString('wishid');
-        if(friendopenid) {
-            main.friendOpenid = main.UT.getQueryString('openid'); // 默认分享链接上带的是friendopenid
-            main.UT.setCookie('friendopenid', main.friendopenid, 30);
+        if (main.openid & main.friendOpenid & main.wishid) {
+            main.api.getUserWish({ 'openid': main.openid, 'wish_openid': main.friendOpenid, 'wishid': main.wishid})
+        } else {
+            main.pageHome();
         }
-        if(wishid) {
-            main.wishid = main.UT.getQueryString('wishid');
-            main.UT.setCookie('wishid', main.wishid, 30);
-        }
-        alert('openid'+main.UT.getQueryString('openid'));
-        alert('wishid'+main.UT.getQueryString('wishid'));
         
-        window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx8b9ddd1c943ce95f&redirect_uri=" + encodeURIComponent(uri) + "&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect";
+        main.api.getJsConfig({
+            'url':sign_url,
+            'openid':main.openid
+        })
     }
     
     // 朋友查愿望id 猜愿望
@@ -136,7 +145,7 @@ main.pageHome = function() {
                 var avatarUrl = main.headimgurl || main.UT.getCookie('headimgurl');
                 $('#selectSharewayPage').show().css('z-index', 20);
                 $('#generatePic').show().css('opacity', 1);
-                main.pageSelectShare();
+                
                 $('#generate-avatar').attr('src', avatarUrl);
                 $('#generate-nickname').text(nickname);
                 // 存目标
@@ -155,7 +164,7 @@ main.pageHome = function() {
                         main.UT.setCookie('mywishid', main.mywishid, 30);
                         var shareOpenid = d.data.wish_openid || main.openid || main.UT.getCookie('openid');
                         var shareMywishid = d.data.wishid || main.mywishid || main.UT.getCookie('mywishid');
-                        var shareLink = (main.txktUrl || 'http://2018.0rh.cn') + '?friendopenid='+shareOpenid+'&wishid='+shareMywishid;
+                        var shareLink = (main.txktUrl || 'http://2018.0rh.cn') + '?openid='+shareOpenid+'&wishid='+shareMywishid;
                         var resetShareOpt = {
                             title: '你能猜中我2018年的目标吗?',
                             desc: '我想的希望你也知道',
@@ -175,6 +184,7 @@ main.pageHome = function() {
                                 $('#share-code').attr('src', res.data.img);
                                 $('.share-pic-layer').fadeOut();
                                 $('#home').hide();
+                                main.pageSelectShare();
                             }
                         })
                     },
@@ -198,7 +208,7 @@ main.pageSelectShare = function () {
         $('.share-ta-layer').css('z-index', 30).fadeIn("slow");
     })
     $(document).on('click touchstart', '.share-ta-layer', function() { 
-        $(this).css('z-index', 1).hide();
+        $(this).hide();
     })
     // 2.生成图片分享
     $(document).on('click touchstart', '#share-pic-btn', function() { 
@@ -281,11 +291,11 @@ main.pageFriendGuess = function (data) {
     });
     // 猜过后生成我的目标
     $(document).on('click touchstart', '#generate-mytarget', function () {
-        // main.UT.delCookie('openid');
-        // main.UT.delCookie('friendopenid');
-        // main.UT.delCookie('wishid');
-        // main.UT.delCookie('wish');
-        // main.UT.delCookie('mywishid');
+        main.UT.delCookie('openid');
+        main.UT.delCookie('friendOpenid');
+        main.UT.delCookie('wishid');
+        main.UT.delCookie('wish');
+        main.UT.delCookie('mywishid');
         $('#friendGuess').hide();
         $('.guess-right-layer').hide();
         main.pageHome();
@@ -321,7 +331,7 @@ main.pageGuessList = function(data) {
     // 再玩一次
     $(document).on('click touchstart', '#target-restart', function () {
         // main.UT.delCookie('openid');
-        // main.UT.delCookie('friendopenid');
+        // main.UT.delCookie('friendOpenid');
         // main.UT.delCookie('wishid');
         // main.UT.delCookie('wish');
         // main.UT.delCookie('mywishid');
