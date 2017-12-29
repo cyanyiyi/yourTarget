@@ -193,6 +193,8 @@ main.pageSelectShare = function () {
     })
 }
 main.pageFriendGuess = function (data) {
+    $('#home').hide();
+    $('#friendGuess').show();
     // 如果是朋友点进来 猜目标
     var d = data;
     main.wish = d.data.wish_info.wish;
@@ -227,8 +229,6 @@ main.pageFriendGuess = function (data) {
             $('.g-nine-text')[i].text(allWishArr[i]);
         })(i)
     }
-    $('#home').hide();
-    $('#friendGuess').show();
 
     // 朋友猜
     $(document).on('click touchstart', '.g-nine-target', function () {
