@@ -149,7 +149,7 @@ main.pageHome = function() {
                         main.UT.setCookie('mywishid', main.mywishid, 30);
                         var shareOpenid = d.data.wish_openid || main.openid || main.UT.getCookie('openid');
                         var shareMywishid = d.data.wishid || main.mywishid;
-                        var shareLink = (main.txktUrl || 'http://2018.0rh.cn') + '?friendopenid='+shareOpenid+'&wishid='+shareMywishid;
+                        var shareLink = 'http://2018.0rh.cn?friendopenid='+shareOpenid+'&wishid='+shareMywishid;
                         var resetShareOpt = {
                             title: '你能猜中我2018年的目标吗?',
                             desc: '我想的希望你也知道',
